@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class Utils {
@@ -30,5 +32,12 @@ public class Utils {
 			copy.add(healthProvider.clone());
 		}
 		return copy;
+	}
+
+	public static int calculateAge(LocalDate birth)
+	{
+		if(birth == null)
+			return 0;
+		return Period.between(birth, LocalDate.now()).getYears();
 	}
 }

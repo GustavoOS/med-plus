@@ -65,4 +65,14 @@ class FilterTest {
 			assertSame(result.get(i), raw.get(i));
 		}
 	}
+
+	@Test
+	void filterSingleProvider()
+	{
+		param.id = "7b11fdbb-0894-4e4b-afaf-880738c84f4c";
+		result = filter.filter(raw, param);
+		assertEquals(1, result.size());
+		assertSame(raw.get(2),result.get(0));
+		assertEquals("7b11fdbb-0894-4e4b-afaf-880738c84f4c", result.get(0).getId());
+	}
 }

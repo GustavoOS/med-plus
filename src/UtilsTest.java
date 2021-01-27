@@ -1,5 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -39,5 +40,16 @@ class UtilsTest {
 		result.get(0).setName("Corleone");
 		assertEquals("João", raw.get(0).getName());
 		assertEquals("Corleone", result.get(0).getName());
+	}
+
+	@Test
+	void calculateAge() {
+		assertEquals(20, Utils.calculateAge(LocalDate.now().minusYears(20)));
+	}
+
+	@Test
+	void nullBirthday()
+	{
+		assertEquals(0, Utils.calculateAge(null));
 	}
 }

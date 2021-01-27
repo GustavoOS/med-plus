@@ -1,6 +1,6 @@
 
 public class Provider implements HealthProvider {
-	private String socialMediaUrl, name, specialization;
+	private String socialMediaUrl, name, specialization, id;
 	private CoordinateDS local;
 
 	public Provider()
@@ -65,7 +65,18 @@ public class Provider implements HealthProvider {
 		p.setName(name);
 		p.setSocialMediaURL(socialMediaUrl);
 		p.setSpecialization(specialization);
+		p.setId(id);
 		return p;
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
