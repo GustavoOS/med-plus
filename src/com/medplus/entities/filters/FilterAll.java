@@ -21,4 +21,5 @@ public class FilterAll implements Filter{
 
 		return result;
 	}
+
 }

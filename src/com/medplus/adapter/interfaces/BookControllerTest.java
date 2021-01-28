@@ -41,16 +41,17 @@ class BookControllerTest {
 	@Test
 	void testSuccess() {
 		controller.setAppointment(  "da0ea328-fe04-49a7-9907-d9948bb8be0f",
-									"7b11fdbb-0894-4e4b-afaf-880738c84f4c");
-		controller.setDateTime(LocalDateTime.of(2021, 03, 31, 10, 0));
+									"7b11fdbb-0894-4e4b-afaf-880738c84f4c",
+									LocalDateTime.of(2021, 03, 31, 10, 0));
 		controller.schedule();
 		assertEquals("success", presenter.getStatus());
 	}
 
 	@Test
 	void testNullProvider() {
-		controller.setAppointment(  "da0ea328-fe04-49a7-9907-d9948bb8be0f", null);
-		controller.setDateTime(LocalDateTime.of(2021, 03, 31, 10, 0));
+		controller.setAppointment(  "da0ea328-fe04-49a7-9907-d9948bb8be0f",
+									null,
+									LocalDateTime.of(2021, 03, 31, 10, 0));
 		controller.schedule();
 		assertEquals("fail", presenter.getStatus());
 	}
@@ -59,8 +60,8 @@ class BookControllerTest {
 	void testUnknownProvider()
 	{
 		controller.setAppointment(  "da0ea328-fe04-49a7-9907-d9948bb8be0f",
-				"hello");
-		controller.setDateTime(LocalDateTime.of(2021, 03, 31, 10, 0));
+									"hello",
+									LocalDateTime.of(2021, 03, 31, 10, 0));
 		controller.schedule();
 		assertEquals("fail", presenter.getStatus());
 	}

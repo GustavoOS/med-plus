@@ -28,7 +28,7 @@ public class TestUtils {
 		return withNext(factory.Make("id"),
 				withNext(factory.Make("specialization"),
 						withNext(factory.Make("local"),
-								factory.Make(null)
+								factory.Make("accept")
 								)
 						)
 				);

@@ -1,6 +1,7 @@
 package com.medplus.entities;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ class BusinessDayTest {
 		appointment = new AppointmentDS();
 		appointment.setProviderID("a69529e1-69a4-4cef-9914-660901dbe2e9");
 		appointment.setPatientID("cb0e17f2-a988-43af-9ef0-63e6b9fc41f5");
+		appointment.setDateTime(LocalDateTime.of(2021, 01, 28, 10, 0));
 	}
 
 	@Test
@@ -38,12 +40,13 @@ class BusinessDayTest {
 	void afterScheduleTheHourShouldBeUnavailableForBooking()
 	{
 		assertTrue(bd.isAvailable(10));
-		bd.scheduleAppointment(10, appointment);
+		bd.scheduleAppointment(appointment);
 		assertFalse(bd.isAvailable(10));
 		assertNotNull(bd.getDay()[1]);
 		assertSame(appointment, bd.getDay()[1]);
 		assertTrue(bd.isAvailable(15));
-		bd.scheduleAppointment(15, appointment);
+		changeAppointmentDateTimeHour(15);
+		bd.scheduleAppointment(appointment);
 		assertFalse(bd.isAvailable(15));
 		assertNotNull(bd.getDay()[5]);
 		assertSame(appointment, bd.getDay()[5]);
@@ -52,11 +55,12 @@ class BusinessDayTest {
 	@Test
 	void scheduleOnAMorningReservedHourShouldNotOverrideSchedule()
 	{
-		bd.scheduleAppointment(10, appointment);
+		bd.scheduleAppointment(appointment);
 		AppointmentDS newAppointment = new AppointmentDS();
 		newAppointment.setProviderID("12d98160-0a3c-4c61-a862-cdc5e03bd8ab");
 		newAppointment.setPatientID("ee7393de-9386-47d6-ab97-cdbdf4673691");
-		bd.scheduleAppointment(10, newAppointment);
+		newAppointment.setDateTime(appointment.getDateTime().withHour(10));
+		bd.scheduleAppointment(newAppointment);
 		assertSame(appointment, bd.getDay()[1]);
 		assertEquals("a69529e1-69a4-4cef-9914-660901dbe2e9", bd.getDay()[1].getProviderID());
 		assertEquals("cb0e17f2-a988-43af-9ef0-63e6b9fc41f5", bd.getDay()[1].getPatientID());
@@ -65,28 +69,34 @@ class BusinessDayTest {
 	@Test
 	void scheduleOnAfternoonReservedHourShouldNotOverrideSchedule()
 	{
-		bd.scheduleAppointment(14, appointment);
+		changeAppointmentDateTimeHour(14);
+		bd.scheduleAppointment(appointment);
 		assertFalse(bd.isAvailable(14));
 		AppointmentDS newAppointment = new AppointmentDS();
 		newAppointment.setProviderID("12d98160-0a3c-4c61-a862-cdc5e03bd8ab");
 		newAppointment.setPatientID("ee7393de-9386-47d6-ab97-cdbdf4673691");
-		bd.scheduleAppointment(14, newAppointment);
+		newAppointment.setDateTime(appointment.getDateTime().withHour(14));
+		bd.scheduleAppointment(newAppointment);
 		assertSame(appointment, bd.getDay()[4]);
 	}
 
 	@Test
 	void scheduleAtNoonShouldFail()
 	{
-		bd.scheduleAppointment(12, appointment);
+		changeAppointmentDateTimeHour(12);
+		bd.scheduleAppointment(appointment);
 		assertEmptyDay();
 	}
 
 	@Test
 	void scheduleBeforeOrAfterBHourShouldNotBookAppointment()
 	{
-		bd.scheduleAppointment(7, appointment);
-		bd.scheduleAppointment(12, appointment);
-		bd.scheduleAppointment(23, appointment);
+		changeAppointmentDateTimeHour(7);
+		bd.scheduleAppointment(appointment);
+		changeAppointmentDateTimeHour(12);
+		bd.scheduleAppointment(appointment);
+		changeAppointmentDateTimeHour(23);
+		bd.scheduleAppointment(appointment);
 		assertEmptyDay();
 	}
 
@@ -101,7 +111,8 @@ class BusinessDayTest {
 		assertTrue(bd.isAvailable(10));
 		assertSame(appointment, bd.getDay()[0]);
 		assertTrue(bd.isAvailable(17));
-		bd.scheduleAppointment(17, appointment);
+		changeAppointmentDateTimeHour(17);
+		bd.scheduleAppointment(appointment);
 		assertFalse(bd.isAvailable(17));
 	}
 
@@ -116,9 +127,11 @@ class BusinessDayTest {
 	void testDayGetter()
 	{
 		ArrayList<AppointmentDS> appointments;
-		bd.scheduleAppointment(10, appointment);
-		bd.scheduleAppointment(17, appointment);
-		bd.scheduleAppointment(11, appointment);
+		bd.scheduleAppointment(appointment);
+		changeAppointmentDateTimeHour(17);
+		bd.scheduleAppointment(appointment);
+		changeAppointmentDateTimeHour(11);
+		bd.scheduleAppointment(appointment);
 		appointments = bd.getDayAsList();
 		assertNull(appointments.get(0));
 		assertSame(appointment, appointments.get(1));
@@ -131,5 +144,10 @@ class BusinessDayTest {
 	private void assertEmptyDay() {
 		for(int i = 0; i < 8; i++)
 			assertNull(bd.getDay()[i]);
+	}
+
+
+	private void changeAppointmentDateTimeHour(int hour) {
+		appointment.setDateTime(appointment.getDateTime().withHour(hour));
 	}
 }

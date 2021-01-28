@@ -1,5 +1,4 @@
 package com.medplus.useCases;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.medplus.entities.AppointmentDS;
@@ -15,21 +14,25 @@ public class BookAppointmentUseCase implements Bookable {
 	private SchedulePresenter presenter;
 
 	@Override
-	public void book(AppointmentDS appointment, LocalDateTime date) {
-		if(!providerIsValid(appointment))
+	public void book(AppointmentDS appointment) {
+		if(!appointmentIsValid(appointment))
 		{
 			presenter.fail();
 			return;
 		}
 		BusinessDay day = new BusinessDay();
-		day.setDay(scheduleGW.getProviderSchedule(appointment.getProviderID(), date.toLocalDate()));
-		day.scheduleAppointment(date.getHour(), appointment);
-		scheduleGW.setSchedule(appointment.getProviderID(), date.toLocalDate(), day.getDayAsList());
+		day.setDay(scheduleGW.getProviderSchedule(appointment.getProviderID(), appointment.getDateTime().toLocalDate()));
+		day.scheduleAppointment(appointment);
+		scheduleGW.setSchedule( appointment.getProviderID(),
+								appointment.getDateTime().toLocalDate(),
+								day.getDayAsList());
 		presenter.succeed();
 	}
 
-	private Boolean providerIsValid(AppointmentDS appointment)
+	private Boolean appointmentIsValid(AppointmentDS appointment)
 	{
+		if(appointment.getDateTime() == null)
+			return false;
 		FilterParameter param = new FilterParameter();
 		param.id = appointment.getProviderID();
 		ArrayList<HealthProvider> providers = filter.filter(providerGW.list(), param);

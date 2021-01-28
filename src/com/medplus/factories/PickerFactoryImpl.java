@@ -1,11 +1,11 @@
 package com.medplus.factories;
 
 import com.medplus.entities.Picker;
-import com.medplus.entities.pickers.IDPicker;
-import com.medplus.entities.pickers.LocalizationPicker;
-import com.medplus.entities.pickers.NullPicker;
-import com.medplus.entities.pickers.RefuserPicker;
-import com.medplus.entities.pickers.SpecializationPicker;
+import com.medplus.entities.filters.pickers.NullPicker;
+import com.medplus.entities.filters.pickers.IDPicker;
+import com.medplus.entities.filters.pickers.LocalizationPicker;
+import com.medplus.entities.filters.pickers.RefuserPicker;
+import com.medplus.entities.filters.pickers.SpecializationPicker;
 
 public class PickerFactoryImpl implements PickerFactory {
 

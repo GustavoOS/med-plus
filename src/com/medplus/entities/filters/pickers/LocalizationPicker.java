@@ -1,12 +1,14 @@
-package com.medplus.entities.pickers;
+package com.medplus.entities.filters.pickers;
 
 import com.medplus.entities.FilterParameter;
 import com.medplus.entities.HealthProvider;
 import com.medplus.entities.Picker;
 import com.medplus.entities.PickerChain;
+import com.medplus.entities.Utils;
 
-public class SpecializationPicker implements Picker, PickerChain {
-	private Picker nextPicker;
+public class LocalizationPicker implements Picker, PickerChain {
+
+	Picker nextPicker;
 
 	@Override
 	public void setNextPicker(Picker picker) {
@@ -20,9 +22,9 @@ public class SpecializationPicker implements Picker, PickerChain {
 
 	@Override
 	public Boolean shouldSelect(HealthProvider provider, FilterParameter param) {
-		if(param == null || param.specialization == null)
+		if (param == null || param.reference == null || param.distance < 0)
 			return next(provider, param);
-		return (param.specialization.equals(provider.getSpecialization())) 
+		return (Utils.calculateDistance(param.reference, provider.getLocal()) < param.distance)
 				&& next(provider, param);
 	}
 

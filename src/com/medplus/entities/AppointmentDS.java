@@ -1,7 +1,14 @@
 package com.medplus.entities;
 
+import java.time.LocalDateTime;
+
 public class AppointmentDS {
 	private String patientID, providerId;
+	private LocalDateTime dateTime;
+
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
+	}
 
 	public String getPatientID() {
 		return patientID;
@@ -17,5 +24,9 @@ public class AppointmentDS {
 
 	public void setProviderID(String doctorID) {
 		this.providerId = doctorID;
+	}
+
+	public LocalDateTime getDateTime() {
+		return dateTime;
 	}
 }

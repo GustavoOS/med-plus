@@ -1,4 +1,4 @@
-package com.medplus.entities.pickers;
+package com.medplus.entities.filters.pickers;
 
 import com.medplus.entities.FilterParameter;
 import com.medplus.entities.HealthProvider;

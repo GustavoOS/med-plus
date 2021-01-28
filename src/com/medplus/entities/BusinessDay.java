@@ -15,8 +15,9 @@ public class BusinessDay {
 				(day[hourToIndex(hour)] == null);
 	}
 
-	public void scheduleAppointment(int hour, AppointmentDS appointment)
+	public void scheduleAppointment(AppointmentDS appointment)
 	{
+		int hour = appointment.getDateTime().getHour();
 		if(isAvailable(hour))
 			day[hourToIndex(hour)] = appointment;
 	}

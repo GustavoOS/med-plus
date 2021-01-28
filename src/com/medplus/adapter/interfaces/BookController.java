@@ -7,24 +7,19 @@ import com.medplus.useCases.Bookable;
 public class BookController {
 	private Bookable useCase;
 	private AppointmentDS appointment;
-	private LocalDateTime dateTime;
 
 	void schedule()
 	{
-		useCase.book(appointment, dateTime);
+		useCase.book(appointment);
 	}
 
 	// Setters
-	void setAppointment(String patientId,String providerId)
+	void setAppointment(String patientId,String providerId, LocalDateTime dateTime)
 	{
 		appointment = new AppointmentDS();
 		appointment.setPatientID(patientId);
 		appointment.setProviderID(providerId);
-	}
-
-	void setDateTime(LocalDateTime dateTime)
-	{
-		this.dateTime = dateTime;
+		appointment.setDateTime(dateTime);
 	}
 
 	public void setUseCase(Bookable useCase) {
