@@ -1,5 +1,12 @@
-package com.medplus.entities;
+package com.medplus.factories;
 import java.util.ArrayList;
+
+import com.medplus.entities.CoordinateDS;
+import com.medplus.entities.Filter;
+import com.medplus.entities.HealthProvider;
+import com.medplus.entities.Picker;
+import com.medplus.entities.PickerChain;
+import com.medplus.entities.Provider;
 
 public class TestUtils {
 	public static ArrayList<HealthProvider> mountProviderList(){
@@ -15,14 +22,29 @@ public class TestUtils {
 		return providers;
 	}
 
-	public static Filter mountFilter()
+	public static Picker mountPickerChain()
 	{
-		LocalizationPicker lp = new LocalizationPicker();
-		lp.setNextPicker(new NullPicker());
-		SpecializationPicker sp = new SpecializationPicker();
-		sp.setNextPicker(lp);
-		IDPicker idPicker = new IDPicker();
-		idPicker.setNextPicker(sp);
-		return new Filter(idPicker);
+		PickerFactory factory = new PickerFactoryImpl();
+		return withNext(factory.Make("id"),
+				withNext(factory.Make("specialization"),
+						withNext(factory.Make("local"),
+								factory.Make(null)
+								)
+						)
+				);
+	}
+
+	public static Filter mountIDFilter()
+	{
+		PickerFactory factory = new PickerFactoryImpl();
+		Filter filter = (new FilterFactoryImpl()).Make("first");
+		filter.setPicker(withNext(factory.Make("id"),factory.Make(null)));
+		return filter;
+	}
+
+	public static Picker withNext(Picker picker, Picker next)
+	{
+		((PickerChain) picker).setNextPicker(next);
+		return picker;
 	}
 }

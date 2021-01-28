@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.TestUtils;
+import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
 import com.medplus.gateways.ScheduleGW;
 import com.medplus.useCases.BookAppointmentUseCase;
@@ -24,14 +24,13 @@ class BookControllerTest {
 	void setUp() throws Exception {
 		controller = new BookController();
 		useCase = new BookAppointmentUseCase();
-		useCase.setFilter(TestUtils.mountFilter());
 		pGw = new ProviderGW();
 		sGw = new ScheduleGW();
 		presenter = new SchedulePresenterImpl();
 		
 		pGw.setProviders(TestUtils.mountProviderList());
 
-		useCase.setFilter(TestUtils.mountFilter());
+		useCase.setFilter(TestUtils.mountIDFilter());
 		useCase.setPresenter(presenter);
 		useCase.setProviderGW(pGw);
 		useCase.setScheduleGW(sGw);

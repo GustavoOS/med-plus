@@ -1,10 +1,15 @@
-package com.medplus.entities;
+package com.medplus.entities.pickers;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.medplus.entities.CoordinateDS;
+import com.medplus.entities.FilterParameter;
+import com.medplus.entities.HealthProvider;
+import com.medplus.factories.TestUtils;
 
 class LocalizationPickerTest {
 

@@ -1,4 +1,5 @@
-package com.medplus.entities;
+package com.medplus.entities.filters;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -6,10 +7,14 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class FilterTest {
+import com.medplus.entities.CoordinateDS;
+import com.medplus.entities.FilterParameter;
+import com.medplus.entities.HealthProvider;
+import com.medplus.factories.TestUtils;
 
+class FilterFirstTest {
 	CoordinateDS user;
-	Filter filter;
+	FilterFirst filter;
 	FilterParameter param;
 
 	ArrayList<HealthProvider> raw, result;
@@ -17,7 +22,8 @@ class FilterTest {
 	@BeforeEach
 	void setUp(){
 		user = new CoordinateDS(-23.2198557,-45.8857719);
-		filter = TestUtils.mountFilter();
+		filter = new FilterFirst();
+		filter.setPicker(TestUtils.mountPickerChain());
 
 		raw = TestUtils.mountProviderList();
 		param = new FilterParameter();
@@ -30,9 +36,8 @@ class FilterTest {
 		param.specialization = "surgeon";
 		result = filter.filter(raw, param);
 
-		assertEquals(2, result.size());
+		assertEquals(1, result.size());
 		assertEquals("João", result.get(0).getName());
-		assertEquals("Silva", result.get(1).getName());
 	}
 
 	@Test
@@ -51,20 +56,8 @@ class FilterTest {
 		param.reference = user;
 
 		result = filter.filter(raw, param);
-		assertEquals(3, result.size());
+		assertEquals(1, result.size());
 		assertEquals("surgeon", result.get(0).getSpecialization());
-		assertEquals("surgeon", result.get(1).getSpecialization());
-		assertEquals("gynecologyst", result.get(2).getSpecialization());
-	}
-
-	@Test
-	void noFilterNoChange()
-	{
-		result = filter.filter(raw, null);
-		assertEquals(4, result.size());
-		for(int i = 0; i < 4; i++) {
-			assertSame(result.get(i), raw.get(i));
-		}
 	}
 
 	@Test
@@ -76,4 +69,5 @@ class FilterTest {
 		assertSame(raw.get(2),result.get(0));
 		assertEquals("7b11fdbb-0894-4e4b-afaf-880738c84f4c", result.get(0).getId());
 	}
+
 }

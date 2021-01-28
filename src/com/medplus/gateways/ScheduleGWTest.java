@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.AppointmentDS;
 import com.medplus.entities.HealthProvider;
-import com.medplus.entities.TestUtils;
+import com.medplus.factories.TestUtils;
 
 class ScheduleGWTest {
 

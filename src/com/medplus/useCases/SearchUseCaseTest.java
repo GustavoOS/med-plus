@@ -8,7 +8,8 @@ import com.medplus.adapter.interfaces.SearchPresenter;
 import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.Filter;
 import com.medplus.entities.FilterParameter;
-import com.medplus.entities.TestUtils;
+import com.medplus.factories.FilterFactoryImpl;
+import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
 
 class SearchUseCaseTest {
@@ -22,7 +23,8 @@ class SearchUseCaseTest {
 
 	@BeforeEach
 	void setUp(){
-		filter = TestUtils.mountFilter();
+		filter = (new FilterFactoryImpl()).Make("all");
+		filter.setPicker(TestUtils.mountPickerChain());
 		gw = new ProviderGW();
 		((ProviderGW)gw).setProviders(TestUtils.mountProviderList());
 		receiver = new SearchPresenter();

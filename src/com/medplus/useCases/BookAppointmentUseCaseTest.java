@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.SchedulePresenterImpl;
 import com.medplus.entities.AppointmentDS;
-import com.medplus.entities.TestUtils;
+import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
 import com.medplus.gateways.ScheduleGW;
 
@@ -31,8 +31,7 @@ class BookAppointmentUseCaseTest {
 		presenter = new SchedulePresenterImpl();
 		
 		pGw.setProviders(TestUtils.mountProviderList());
-
-		useCase.setFilter(TestUtils.mountFilter());
+		useCase.setFilter(TestUtils.mountIDFilter());
 		useCase.setPresenter(presenter);
 		useCase.setProviderGW(pGw);
 		useCase.setScheduleGW(sGw);
@@ -62,5 +61,4 @@ class BookAppointmentUseCaseTest {
 		useCase.book(appointment, dateTime);
 		assertEquals("fail", presenter.getStatus());
 	}
-
 }

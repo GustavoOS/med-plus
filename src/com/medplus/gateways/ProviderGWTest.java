@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.HealthProvider;
-import com.medplus.entities.TestUtils;
+import com.medplus.factories.TestUtils;
 
 class ProviderGWTest {
 	ProviderGW gw;

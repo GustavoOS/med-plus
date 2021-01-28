@@ -5,7 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.Filter;
-import com.medplus.entities.TestUtils;
+import com.medplus.factories.FilterFactoryImpl;
+import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
 import com.medplus.useCases.SearchUseCase;
 
@@ -16,7 +17,8 @@ class SearchControllerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		Filter filter = TestUtils.mountFilter();
+		Filter filter = (new FilterFactoryImpl()).Make("all");
+		filter.setPicker(TestUtils.mountPickerChain());
 		ProviderGW gw = new ProviderGW();
 		gw.setProviders(TestUtils.mountProviderList());
 		receiver = new SearchPresenter();

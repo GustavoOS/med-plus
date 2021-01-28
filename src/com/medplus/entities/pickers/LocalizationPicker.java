@@ -1,4 +1,10 @@
-package com.medplus.entities;
+package com.medplus.entities.pickers;
+
+import com.medplus.entities.FilterParameter;
+import com.medplus.entities.HealthProvider;
+import com.medplus.entities.Picker;
+import com.medplus.entities.PickerChain;
+import com.medplus.entities.Utils;
 
 public class LocalizationPicker implements Picker, PickerChain {
 
