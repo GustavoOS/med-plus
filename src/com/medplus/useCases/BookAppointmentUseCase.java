@@ -3,14 +3,14 @@ import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.DaySchedule;
-import com.medplus.entities.Filter;
-import com.medplus.entities.FilterParameter;
+import com.medplus.entities.ProviderFilter;
+import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.HealthProvider;
 
 public class BookAppointmentUseCase implements Bookable {
 	private ScheduleGateway scheduleGW;
 	private ProviderGateway providerGW;
-	private Filter filter;
+	private ProviderFilter filter;
 	private SchedulePresenter presenter;
 	private DaySchedule daySchedule;
 
@@ -34,7 +34,7 @@ public class BookAppointmentUseCase implements Bookable {
 	{
 		if(appointment.getDateTime() == null)
 			return false;
-		FilterParameter param = new FilterParameter();
+		ProviderFilterParameter param = new ProviderFilterParameter();
 		param.id = appointment.getProviderID();
 		ArrayList<HealthProvider> providers = filter.filter(providerGW.list(), param);
 		return providers.size() != 0 && providers.get(0).getId().equals(appointment.getProviderID());
@@ -50,7 +50,7 @@ public class BookAppointmentUseCase implements Bookable {
 		this.providerGW = providerGW;
 	}
 
-	public void setFilter(Filter filter) {
+	public void setFilter(ProviderFilter filter) {
 		this.filter = filter;
 	}
 

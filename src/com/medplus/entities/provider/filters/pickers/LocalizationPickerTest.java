@@ -1,4 +1,4 @@
-package com.medplus.entities.filters.pickers;
+package com.medplus.entities.provider.filters.pickers;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -7,14 +7,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.CoordinateDS;
-import com.medplus.entities.FilterParameter;
+import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.HealthProvider;
 import com.medplus.factories.TestUtils;
 
 class LocalizationPickerTest {
 
 	LocalizationPicker picker;
-	FilterParameter param;
+	ProviderFilterParameter param;
 	ArrayList<HealthProvider>providers;
 	RefuserPicker refuser = new RefuserPicker();
 	CoordinateDS user;
@@ -24,7 +24,7 @@ class LocalizationPickerTest {
 	void setUp(){
 		picker = new LocalizationPicker();
 		picker.setNextPicker(new NullPicker());
-		param = new FilterParameter();
+		param = new ProviderFilterParameter();
 		providers = TestUtils.mountProviderList();
 		user = new CoordinateDS(-23.1649181,-45.7951985);
 	}

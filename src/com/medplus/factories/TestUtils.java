@@ -3,9 +3,9 @@ import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.CoordinateDS;
-import com.medplus.entities.Filter;
+import com.medplus.entities.ProviderFilter;
 import com.medplus.entities.HealthProvider;
-import com.medplus.entities.Picker;
+import com.medplus.entities.ProviderPicker;
 import com.medplus.entities.PickerChain;
 import com.medplus.entities.Provider;
 
@@ -23,7 +23,7 @@ public class TestUtils {
 		return providers;
 	}
 
-	public static Picker mountPickerChain()
+	public static ProviderPicker mountPickerChain()
 	{
 		PickerFactory factory = new PickerFactoryImpl();
 		return withNext(factory.Make("id"),
@@ -35,15 +35,15 @@ public class TestUtils {
 				);
 	}
 
-	public static Filter mountIDFilter()
+	public static ProviderFilter mountIDFilter()
 	{
 		PickerFactory factory = new PickerFactoryImpl();
-		Filter filter = (new FilterFactoryImpl()).Make("first");
+		ProviderFilter filter = (new ProviderFilterFactoryImpl()).Make("first");
 		filter.setPicker(withNext(factory.Make("id"),factory.Make(null)));
 		return filter;
 	}
 
-	public static Picker withNext(Picker picker, Picker next)
+	public static ProviderPicker withNext(ProviderPicker picker, ProviderPicker next)
 	{
 		((PickerChain) picker).setNextPicker(next);
 		return picker;

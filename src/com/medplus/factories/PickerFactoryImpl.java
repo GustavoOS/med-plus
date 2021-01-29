@@ -1,16 +1,16 @@
 package com.medplus.factories;
 
-import com.medplus.entities.Picker;
-import com.medplus.entities.filters.pickers.NullPicker;
-import com.medplus.entities.filters.pickers.IDPicker;
-import com.medplus.entities.filters.pickers.LocalizationPicker;
-import com.medplus.entities.filters.pickers.RefuserPicker;
-import com.medplus.entities.filters.pickers.SpecializationPicker;
+import com.medplus.entities.ProviderPicker;
+import com.medplus.entities.provider.filters.pickers.IDPicker;
+import com.medplus.entities.provider.filters.pickers.LocalizationPicker;
+import com.medplus.entities.provider.filters.pickers.NullPicker;
+import com.medplus.entities.provider.filters.pickers.RefuserPicker;
+import com.medplus.entities.provider.filters.pickers.SpecializationPicker;
 
 public class PickerFactoryImpl implements PickerFactory {
 
 	@Override
-	public Picker Make(String type) {
+	public ProviderPicker Make(String type) {
 		if(type == null)
 			return new NullPicker();
 		if(type.equals("id"))

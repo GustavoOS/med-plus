@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.filters.FilterAll;
-import com.medplus.entities.filters.FilterFirst;
+import com.medplus.entities.provider.filters.FilterAll;
+import com.medplus.entities.provider.filters.FilterFirst;
 
-class FilterFactoryImplTest {
+class ProviderFilterFactoryImplTest {
 
-	private FilterFactory factory;
+	private ProviderFilterFactory factory;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		factory = new FilterFactoryImpl();		
+		factory = new ProviderFilterFactoryImpl();		
 	}
 
 	@Test

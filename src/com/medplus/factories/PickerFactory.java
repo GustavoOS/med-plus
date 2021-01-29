@@ -1,7 +1,7 @@
 package com.medplus.factories;
 
-import com.medplus.entities.Picker;
+import com.medplus.entities.ProviderPicker;
 
 public interface PickerFactory {
-	Picker Make(String type);
+	ProviderPicker Make(String type);
 }

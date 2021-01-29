@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.filters.pickers.NullPicker;
-import com.medplus.entities.filters.pickers.IDPicker;
-import com.medplus.entities.filters.pickers.LocalizationPicker;
-import com.medplus.entities.filters.pickers.RefuserPicker;
-import com.medplus.entities.filters.pickers.SpecializationPicker;
+import com.medplus.entities.provider.filters.pickers.IDPicker;
+import com.medplus.entities.provider.filters.pickers.LocalizationPicker;
+import com.medplus.entities.provider.filters.pickers.NullPicker;
+import com.medplus.entities.provider.filters.pickers.RefuserPicker;
+import com.medplus.entities.provider.filters.pickers.SpecializationPicker;
 
 class PickerFactoryImplTest {
 	PickerFactory factory;

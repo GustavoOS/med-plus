@@ -1,11 +1,11 @@
 package com.medplus.adapter.interfaces;
 import com.medplus.entities.CoordinateDS;
-import com.medplus.entities.FilterParameter;
+import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.useCases.SearchUseCase;
 
 public class SearchController {
 	private SearchUseCase useCase;
-	private FilterParameter param = new FilterParameter();
+	private ProviderFilterParameter param = new ProviderFilterParameter();
 
 	public SearchController(SearchUseCase uc)
 	{

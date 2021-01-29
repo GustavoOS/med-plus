@@ -1,17 +1,23 @@
 package com.medplus.entities;
 
-public interface HealthProvider {
-	String getSocialMediaURL();
-	String getName();
-	String getSpecialization();
-	CoordinateDS getLocal();
-	String getId();
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-	void setLocal(CoordinateDS local);
-	void setSocialMediaURL(String url);
-	void setName(String name);
-	void setSpecialization(String specialization);
-	void setId(String id);
+public interface HealthProvider {
+	public String getSocialMediaURL();
+	public String getName();
+	public String getSpecialization();
+	public CoordinateDS getLocal();
+	public String getId();
+	public HashMap<LocalDate, ArrayList<Appointment>> getAppointments();
+
+	public void setLocal(CoordinateDS local);
+	public void setSocialMediaURL(String url);
+	public void setName(String name);
+	public void setSpecialization(String specialization);
+	public void setId(String id);
+	public void setAppointments(HashMap<LocalDate, ArrayList<Appointment>> appointments) ;
 
 	HealthProvider clone();
 }

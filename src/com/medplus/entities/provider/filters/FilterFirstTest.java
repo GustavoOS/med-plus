@@ -1,4 +1,4 @@
-package com.medplus.entities.filters;
+package com.medplus.entities.provider.filters;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,14 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.CoordinateDS;
-import com.medplus.entities.FilterParameter;
+import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.HealthProvider;
 import com.medplus.factories.TestUtils;
 
 class FilterFirstTest {
 	CoordinateDS user;
 	FilterFirst filter;
-	FilterParameter param;
+	ProviderFilterParameter param;
 
 	ArrayList<HealthProvider> raw, result;
 
@@ -26,7 +26,7 @@ class FilterFirstTest {
 		filter.setPicker(TestUtils.mountPickerChain());
 
 		raw = TestUtils.mountProviderList();
-		param = new FilterParameter();
+		param = new ProviderFilterParameter();
 	}
 
 	@Test

@@ -1,6 +1,6 @@
 package com.medplus.entities;
 
-public class FilterParameter {
+public class ProviderFilterParameter {
 	public String specialization = null;
 	public double distance = -1;
 	public CoordinateDS reference = null;

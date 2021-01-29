@@ -1,7 +1,7 @@
 package com.medplus.useCases;
 
-import com.medplus.entities.FilterParameter;
+import com.medplus.entities.ProviderFilterParameter;
 
 public interface Searchable {
-	void search(FilterParameter params);
+	void search(ProviderFilterParameter params);
 }
