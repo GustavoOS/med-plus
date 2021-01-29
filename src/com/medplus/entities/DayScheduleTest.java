@@ -7,15 +7,18 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class BusinessDayTest {
+import com.medplus.factories.DayScheduleFactory;
+import com.medplus.factories.TestUtils;
 
-	BusinessDay bd;
-	AppointmentDS appointment;
+class DayScheduleTest {
+
+	DaySchedule bd;
+	Appointment appointment;
 
 	@BeforeEach
 	void setUp(){
-		bd = new BusinessDay();
-		appointment = new AppointmentDS();
+		bd = DayScheduleFactory.make();
+		appointment = TestUtils.createAppointment();
 		appointment.setProviderID("a69529e1-69a4-4cef-9914-660901dbe2e9");
 		appointment.setPatientID("cb0e17f2-a988-43af-9ef0-63e6b9fc41f5");
 		appointment.setDateTime(LocalDateTime.of(2021, 01, 28, 10, 0));
@@ -56,7 +59,7 @@ class BusinessDayTest {
 	void scheduleOnAMorningReservedHourShouldNotOverrideSchedule()
 	{
 		bd.scheduleAppointment(appointment);
-		AppointmentDS newAppointment = new AppointmentDS();
+		Appointment newAppointment = TestUtils.createAppointment();
 		newAppointment.setProviderID("12d98160-0a3c-4c61-a862-cdc5e03bd8ab");
 		newAppointment.setPatientID("ee7393de-9386-47d6-ab97-cdbdf4673691");
 		newAppointment.setDateTime(appointment.getDateTime().withHour(10));
@@ -72,7 +75,7 @@ class BusinessDayTest {
 		changeAppointmentDateTimeHour(14);
 		bd.scheduleAppointment(appointment);
 		assertFalse(bd.isAvailable(14));
-		AppointmentDS newAppointment = new AppointmentDS();
+		Appointment newAppointment = TestUtils.createAppointment();
 		newAppointment.setProviderID("12d98160-0a3c-4c61-a862-cdc5e03bd8ab");
 		newAppointment.setPatientID("ee7393de-9386-47d6-ab97-cdbdf4673691");
 		newAppointment.setDateTime(appointment.getDateTime().withHour(14));
@@ -103,7 +106,7 @@ class BusinessDayTest {
 	@Test
 	void testDaySetter()
 	{
-		ArrayList<AppointmentDS> apps = new ArrayList<AppointmentDS>();
+		ArrayList<Appointment> apps = new ArrayList<Appointment>();
 		apps.add(appointment);
 		bd.setDay(apps);
 		assertFalse(bd.isAvailable(9));
@@ -126,7 +129,7 @@ class BusinessDayTest {
 	@Test
 	void testDayGetter()
 	{
-		ArrayList<AppointmentDS> appointments;
+		ArrayList<Appointment> appointments;
 		bd.scheduleAppointment(appointment);
 		changeAppointmentDateTimeHour(17);
 		bd.scheduleAppointment(appointment);
@@ -145,7 +148,6 @@ class BusinessDayTest {
 		for(int i = 0; i < 8; i++)
 			assertNull(bd.getDay()[i]);
 	}
-
 
 	private void changeAppointmentDateTimeHour(int hour) {
 		appointment.setDateTime(appointment.getDateTime().withHour(hour));

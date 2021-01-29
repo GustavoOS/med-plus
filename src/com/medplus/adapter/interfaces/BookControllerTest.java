@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.medplus.factories.AppointmentFactoryImpl;
+import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
 import com.medplus.gateways.ScheduleGW;
@@ -19,7 +21,6 @@ class BookControllerTest {
 	private ProviderGW pGw;
 	private ScheduleGW sGw;
 
-	
 	@BeforeEach
 	void setUp() throws Exception {
 		controller = new BookController();
@@ -34,7 +35,9 @@ class BookControllerTest {
 		useCase.setPresenter(presenter);
 		useCase.setProviderGW(pGw);
 		useCase.setScheduleGW(sGw);
+		useCase.setDaySchedule(DayScheduleFactory.make());
 
+		controller.setAppointmentFactory(new AppointmentFactoryImpl());
 		controller.setUseCase(useCase);
 	}
 

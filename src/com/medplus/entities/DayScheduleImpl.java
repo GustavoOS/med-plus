@@ -1,9 +1,10 @@
 package com.medplus.entities;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class BusinessDay {
-	private AppointmentDS[] day = new AppointmentDS[8];
+public class DayScheduleImpl implements DaySchedule{
+	private Appointment[] day = new Appointment[8];
 	private int morningStartHour = 9;
 	private int afternoonStartHour = 13;
 	private int morningEndHour = 12;
@@ -15,7 +16,7 @@ public class BusinessDay {
 				(day[hourToIndex(hour)] == null);
 	}
 
-	public void scheduleAppointment(AppointmentDS appointment)
+	public void scheduleAppointment(Appointment appointment)
 	{
 		int hour = appointment.getDateTime().getHour();
 		if(isAvailable(hour))
@@ -38,19 +39,19 @@ public class BusinessDay {
 		return (hour > morningEndHour) && (hour < afternoonEndHour);
 	}
 
-	public AppointmentDS[] getDay() {
+	public Appointment[] getDay() {
 		return day;
 	}
 
-	public ArrayList<AppointmentDS> getDayAsList()
+	public ArrayList<Appointment> getDayAsList()
 	{
-		return new ArrayList<AppointmentDS> (Arrays.asList(day));
+		return new ArrayList<Appointment> (Arrays.asList(day));
 	}
 
-	public void setDay(ArrayList<AppointmentDS> appointments)
+	public void setDay(ArrayList<Appointment> appointments)
 	{
 		if(appointments == null)
-			appointments = new ArrayList<AppointmentDS>();
+			appointments = new ArrayList<Appointment>();
 		appointments.toArray(day);
 	}
 

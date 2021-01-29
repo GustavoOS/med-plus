@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.AppointmentDS;
+import com.medplus.entities.Appointment;
 import com.medplus.entities.HealthProvider;
 import com.medplus.factories.TestUtils;
 
@@ -15,19 +15,19 @@ class ScheduleGWTest {
 
 	ScheduleGW gw;
 	ArrayList<HealthProvider> providers;
-	AppointmentDS appointment;
+	Appointment appointment;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		gw = new ScheduleGW();
 		providers = TestUtils.mountProviderList();
-		appointment = new AppointmentDS();
+		appointment = TestUtils.createAppointment();
 	}
 
 	@Test
 	void oneInsertionOneRecovery() {
 		appointment.setProviderID(providers.get(0).getId());
-		ArrayList<AppointmentDS> list = new ArrayList<AppointmentDS>();
+		ArrayList<Appointment> list = new ArrayList<Appointment>();
 		list.add(appointment);
 		gw.setSchedule(providers.get(0).getId(), LocalDate.now(), list);
 		assertNotNull(gw.getProviderSchedule(providers.get(0).getId(), LocalDate.now()));

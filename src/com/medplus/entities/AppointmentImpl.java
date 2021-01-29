@@ -2,7 +2,7 @@ package com.medplus.entities;
 
 import java.time.LocalDateTime;
 
-public class AppointmentDS {
+public class AppointmentImpl implements Appointment {
 	private String patientID, providerId;
 	private LocalDateTime dateTime;
 

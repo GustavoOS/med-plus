@@ -7,7 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.SchedulePresenterImpl;
-import com.medplus.entities.AppointmentDS;
+import com.medplus.entities.Appointment;
+import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
 import com.medplus.gateways.ScheduleGW;
@@ -15,7 +16,7 @@ import com.medplus.gateways.ScheduleGW;
 class BookAppointmentUseCaseTest {
 
 	BookAppointmentUseCase useCase;
-	AppointmentDS appointment;
+	Appointment appointment;
 	SchedulePresenterImpl presenter;
 	ProviderGW pGw;
 	ScheduleGateway sGw;
@@ -23,7 +24,7 @@ class BookAppointmentUseCaseTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		useCase = new BookAppointmentUseCase();
-		appointment = new AppointmentDS();
+		appointment = TestUtils.createAppointment();
 		pGw = new ProviderGW();
 		sGw = new ScheduleGW();
 		presenter = new SchedulePresenterImpl();
@@ -33,7 +34,8 @@ class BookAppointmentUseCaseTest {
 		useCase.setPresenter(presenter);
 		useCase.setProviderGW(pGw);
 		useCase.setScheduleGW(sGw);
-		
+		useCase.setDaySchedule(DayScheduleFactory.make());
+
 		appointment.setPatientID("ee7393de-9386-47d6-ab97-cdbdf4673691");
 		appointment.setDateTime(LocalDateTime.of(2021, 01, 28, 10, 0));
 	}

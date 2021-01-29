@@ -1,6 +1,7 @@
 package com.medplus.factories;
 import java.util.ArrayList;
 
+import com.medplus.entities.Appointment;
 import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.Filter;
 import com.medplus.entities.HealthProvider;
@@ -46,5 +47,9 @@ public class TestUtils {
 	{
 		((PickerChain) picker).setNextPicker(next);
 		return picker;
+	}
+
+	public static Appointment createAppointment() {
+		return (new AppointmentFactoryImpl()).make();
 	}
 }

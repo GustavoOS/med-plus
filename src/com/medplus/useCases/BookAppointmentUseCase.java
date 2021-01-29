@@ -1,8 +1,8 @@
 package com.medplus.useCases;
 import java.util.ArrayList;
 
-import com.medplus.entities.AppointmentDS;
-import com.medplus.entities.BusinessDay;
+import com.medplus.entities.Appointment;
+import com.medplus.entities.DaySchedule;
 import com.medplus.entities.Filter;
 import com.medplus.entities.FilterParameter;
 import com.medplus.entities.HealthProvider;
@@ -12,24 +12,25 @@ public class BookAppointmentUseCase implements Bookable {
 	private ProviderGateway providerGW;
 	private Filter filter;
 	private SchedulePresenter presenter;
+	private DaySchedule daySchedule;
 
 	@Override
-	public void book(AppointmentDS appointment) {
+	public void book(Appointment appointment) {
 		if(!appointmentIsValid(appointment))
 		{
 			presenter.fail();
 			return;
 		}
-		BusinessDay day = new BusinessDay();
-		day.setDay(scheduleGW.getProviderSchedule(appointment.getProviderID(), appointment.getDateTime().toLocalDate()));
-		day.scheduleAppointment(appointment);
+
+		daySchedule.setDay(scheduleGW.getProviderSchedule(appointment.getProviderID(), appointment.getDateTime().toLocalDate()));
+		daySchedule.scheduleAppointment(appointment);
 		scheduleGW.setSchedule( appointment.getProviderID(),
 								appointment.getDateTime().toLocalDate(),
-								day.getDayAsList());
+								daySchedule.getDayAsList());
 		presenter.succeed();
 	}
 
-	private Boolean appointmentIsValid(AppointmentDS appointment)
+	private Boolean appointmentIsValid(Appointment appointment)
 	{
 		if(appointment.getDateTime() == null)
 			return false;
@@ -56,4 +57,9 @@ public class BookAppointmentUseCase implements Bookable {
 	public void setPresenter(SchedulePresenter presenter) {
 		this.presenter = presenter;
 	}
+
+	public void setDaySchedule(DaySchedule daySchedule) {
+		this.daySchedule = daySchedule;
+	}
+
 }

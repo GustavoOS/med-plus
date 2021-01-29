@@ -1,12 +1,14 @@
 package com.medplus.adapter.interfaces;
 import java.time.LocalDateTime;
 
-import com.medplus.entities.AppointmentDS;
+import com.medplus.entities.Appointment;
+import com.medplus.factories.AppointmentFactory;
 import com.medplus.useCases.Bookable;
 
 public class BookController {
 	private Bookable useCase;
-	private AppointmentDS appointment;
+	private Appointment appointment;
+	private AppointmentFactory appointmentFactory;
 
 	void schedule()
 	{
@@ -16,7 +18,7 @@ public class BookController {
 	// Setters
 	void setAppointment(String patientId,String providerId, LocalDateTime dateTime)
 	{
-		appointment = new AppointmentDS();
+		appointment = appointmentFactory.make();
 		appointment.setPatientID(patientId);
 		appointment.setProviderID(providerId);
 		appointment.setDateTime(dateTime);
@@ -27,6 +29,8 @@ public class BookController {
 	}
 
 
-	
+	public void setAppointmentFactory(AppointmentFactory appointmentFactory) {
+		this.appointmentFactory = appointmentFactory;
+	}
 	
 }

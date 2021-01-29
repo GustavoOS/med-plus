@@ -1,7 +1,7 @@
 package com.medplus.useCases;
 
-import com.medplus.entities.AppointmentDS;
+import com.medplus.entities.Appointment;
 
 public interface Bookable {
-	void book(AppointmentDS appointment);
+	void book(Appointment appointment);
 }

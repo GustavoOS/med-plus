@@ -55,4 +55,10 @@ class UtilsTest {
 	{
 		assertEquals(0, Utils.calculateAge(null));
 	}
+
+	@Test
+	void testConstructorToFillCoverage()
+	{
+		assertNotNull(new Utils());
+	}
 }
