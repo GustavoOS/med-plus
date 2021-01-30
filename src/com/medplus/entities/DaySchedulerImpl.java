@@ -14,6 +14,7 @@ public class DaySchedulerImpl implements DayScheduler {
 
 	@Override
 	public Boolean isAvailable(Appointment appointment, ArrayList<Appointment> appointments) {
+		setParameter(appointment);
 		return !isInvalid(appointment, appointments);
 	}
 
@@ -38,7 +39,11 @@ public class DaySchedulerImpl implements DayScheduler {
 		return false;
 	}
 
-	public void setParameter(Appointment param) {
-		this.param = param;
+	private void setParameter(Appointment app) {
+		param = Cloner.cloneAppointment(app);
+		if(param != null) {
+			param.setPatientID(null);
+			param.setProviderID(null);
+		}
 	}
 }
