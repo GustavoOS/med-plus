@@ -1,4 +1,5 @@
 package com.medplus.factories;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
@@ -51,5 +52,28 @@ public class TestUtils {
 
 	public static Appointment createAppointment() {
 		return (new AppointmentFactoryImpl()).make();
+	}
+
+	public static ArrayList<Appointment> mountAppointmentList(String provider, String patient, LocalDateTime baseDate)
+	{
+		ArrayList<Appointment> list = new ArrayList<Appointment>();
+
+		addAppointmentToRaw(list, provider, patient, baseDate);
+		addAppointmentToRaw(list, provider, patient, baseDate.plusHours(1));
+		addAppointmentToRaw(list, provider, patient, baseDate.plusDays(1));
+
+		return list;
+	}
+
+	private static void addAppointmentToRaw(ArrayList<Appointment> raw, 
+			String providerId,
+			String patientId,
+			LocalDateTime dateTime)
+	{
+		Appointment appointment = (new AppointmentFactoryImpl()).make();
+		appointment.setProviderID(providerId);
+		appointment.setPatientID(patientId);
+		appointment.setDateTime(dateTime);
+		raw.add(appointment);
 	}
 }

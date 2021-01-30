@@ -2,9 +2,12 @@ package com.medplus.entities;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.medplus.factories.PatientFactoryImpl;
 
 class PatientTest {
 
@@ -12,7 +15,7 @@ class PatientTest {
 	@BeforeEach
 	void setUp()
 	{
-		patient = new Patient();
+		patient = (new PatientFactoryImpl()).make();
 	}
 
 	@Test
@@ -22,9 +25,11 @@ class PatientTest {
 		patient.setName("Joe");
 		patient.setIsFemale(false);
 		patient.setBirth(LocalDate.now());
+		patient.setAppointments(new ArrayList<Appointment>());
 		assertEquals("ae20ca9f-a2de-4417-a980-64408ecf657a", patient.getId());
 		assertEquals("Joe", patient.getName());
 		assertEquals(LocalDate.now(), patient.getBirth());
 		assertFalse(patient.getIsFemale());
+		assertNotNull(patient.getAppointments());
 	}
 }

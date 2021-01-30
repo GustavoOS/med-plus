@@ -1,13 +1,11 @@
 package com.medplus.entities;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Provider implements HealthProvider {
 	private String socialMediaUrl, name, specialization, id;
 	private CoordinateDS local;
-	private HashMap<LocalDate, ArrayList<Appointment>> appointments;
+	private ArrayList<Appointment> appointments;
 
 	public Provider(){}
 	
@@ -61,18 +59,6 @@ public class Provider implements HealthProvider {
 	}
 
 	@Override
-	public HealthProvider clone()
-	{
-		HealthProvider p = new Provider();
-		p.setLocal(local);
-		p.setName(name);
-		p.setSocialMediaURL(socialMediaUrl);
-		p.setSpecialization(specialization);
-		p.setId(id);
-		return p;
-	}
-
-	@Override
 	public String getId() {
 		return id;
 	}
@@ -83,12 +69,12 @@ public class Provider implements HealthProvider {
 	}
 
 	@Override
-	public HashMap<LocalDate, ArrayList<Appointment>> getAppointments() {
+	public ArrayList<Appointment> getAppointments() {
 		return appointments;
 	}
 
 	@Override
-	public void setAppointments(HashMap<LocalDate, ArrayList<Appointment>> appointments){
+	public void setAppointments(ArrayList<Appointment> appointments){
 		this.appointments = appointments;
 		
 	}

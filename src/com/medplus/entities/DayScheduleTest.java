@@ -12,7 +12,7 @@ import com.medplus.factories.TestUtils;
 
 class DayScheduleTest {
 
-	DaySchedule bd;
+	DayScheduler bd;
 	Appointment appointment;
 
 	@BeforeEach

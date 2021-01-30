@@ -26,15 +26,6 @@ public class Utils {
 		return (c * r);
 	}
 
-	public static ArrayList<HealthProvider> copyProviderList(ArrayList<HealthProvider> providers)
-	{
-		ArrayList<HealthProvider> copy = new ArrayList<HealthProvider>();
-		for (HealthProvider healthProvider : providers) {
-			copy.add(healthProvider.clone());
-		}
-		return copy;
-	}
-
 	public static int calculateAge(LocalDate birth)
 	{
 		if(birth == null)

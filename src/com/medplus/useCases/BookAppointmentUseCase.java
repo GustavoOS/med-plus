@@ -2,7 +2,7 @@ package com.medplus.useCases;
 import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
-import com.medplus.entities.DaySchedule;
+import com.medplus.entities.DayScheduler;
 import com.medplus.entities.ProviderFilter;
 import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.HealthProvider;
@@ -12,7 +12,7 @@ public class BookAppointmentUseCase implements Bookable {
 	private ProviderGateway providerGW;
 	private ProviderFilter filter;
 	private SchedulePresenter presenter;
-	private DaySchedule daySchedule;
+	private DayScheduler daySchedule;
 
 	@Override
 	public void book(Appointment appointment) {
@@ -58,7 +58,7 @@ public class BookAppointmentUseCase implements Bookable {
 		this.presenter = presenter;
 	}
 
-	public void setDaySchedule(DaySchedule daySchedule) {
+	public void setDaySchedule(DayScheduler daySchedule) {
 		this.daySchedule = daySchedule;
 	}
 
