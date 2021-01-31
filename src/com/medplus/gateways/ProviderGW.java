@@ -1,8 +1,8 @@
 package com.medplus.gateways;
 import java.util.ArrayList;
 
+import com.medplus.entities.Cloner;
 import com.medplus.entities.HealthProvider;
-import com.medplus.entities.Utils;
 import com.medplus.useCases.ProviderGateway;
 
 public class ProviderGW implements ProviderGateway {
@@ -14,7 +14,34 @@ public class ProviderGW implements ProviderGateway {
 
 	@Override
 	public ArrayList<HealthProvider> list() {
-		return Utils.copyProviderList(providers);
+		return Cloner.cloneProviderList(providers);
 	}
 
+	@Override
+	public void put(HealthProvider provider) {
+		int index = providers.indexOf(filterProvider(provider.getId()));
+		if(index < 0)
+			providers.add(provider);
+		else
+			providers.set(index, provider);		
+	}
+
+	@Override
+	public HealthProvider getProvider(String id)
+	{
+		return Cloner.cloneProvider(filterProvider(id));
+	}
+
+	public HealthProvider filterProvider(String id) {
+		return providers.stream()
+				  .filter(provider -> id.equals(provider.getId()))
+				  .findAny()
+				  .orElse(null);
+	}
+
+	ArrayList<HealthProvider> getProviders() {
+		return providers;
+	}
+
+	
 }

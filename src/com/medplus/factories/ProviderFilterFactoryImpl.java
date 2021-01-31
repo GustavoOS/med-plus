@@ -1,16 +1,13 @@
 package com.medplus.factories;
 
 import com.medplus.entities.ProviderFilter;
-import com.medplus.entities.provider.filters.FilterAll;
-import com.medplus.entities.provider.filters.FilterFirst;
+import com.medplus.entities.provider.filters.FilterImpl;
 
 public class ProviderFilterFactoryImpl implements ProviderFilterFactory {
 
 	@Override
-	public ProviderFilter Make(String name) {
-		if(name.equals("first"))
-			return new FilterFirst();
-		return new FilterAll();
+	public ProviderFilter Make() {
+		return new FilterImpl();
 	}
 
 }

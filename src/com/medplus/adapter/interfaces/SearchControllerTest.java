@@ -17,7 +17,7 @@ class SearchControllerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		ProviderFilter filter = (new ProviderFilterFactoryImpl()).Make("all");
+		ProviderFilter filter = (new ProviderFilterFactoryImpl()).Make();
 		filter.setPicker(TestUtils.mountPickerChain());
 		ProviderGW gw = new ProviderGW();
 		gw.setProviders(TestUtils.mountProviderList());

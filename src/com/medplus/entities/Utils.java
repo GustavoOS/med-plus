@@ -1,7 +1,6 @@
 package com.medplus.entities;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 
 public class Utils {
 	public static double calculateDistance(CoordinateDS pointA, CoordinateDS pointB) {
@@ -24,15 +23,6 @@ public class Utils {
 
 		// calculate the result 
 		return (c * r);
-	}
-
-	public static ArrayList<HealthProvider> copyProviderList(ArrayList<HealthProvider> providers)
-	{
-		ArrayList<HealthProvider> copy = new ArrayList<HealthProvider>();
-		for (HealthProvider healthProvider : providers) {
-			copy.add(healthProvider.clone());
-		}
-		return copy;
 	}
 
 	public static int calculateAge(LocalDate birth)

@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.DaySchedule;
+import com.medplus.entities.DayScheduler;
 
 class DayScheduleFactoryTest{
 
 	@Test
 	void createdShouldBeInstanceofDaySchedule() {
-		assertTrue(DayScheduleFactory.make() instanceof DaySchedule);
+		assertTrue(DayScheduleFactory.make() instanceof DayScheduler);
 	}
 
 	@Test

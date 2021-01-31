@@ -2,11 +2,9 @@ package com.medplus.entities;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import com.medplus.factories.TestUtils;
 
 class UtilsTest {
 
@@ -18,31 +16,6 @@ class UtilsTest {
 		b.longitude = -1.6997222222222223;
 		
 		assertEquals(2.0043, Utils.calculateDistance(a, b), 0.001);
-	}
-
-	@Test
-	void copiedListShouldHaveDifferentReferences()
-	{
-		ArrayList<HealthProvider> raw, result;
-		raw = TestUtils.mountProviderList();
-		result = Utils.copyProviderList(raw);
-		assertEquals(4, result.size());
-		for(int i = 0; i < 4; i++)
-		{
-			assertNotSame(result.get(i), raw.get(i));
-			assertEquals(raw.get(i).getName(), result.get(i).getName());
-		}
-	}
-
-	@Test
-	void changeInCopiedListShouldNotChangeTheOriginal()
-	{
-		ArrayList<HealthProvider> raw, result;
-		raw = TestUtils.mountProviderList();
-		result = Utils.copyProviderList(raw);
-		result.get(0).setName("Corleone");
-		assertEquals("João", raw.get(0).getName());
-		assertEquals("Corleone", result.get(0).getName());
 	}
 
 	@Test

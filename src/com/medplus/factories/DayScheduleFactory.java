@@ -1,12 +1,12 @@
 package com.medplus.factories;
 
-import com.medplus.entities.DaySchedule;
-import com.medplus.entities.DayScheduleImpl;
+import com.medplus.entities.DayScheduler;
+import com.medplus.entities.DaySchedulerImpl;
 
 public class DayScheduleFactory {
-	public static DaySchedule make()
+	public static DayScheduler make()
 	{
-		return new DayScheduleImpl();
+		return new DaySchedulerImpl();
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.medplus.useCases;
 
-public interface SchedulePresenter {
+public interface SchedulePresenter extends FailablePresenter{
 	void succeed();
-	void fail();
 }

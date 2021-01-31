@@ -23,7 +23,7 @@ class SearchUseCaseTest {
 
 	@BeforeEach
 	void setUp(){
-		filter = (new ProviderFilterFactoryImpl()).Make("all");
+		filter = (new ProviderFilterFactoryImpl()).Make();
 		filter.setPicker(TestUtils.mountPickerChain());
 		gw = new ProviderGW();
 		((ProviderGW)gw).setProviders(TestUtils.mountProviderList());
@@ -38,7 +38,7 @@ class SearchUseCaseTest {
 	{
 		useCase.search(null);
 		assertEquals(4, receiver.getProviders().size());
-		assertEquals("João", receiver.getProviders().get(0).getName());
+		assertEquals("Joe", receiver.getProviders().get(0).getName());
 		assertEquals("Silva", receiver.getProviders().get(1).getName());
 		assertEquals("Paz", receiver.getProviders().get(2).getName());
 		assertEquals("Benedito", receiver.getProviders().get(3).getName());
@@ -62,7 +62,7 @@ class SearchUseCaseTest {
 
 		useCase.search(param);
 		assertEquals(3, receiver.getProviders().size());
-		assertEquals("João", receiver.getProviders().get(0).getName());
+		assertEquals("Joe", receiver.getProviders().get(0).getName());
 		assertEquals("Silva", receiver.getProviders().get(1).getName());
 		assertEquals("Benedito", receiver.getProviders().get(2).getName());
 	}
@@ -76,7 +76,7 @@ class SearchUseCaseTest {
 
 		useCase.search(param);
 		assertEquals(2, receiver.getProviders().size());
-		assertEquals("João", receiver.getProviders().get(0).getName());
+		assertEquals("Joe", receiver.getProviders().get(0).getName());
 		assertEquals("Silva", receiver.getProviders().get(1).getName());
 	}
 }
