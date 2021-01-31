@@ -62,6 +62,15 @@ class DayScheduleTest {
 		appointment.setDateTime(null);
 		assertFalse(bd.isAvailable(appointment, list));
 	}
+
+	@Test
+	void testAppointmentsOfDoctor()
+	{
+		list = TestUtils.mountProviderList().get(0).getAppointments();
+		assertNotNull(list);
+		appointment.setProviderID("da2ed3e9-566b-4521-8002-6e15f6f9958d");
+		assertTrue(bd.isAvailable(appointment, list));
+	}
 	private void changeAppointmentDateTimeHour(int hour) {
 		appointment.setDateTime(appointment.getDateTime().withHour(hour));
 	}

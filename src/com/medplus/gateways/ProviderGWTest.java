@@ -75,7 +75,6 @@ class ProviderGWTest {
 		result = gw.list();
 		assertEquals("blabla.com", result.get(0).getSocialMediaURL());
 		assertEquals("da2ed3e9-566b-4521-8002-6e15f6f9958d", result.get(0).getId());
-		assertNull(result.get(0).getAppointments());
 
 		gw.put(p);
 		result = gw.list();

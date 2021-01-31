@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.provider.filters.FilterAll;
-import com.medplus.entities.provider.filters.FilterFirst;
+import com.medplus.entities.provider.filters.FilterImpl;
 
 class ProviderFilterFactoryImplTest {
 
@@ -18,13 +17,8 @@ class ProviderFilterFactoryImplTest {
 	}
 
 	@Test
-	void makeFilterFirst() {
-		assertTrue(factory.Make("first") instanceof FilterFirst);
-	}
-
-	@Test
 	void makeFilterAll()
 	{
-		assertTrue(factory.Make("all") instanceof FilterAll);
+		assertTrue(factory.Make() instanceof FilterImpl);
 	}
 }

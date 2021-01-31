@@ -23,7 +23,7 @@ class SearchUseCaseTest {
 
 	@BeforeEach
 	void setUp(){
-		filter = (new ProviderFilterFactoryImpl()).Make("all");
+		filter = (new ProviderFilterFactoryImpl()).Make();
 		filter.setPicker(TestUtils.mountPickerChain());
 		gw = new ProviderGW();
 		((ProviderGW)gw).setProviders(TestUtils.mountProviderList());

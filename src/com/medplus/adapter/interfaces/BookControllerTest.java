@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import com.medplus.factories.AppointmentFactoryImpl;
 import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
+import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
-import com.medplus.gateways.ScheduleGW;
 import com.medplus.useCases.BookAppointmentUseCase;
 
 class BookControllerTest {
@@ -18,23 +18,23 @@ class BookControllerTest {
 	BookController controller;
 	BookAppointmentUseCase useCase;
 	SchedulePresenterImpl presenter;
-	private ProviderGW pGw;
-	private ScheduleGW sGw;
+	private ProviderGW providerGw;
+	private PatientGW patientGW;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		controller = new BookController();
 		useCase = new BookAppointmentUseCase();
-		pGw = new ProviderGW();
-		sGw = new ScheduleGW();
+		providerGw = new ProviderGW();
+		patientGW = new PatientGW();
 		presenter = new SchedulePresenterImpl();
 		
-		pGw.setProviders(TestUtils.mountProviderList());
+		providerGw.setProviders(TestUtils.mountProviderList());
+		patientGW.setPatients(TestUtils.mountPatientList());
 
-		useCase.setFilter(TestUtils.mountIDFilter());
 		useCase.setPresenter(presenter);
-		useCase.setProviderGW(pGw);
-		useCase.setScheduleGW(sGw);
+		useCase.setProviderGW(providerGw);
+		useCase.setPatientGW(patientGW);
 		useCase.setDaySchedule(DayScheduleFactory.make());
 
 		controller.setAppointmentFactory(new AppointmentFactoryImpl());
@@ -43,9 +43,13 @@ class BookControllerTest {
 
 	@Test
 	void testSuccess() {
-		controller.setAppointment(  "da0ea328-fe04-49a7-9907-d9948bb8be0f",
-									"7b11fdbb-0894-4e4b-afaf-880738c84f4c",
-									LocalDateTime.of(2021, 03, 31, 10, 0));
+		controller.setAppointment(  "da2ed3e9-566b-4521-8002-6e15f6f9958d",
+									"0c9dbc30-2874-4983-a0b7-6885c409ddbc",
+									LocalDateTime.of(2021, 01, 21, 10, 0));
+		assertNotNull(controller.getAppointment());
+		assertEquals("da2ed3e9-566b-4521-8002-6e15f6f9958d", controller.getAppointment().getProviderID());
+		assertEquals("0c9dbc30-2874-4983-a0b7-6885c409ddbc", controller.getAppointment().getPatientID());
+		assertEquals(LocalDateTime.of(2021, 01, 21, 10, 0),controller.getAppointment().getDateTime());
 		controller.schedule();
 		assertEquals("success", presenter.getStatus());
 	}

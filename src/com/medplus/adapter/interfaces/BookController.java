@@ -16,7 +16,7 @@ public class BookController {
 	}
 
 	// Setters
-	void setAppointment(String patientId,String providerId, LocalDateTime dateTime)
+	void setAppointment(String providerId,String patientId, LocalDateTime dateTime)
 	{
 		appointment = appointmentFactory.make();
 		appointment.setPatientID(patientId);
@@ -32,5 +32,10 @@ public class BookController {
 	public void setAppointmentFactory(AppointmentFactory appointmentFactory) {
 		this.appointmentFactory = appointmentFactory;
 	}
+
+	Appointment getAppointment() {
+		return appointment;
+	}
+
 	
 }

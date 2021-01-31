@@ -84,7 +84,7 @@ class BookAppointmentUseCaseTest {
 	void bookConflictingProviderTimeShouldFail()
 	{
 		appointment.setPatientID("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
-		appointment.setDateTime(LocalDateTime.now().withHour(10).plusDays(1));
+		appointment.setDateTime(LocalDateTime.now().withHour(14).plusDays(1));
 		useCase.book(appointment);
 		assertFailure();
 	}
@@ -92,7 +92,7 @@ class BookAppointmentUseCaseTest {
 	@Test
 	void bookConflictingPatientTimeShouldFail()
 	{
-		appointment.setDateTime(LocalDateTime.now().withHour(14));
+		appointment.setDateTime(LocalDateTime.now().withHour(10).plusDays(1));
 		useCase.book(appointment);
 		assertFailure();
 	}
