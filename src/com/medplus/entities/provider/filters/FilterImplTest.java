@@ -37,7 +37,7 @@ class FilterImplTest {
 		result = filter.filter(raw, param);
 
 		assertEquals(2, result.size());
-		assertEquals("João", result.get(0).getName());
+		assertEquals("Joe", result.get(0).getName());
 		assertEquals("Silva", result.get(1).getName());
 	}
 

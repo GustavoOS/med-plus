@@ -27,7 +27,7 @@ class ProviderGWTest {
 	void listShouldReturnACopyOfAllValuesStoredCheckByName() {
 		result = gw.list();
 		assertEquals(4, result.size());
-		assertEquals("João", result.get(0).getName());
+		assertEquals("Joe", result.get(0).getName());
 		assertEquals("Silva", result.get(1).getName());
 		assertEquals("Paz", result.get(2).getName());
 		assertEquals("Benedito", result.get(3).getName());
@@ -55,7 +55,7 @@ class ProviderGWTest {
 		result = gw.list();
 		assertEquals(5, result.size());
 		assertEquals("medplus.com", result.get(4).getSocialMediaURL());
-		assertEquals("João", result.get(0).getName());
+		assertEquals("Joe", result.get(0).getName());
 		assertEquals("Silva", result.get(1).getName());
 		assertEquals("Paz", result.get(2).getName());
 		assertEquals("Benedito", result.get(3).getName());

@@ -53,7 +53,7 @@ class ClonerTest {
 		raw = TestUtils.mountProviderList();
 		result = Cloner.cloneProviderList(raw);
 		result.get(0).setName("Corleone");
-		assertEquals("João", raw.get(0).getName());
+		assertEquals("Joe", raw.get(0).getName());
 		assertEquals("Corleone", result.get(0).getName());
 	}
 
