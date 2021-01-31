@@ -19,7 +19,6 @@ class DayScheduleTest {
 	@BeforeEach
 	void setUp(){
 		bd = DayScheduleFactory.make();
-		bd.setFilter(new AppointmentFilterAll());
 		appointment = TestUtils.createAppointment();
 		appointment.setProviderID("da2ed3e9-566b-4521-8002-6e15f6f9958d");
 		appointment.setPatientID("cb0e17f2-a988-43af-9ef0-63e6b9fc41f5");

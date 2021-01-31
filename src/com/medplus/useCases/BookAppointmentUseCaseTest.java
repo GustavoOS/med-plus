@@ -10,40 +10,40 @@ import com.medplus.adapter.interfaces.SchedulePresenterImpl;
 import com.medplus.entities.Appointment;
 import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
+import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
-import com.medplus.gateways.ScheduleGW;
 
 class BookAppointmentUseCaseTest {
 
 	BookAppointmentUseCase useCase;
 	Appointment appointment;
 	SchedulePresenterImpl presenter;
-	ProviderGW pGw;
-	ScheduleGateway sGw;
+	ProviderGW providerGw;
+	PatientGW patientGW;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		useCase = new BookAppointmentUseCase();
 		appointment = TestUtils.createAppointment();
-		pGw = new ProviderGW();
-		sGw = new ScheduleGW();
+		providerGw = new ProviderGW();
+		patientGW = new PatientGW();
 		presenter = new SchedulePresenterImpl();
 		
-		pGw.setProviders(TestUtils.mountProviderList());
-		useCase.setFilter(TestUtils.mountIDFilter());
+		providerGw.setProviders(TestUtils.mountProviderList());
+		patientGW.setPatients(TestUtils.mountPatientList());
+
 		useCase.setPresenter(presenter);
-		useCase.setProviderGW(pGw);
-		useCase.setScheduleGW(sGw);
+		useCase.setProviderGW(providerGw);
+		useCase.setPatientGW(patientGW);
 		useCase.setDaySchedule(DayScheduleFactory.make());
 
-		appointment.setPatientID("ee7393de-9386-47d6-ab97-cdbdf4673691");
-		appointment.setDateTime(LocalDateTime.of(2021, 01, 28, 10, 0));
+		appointment.setPatientID("0c9dbc30-2874-4983-a0b7-6885c409ddbc");
+		appointment.setProviderID("7b11fdbb-0894-4e4b-afaf-880738c84f4c");
+		appointment.setDateTime(LocalDateTime.now().withHour(10).plusDays(15));
 	}
 
 	@Test
 	void bookAppointment() {
-		appointment.setProviderID("7b11fdbb-0894-4e4b-afaf-880738c84f4c");
-
 		useCase.book(appointment);
 		assertEquals("success", presenter.getStatus());
 	}
@@ -51,6 +51,7 @@ class BookAppointmentUseCaseTest {
 	@Test
 	void bookAppointmentWithNullProviderIDShouldFail()
 	{
+		appointment.setProviderID(null);
 		useCase.book(appointment);
 		assertFailure();
 	}
@@ -64,10 +65,34 @@ class BookAppointmentUseCaseTest {
 	}
 
 	@Test
+	void bookAppointmentWithNotListedPatientIdShouldFail()
+	{
+		appointment.setPatientID("hello");
+		useCase.book(appointment);
+		assertFailure();
+	}
+
+	@Test
 	void bookAppointmentWithNoTimeShouldFail()
 	{
-		appointment.setProviderID("7b11fdbb-0894-4e4b-afaf-880738c84f4c");
 		appointment.setDateTime(null);
+		useCase.book(appointment);
+		assertFailure();
+	}
+
+	@Test
+	void bookConflictingProviderTimeShouldFail()
+	{
+		appointment.setPatientID("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
+		appointment.setDateTime(LocalDateTime.now().withHour(10).plusDays(1));
+		useCase.book(appointment);
+		assertFailure();
+	}
+
+	@Test
+	void bookConflictingPatientTimeShouldFail()
+	{
+		appointment.setDateTime(LocalDateTime.now().withHour(14));
 		useCase.book(appointment);
 		assertFailure();
 	}

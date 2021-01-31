@@ -1,7 +1,6 @@
 package com.medplus.entities;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 
 public class Utils {
 	public static double calculateDistance(CoordinateDS pointA, CoordinateDS pointB) {

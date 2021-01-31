@@ -50,4 +50,17 @@ public class Cloner {
 			result.add(cloneProvider(healthProvider));
 		return result;		
 	}
+
+	public static Patient clonePatient(Patient original)
+	{
+		if(original == null)
+			return null;
+		Patient p = new PatientImpl();
+		p.setAppointments(cloneAppointmentList(original.getAppointments()));
+		p.setBirth(original.getBirth());
+		p.setId(original.getId());
+		p.setIsFemale(original.getIsFemale());
+		p.setName(original.getName());
+		return p;
+	}
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.medplus.factories.PatientFactoryImpl;
 import com.medplus.factories.TestUtils;
 
 class ClonerTest {
@@ -52,7 +53,7 @@ class ClonerTest {
 		raw = TestUtils.mountProviderList();
 		result = Cloner.cloneProviderList(raw);
 		result.get(0).setName("Corleone");
-		assertEquals("João", raw.get(0).getName());
+		assertEquals("Joï¿½o", raw.get(0).getName());
 		assertEquals("Corleone", result.get(0).getName());
 	}
 
@@ -76,7 +77,22 @@ class ClonerTest {
 		assertNotSame(appointments, rawAppointmentList);
 	}
 
-
+	@Test
+	void clonePatient()
+	{
+		Patient p = (new PatientFactoryImpl()).make();
+		p.setAppointments(rawAppointmentList);
+		p.setBirth(LocalDate.now().minusYears(20));
+		p.setId("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
+		p.setIsFemale(true);
+		p.setName("Maria");
+		Patient copy = Cloner.clonePatient(p);
+		assertEquals(p.getBirth(), copy.getBirth());
+		assertEquals("Maria", copy.getName());
+		assertTrue(p.getIsFemale());
+		assertEquals(p.getId(), copy.getId());
+		assertNotSame(p, copy);
+	}
 
 
 	private void verifySingleAppointmentClone(Appointment appointment, int index) {

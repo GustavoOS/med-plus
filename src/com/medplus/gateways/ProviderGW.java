@@ -19,7 +19,7 @@ public class ProviderGW implements ProviderGateway {
 
 	@Override
 	public void put(HealthProvider provider) {
-		int index = providers.indexOf(getProvider(provider.getId()));
+		int index = providers.indexOf(filterProvider(provider.getId()));
 		if(index < 0)
 			providers.add(provider);
 		else
@@ -27,10 +27,21 @@ public class ProviderGW implements ProviderGateway {
 	}
 
 	@Override
-	public HealthProvider getProvider(String id) {
+	public HealthProvider getProvider(String id)
+	{
+		return Cloner.cloneProvider(filterProvider(id));
+	}
+
+	public HealthProvider filterProvider(String id) {
 		return providers.stream()
 				  .filter(provider -> id.equals(provider.getId()))
 				  .findAny()
 				  .orElse(null);
 	}
+
+	ArrayList<HealthProvider> getProviders() {
+		return providers;
+	}
+
+	
 }

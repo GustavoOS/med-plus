@@ -6,6 +6,7 @@ import com.medplus.entities.Appointment;
 import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.ProviderFilter;
 import com.medplus.entities.HealthProvider;
+import com.medplus.entities.Patient;
 import com.medplus.entities.ProviderPicker;
 import com.medplus.entities.PickerChain;
 import com.medplus.entities.Provider;
@@ -63,6 +64,32 @@ public class TestUtils {
 		addAppointmentToRaw(list, provider, patient, baseDate.plusDays(1));
 
 		return list;
+	}
+
+	public static ArrayList<Patient> mountPatientList()
+	{
+		ArrayList<Patient> patients = new ArrayList<Patient>();
+		Patient p = (new PatientFactoryImpl()).make();
+		p.setAppointments(mountAppointmentList(
+				"da2ed3e9-566b-4521-8002-6e15f6f9958d",
+				"4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1",
+				LocalDateTime.now().withHour(14)));
+		p.setBirth(LocalDateTime.now().minusYears(20).toLocalDate());
+		p.setId("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
+		p.setIsFemale(true);
+		p.setName("Maria");
+		patients.add(p);
+		p = (new PatientFactoryImpl()).make();
+		p.setAppointments(mountAppointmentList(
+				"da2ed3e9-566b-4521-8002-6e15f6f9958d",
+				"0c9dbc30-2874-4983-a0b7-6885c409ddbc",
+				LocalDateTime.now().withHour(10).plusDays(1)));
+		p.setBirth(LocalDateTime.now().minusYears(25).toLocalDate());
+		p.setId("0c9dbc30-2874-4983-a0b7-6885c409ddbc");
+		p.setIsFemale(false);
+		p.setName("John");
+		patients.add(p);
+		return patients;
 	}
 
 	private static void addAppointmentToRaw(ArrayList<Appointment> raw, 

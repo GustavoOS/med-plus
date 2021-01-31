@@ -1,65 +1,79 @@
 package com.medplus.useCases;
-import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.DayScheduler;
-import com.medplus.entities.ProviderFilter;
-import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.HealthProvider;
+import com.medplus.entities.Patient;
 
 public class BookAppointmentUseCase implements Bookable {
-	private ScheduleGateway scheduleGW;
+	private PatientGateway patientGW;
 	private ProviderGateway providerGW;
-	private ProviderFilter filter;
 	private SchedulePresenter presenter;
-	private DayScheduler daySchedule;
+	private DayScheduler dayScheduler;
+
+	private HealthProvider provider;
+	private Patient patient;
+	private Appointment appointment;
 
 	@Override
-	public void book(Appointment appointment) {
-		if(!appointmentIsValid(appointment))
+	public void book(Appointment a) {
+		appointment = a;
+		if(appointmentIsInvalid() || !involvedPeopleAreNotBusy())
 		{
 			presenter.fail();
 			return;
 		}
-
-		daySchedule.setDay(scheduleGW.getProviderSchedule(appointment.getProviderID(), appointment.getDateTime().toLocalDate()));
-		daySchedule.scheduleAppointment(appointment);
-		scheduleGW.setSchedule( appointment.getProviderID(),
-								appointment.getDateTime().toLocalDate(),
-								daySchedule.getDayAsList());
+		provider.getAppointments().add(appointment);
+		patient.getAppointments().add(appointment);
+		providerGW.put(provider);
+		patientGW.put(patient);
 		presenter.succeed();
 	}
 
-	private Boolean appointmentIsValid(Appointment appointment)
+	private Boolean appointmentIsInvalid()
+	{		
+		return  appointment.getDateTime() == null ||
+				appointment.getPatientID() == null ||
+				appointment.getProviderID() == null ||
+				providerWasNotFound() ||
+				patientWasNotFound();
+	}
+
+	private boolean patientWasNotFound() {
+		patient = patientGW.getPatient(appointment.getPatientID());
+		return patient == null;
+	}
+
+	private Boolean involvedPeopleAreNotBusy()
 	{
-		if(appointment.getDateTime() == null)
-			return false;
-		ProviderFilterParameter param = new ProviderFilterParameter();
-		param.id = appointment.getProviderID();
-		ArrayList<HealthProvider> providers = filter.filter(providerGW.list(), param);
-		return providers.size() != 0 && providers.get(0).getId().equals(appointment.getProviderID());
+		Boolean bool1 = dayScheduler.isAvailable(appointment, provider.getAppointments()); //TODO investigate why this is false in the book appointment test
+		Boolean bool2 = dayScheduler.isAvailable(appointment, patient.getAppointments());
+		System.out.println(bool1);
+		System.out.println(bool2);
+		return bool1 && bool2;
 	}
 
+	private Boolean providerWasNotFound()
+	{
+		provider = providerGW.getProvider(appointment.getProviderID());
+		return provider == null;
+	}
 	// Setters
-
-	public void setScheduleGW(ScheduleGateway scheduleGW) {
-		this.scheduleGW = scheduleGW;
-	}
 
 	public void setProviderGW(ProviderGateway providerGW) {
 		this.providerGW = providerGW;
 	}
 
-	public void setFilter(ProviderFilter filter) {
-		this.filter = filter;
+	public void setPatientGW(PatientGateway patientGW) {
+		this.patientGW = patientGW;
 	}
 
 	public void setPresenter(SchedulePresenter presenter) {
 		this.presenter = presenter;
 	}
 
-	public void setDaySchedule(DayScheduler daySchedule) {
-		this.daySchedule = daySchedule;
+	public void setDaySchedule(DayScheduler dayScheduler) {
+		this.dayScheduler = dayScheduler;
 	}
 
 }

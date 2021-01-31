@@ -86,4 +86,15 @@ class ProviderGWTest {
 		assertEquals("da2ed3e9-566b-4521-8002-6e15f6f9958d", result.get(0).getId());
 		assertEquals("medplus.com", result.get(0).getSocialMediaURL());
 	}
+
+	@Test
+	void testProviderRecovery()
+	{
+		assertTrue(gw.getProvider("7b11fdbb-0894-4e4b-afaf-880738c84f4c") instanceof HealthProvider);
+		HealthProvider provider = gw.getProvider("7b11fdbb-0894-4e4b-afaf-880738c84f4c");
+		assertNotNull(provider);
+		assertEquals("Paz", provider.getName());
+		assertNotSame(provider, gw.getProviders().get(2));
+		assertEquals("7b11fdbb-0894-4e4b-afaf-880738c84f4c", gw.getProviders().get(2).getId());
+	}
 }
