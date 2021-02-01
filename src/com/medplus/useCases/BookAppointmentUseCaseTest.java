@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.SchedulePresenterImpl;
 import com.medplus.entities.Appointment;
+import com.medplus.factories.AppointmentFactoryImpl;
 import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
@@ -24,7 +25,7 @@ class BookAppointmentUseCaseTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		useCase = new BookAppointmentUseCase();
-		appointment = TestUtils.createAppointment();
+		appointment = (new AppointmentFactoryImpl()).make();
 		providerGw = new ProviderGW();
 		patientGW = new PatientGW();
 		presenter = new SchedulePresenterImpl();

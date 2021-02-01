@@ -46,10 +46,6 @@ public class TestUtils {
 		return picker;
 	}
 
-	public static Appointment createAppointment() {
-		return (new AppointmentFactoryImpl()).make();
-	}
-
 	public static ArrayList<Appointment> mountAppointmentList(String provider, String patient, LocalDateTime baseDate)
 	{
 		ArrayList<Appointment> list = new ArrayList<Appointment>();

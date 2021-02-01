@@ -46,11 +46,9 @@ public class BookAppointmentUseCase implements Bookable {
 
 	private Boolean involvedPeopleAreNotBusy()
 	{
-		Boolean bool1 = dayScheduler.isAvailable(appointment, provider.getAppointments()); //TODO investigate why this is false in the book appointment test
-		Boolean bool2 = dayScheduler.isAvailable(appointment, patient.getAppointments());
-		System.out.println(bool1);
-		System.out.println(bool2);
-		return bool1 && bool2;
+		return
+			dayScheduler.isAvailable(appointment, provider.getAppointments()) &&
+			dayScheduler.isAvailable(appointment, patient.getAppointments());
 	}
 
 	private Boolean providerWasNotFound()

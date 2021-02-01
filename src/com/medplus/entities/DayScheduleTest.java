@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.medplus.factories.AppointmentFactoryImpl;
 import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
 
@@ -19,7 +20,7 @@ class DayScheduleTest {
 	@BeforeEach
 	void setUp(){
 		bd = DayScheduleFactory.make();
-		appointment = TestUtils.createAppointment();
+		appointment = (new AppointmentFactoryImpl()).make();
 		appointment.setProviderID("da2ed3e9-566b-4521-8002-6e15f6f9958d");
 		appointment.setPatientID("cb0e17f2-a988-43af-9ef0-63e6b9fc41f5");
 		appointment.setDateTime(LocalDateTime.of(2021, 01, 28, 10, 0));
@@ -71,6 +72,15 @@ class DayScheduleTest {
 		appointment.setProviderID("da2ed3e9-566b-4521-8002-6e15f6f9958d");
 		assertTrue(bd.isAvailable(appointment, list));
 	}
+
+	@Test
+	void testConflictingDoctorAppointment()
+	{
+		list = TestUtils.mountPatientList().get(0).getAppointments();
+		appointment.setDateTime(LocalDateTime.now().withHour(14).plusDays(1));
+		assertFalse(bd.isAvailable(appointment, list));
+	}
+
 	private void changeAppointmentDateTimeHour(int hour) {
 		appointment.setDateTime(appointment.getDateTime().withHour(hour));
 	}
