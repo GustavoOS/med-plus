@@ -1,6 +1,8 @@
 package com.medplus.entities;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
 
 public class Utils {
 	public static double calculateDistance(CoordinateDS pointA, CoordinateDS pointB) {
@@ -30,5 +32,18 @@ public class Utils {
 		if(birth == null)
 			return 0;
 		return Period.between(birth, LocalDate.now()).getYears();
+	}
+
+	public static Appointment findFirstAppointmentWithDateTime(ArrayList<Appointment> appointments, LocalDateTime dateTime)
+	{
+		return (appointments == null || dateTime == null)? null : appointments.stream()
+				  .filter(ap -> getComparableDateTime(ap.getDateTime()).equals(getComparableDateTime(dateTime)))
+				  .findAny()
+				  .orElse(null);
+	}
+
+	private static LocalDateTime getComparableDateTime(LocalDateTime a)
+	{
+		return a.withNano(0).withSecond(0).withMinute(0);
 	}
 }

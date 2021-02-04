@@ -1,8 +1,6 @@
 package com.medplus.entities;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class DaySchedulerImpl implements DayScheduler {
 
@@ -15,8 +13,8 @@ public class DaySchedulerImpl implements DayScheduler {
 		return  appointments == null ||
 				appointment == null ||
 				appointment.getDateTime() == null ||
-				hasConflictingAppointments(appointment, appointments) ||
-				hourIsOutOfBusinessTime(getComparableDateTime(appointment).getHour())
+				hasConflictingAppointment(appointment, appointments) ||
+				hourIsOutOfBusinessTime(appointment.getDateTime().getHour())
 				;
 	}
 
@@ -24,15 +22,11 @@ public class DaySchedulerImpl implements DayScheduler {
 		return hour > 17 || hour < 9 || hour == 12;
 	}
 
-	private Boolean hasConflictingAppointments(Appointment appointment, ArrayList<Appointment> appointments) {
-		ArrayList<Appointment> filtered = (ArrayList<Appointment>) appointments.stream()
-				  .filter(ap -> getComparableDateTime(ap).equals(getComparableDateTime(appointment)))
-				  .collect(Collectors.toList());
-		return filtered.size() > 0;
+	private Boolean hasConflictingAppointment(Appointment appointment, ArrayList<Appointment> appointments)
+	{
+		Appointment conflict = Utils.findFirstAppointmentWithDateTime(appointments, appointment.getDateTime());
+		return conflict != null;
 	}
 
-	private LocalDateTime getComparableDateTime(Appointment a)
-	{
-		return a.getDateTime().withNano(0).withMinute(0);
-	}
+
 }
