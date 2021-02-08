@@ -2,17 +2,16 @@ package com.medplus.useCases;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.DayScheduler;
-import com.medplus.entities.HealthProvider;
-import com.medplus.entities.Patient;
+import com.medplus.entities.User;
 
 public class BookAppointmentUseCase implements Bookable {
-	private PatientGateway patientGW;
+	private UserGateway patientGW;
 	private ProviderGateway providerGW;
 	private SchedulePresenter presenter;
 	private DayScheduler dayScheduler;
 
-	private HealthProvider provider;
-	private Patient patient;
+	private User provider;
+	private User patient;
 	private Appointment appointment;
 
 	@Override
@@ -40,7 +39,7 @@ public class BookAppointmentUseCase implements Bookable {
 	}
 
 	private boolean patientWasNotFound() {
-		patient = patientGW.getPatient(appointment.getPatientID());
+		patient = patientGW.getUser(appointment.getPatientID());
 		return patient == null;
 	}
 
@@ -53,7 +52,7 @@ public class BookAppointmentUseCase implements Bookable {
 
 	private Boolean providerWasNotFound()
 	{
-		provider = providerGW.getProvider(appointment.getProviderID());
+		provider = providerGW.getUser(appointment.getProviderID());
 		return provider == null;
 	}
 	// Setters
@@ -62,7 +61,7 @@ public class BookAppointmentUseCase implements Bookable {
 		this.providerGW = providerGW;
 	}
 
-	public void setPatientGW(PatientGateway patientGW) {
+	public void setPatientGW(UserGateway patientGW) {
 		this.patientGW = patientGW;
 	}
 

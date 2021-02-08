@@ -44,15 +44,15 @@ class PatientGWTest {
 		assertEquals(id, p.getId());
 		assertEquals("Maria", gw.getPatients().get(0).getName());
 		gw.put(p);
-		assertEquals("Rita", gw.getPatient(id).getName());
+		assertEquals("Rita", gw.getUser(id).getName());
 	}
 
 	@Test
 	void testProviderRecovery()
 	{
 		String id = "0c9dbc30-2874-4983-a0b7-6885c409ddbc";
-		assertTrue(gw.getPatient(id) instanceof Patient);
-		Patient patient = gw.getPatient(id);
+		assertTrue(gw.getUser(id) instanceof Patient);
+		Patient patient = (Patient) gw.getUser(id);
 		assertNotNull(patient);
 		assertEquals("John", patient.getName());
 		assertNotSame(patient, gw.getPatients().get(1));

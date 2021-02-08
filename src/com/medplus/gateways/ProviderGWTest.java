@@ -89,11 +89,23 @@ class ProviderGWTest {
 	@Test
 	void testProviderRecovery()
 	{
-		assertTrue(gw.getProvider("7b11fdbb-0894-4e4b-afaf-880738c84f4c") instanceof HealthProvider);
-		HealthProvider provider = gw.getProvider("7b11fdbb-0894-4e4b-afaf-880738c84f4c");
+		assertTrue(gw.getUser("7b11fdbb-0894-4e4b-afaf-880738c84f4c") instanceof HealthProvider);
+		HealthProvider provider = (HealthProvider) gw.getUser("7b11fdbb-0894-4e4b-afaf-880738c84f4c");
 		assertNotNull(provider);
 		assertEquals("Paz", provider.getName());
 		assertNotSame(provider, gw.getProviders().get(2));
 		assertEquals("7b11fdbb-0894-4e4b-afaf-880738c84f4c", gw.getProviders().get(2).getId());
+	}
+
+	@Test
+	void putNullShouldNotChange()
+	{
+		gw.put(null);
+		result = gw.list();
+		assertEquals(4, result.size());
+		assertEquals("Joe", result.get(0).getName());
+		assertEquals("Silva", result.get(1).getName());
+		assertEquals("Paz", result.get(2).getName());
+		assertEquals("Benedito", result.get(3).getName());
 	}
 }

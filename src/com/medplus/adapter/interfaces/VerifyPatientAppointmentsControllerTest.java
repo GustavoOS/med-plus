@@ -7,11 +7,11 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
-import com.medplus.useCases.VerifyPatientAppointmentsUseCase;
+import com.medplus.useCases.VerifyAppointmentsUseCase;
 
 class VerifyPatientAppointmentsControllerTest {
 
-	VerifyPatientAppointmentsUseCase useCase;
+	VerifyAppointmentsUseCase useCase;
 	PatientGW gw;
 	VerifyPatientAppointmentsPresenterImpl presenter;
 	VerifyPatientAppointmentsController controller;
@@ -19,7 +19,7 @@ class VerifyPatientAppointmentsControllerTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		useCase = new VerifyPatientAppointmentsUseCase();
+		useCase = new VerifyAppointmentsUseCase();
 		gw = new PatientGW();
 		gw.setPatients(TestUtils.mountPatientList());
 		presenter = new VerifyPatientAppointmentsPresenterImpl();

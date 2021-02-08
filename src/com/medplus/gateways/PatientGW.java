@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import com.medplus.entities.Cloner;
 import com.medplus.entities.Patient;
-import com.medplus.useCases.PatientGateway;
+import com.medplus.entities.User;
+import com.medplus.useCases.UserGateway;
 
-public class PatientGW implements PatientGateway {
+public class PatientGW implements UserGateway {
 	private ArrayList<Patient> patients;
 
 	public void setPatients(ArrayList<Patient> patients) {
@@ -18,16 +19,17 @@ public class PatientGW implements PatientGateway {
 	}
 
 	@Override
-	public void put(Patient patient) {
-		int index = patients.indexOf(filterPatient(patient.getId()));
+	public void put(User patient) {
+		Patient p = (Patient) patient;
+		int index = patients.indexOf(filterPatient(p.getId()));
 		if(index < 0)
-			patients.add(patient);
+			patients.add(p);
 		else
-			patients.set(index, patient);		
+			patients.set(index, p);		
 	}
 
 	@Override
-	public Patient getPatient(String id)
+	public User getUser(String id)
 	{
 		return Cloner.clonePatient(filterPatient(id));
 	}

@@ -2,34 +2,46 @@ package com.medplus.useCases;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.VerifyPatientAppointmentsPresenterImpl;
+import com.medplus.entities.HealthProvider;
 import com.medplus.factories.TestUtils;
-import com.medplus.gateways.PatientGW;
+import com.medplus.gateways.ProviderGW;
 
-class VerifyPatientAppointmentsUseCaseTest {
+class VerifyProviderAppointmentsUseCaseTest {
 
 	VerifyAppointmentsUseCase useCase;
-	PatientGW gw;
+	ProviderGW gw;
 	VerifyPatientAppointmentsPresenterImpl presenter;
-	String patient;
+	String providerID;
+	ArrayList<HealthProvider> providers;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		useCase = new VerifyAppointmentsUseCase();
-		gw = new PatientGW();
-		gw.setPatients(TestUtils.mountPatientList());
+		gw = new ProviderGW();
+		providers = TestUtils.mountProviderList();
+		gw.setProviders(providers);
 		presenter = new VerifyPatientAppointmentsPresenterImpl();
-		patient = "4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1";
-		useCase.setGw(gw);
+		providerID = "da2ed3e9-566b-4521-8002-6e15f6f9958d";
+		useCase.setGw((UserGateway) gw);
 		useCase.setPresenter(presenter);
+
+		providers.get(0).setAppointments(
+				TestUtils.mountAppointmentList(
+						providerID,
+						"4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1",
+						LocalDateTime.now().withHour(14)));
 	}
 
 	@Test
 	void check() {
-		useCase.verify(patient);
+		useCase.verify(providerID);
 		assertEquals("success", presenter.getStatus());
 		assertEquals(3, presenter.getResult().size());
 	}

@@ -3,9 +3,9 @@ package com.medplus.adapter.interfaces;
 import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
-import com.medplus.useCases.VerifyPatientAppointmentsPresenter;
+import com.medplus.useCases.VerifyAppointmentsPresenter;
 
-public class VerifyPatientAppointmentsPresenterImpl implements VerifyPatientAppointmentsPresenter {
+public class VerifyPatientAppointmentsPresenterImpl implements VerifyAppointmentsPresenter {
 	private String status = "";
 	private ArrayList<Appointment> result = null;
 

@@ -7,9 +7,9 @@ import com.medplus.entities.HealthProvider;
 import com.medplus.entities.Patient;
 
 public class CancelPatientAppointmentUseCase implements Cancelable {
-	PatientGateway patientGW;
+	UserGateway patientGW;
 	ProviderGateway providerGW;
-	VerifyPatientAppointmentsPresenter presenter;
+	VerifyAppointmentsPresenter presenter;
 	Canceler canceler;
 
 	Patient patient;
@@ -17,7 +17,7 @@ public class CancelPatientAppointmentUseCase implements Cancelable {
 
 	@Override
 	public void cancel(String id, LocalDateTime dateTime) {
-		patient = patientGW.getPatient(id);
+		patient = (Patient) patientGW.getUser(id);
 		if(patient == null || dateTime == null || !canceler.cancel(
 				patient.getAppointments(), dateTime))
 		{
@@ -31,7 +31,7 @@ public class CancelPatientAppointmentUseCase implements Cancelable {
 
 	private void cancelProviderAppointment(LocalDateTime dateTime) {
 		patientGW.put(patient);
-		provider = providerGW.getProvider(canceler.getCanceledAppointmentUnknownID());
+		provider = (HealthProvider) providerGW.getUser(canceler.getCanceledAppointmentUnknownID());
 		canceler.cancel(provider.getAppointments(), dateTime);
 		providerGW.put(provider);
 	}
@@ -43,11 +43,11 @@ public class CancelPatientAppointmentUseCase implements Cancelable {
 		this.providerGW = providerGW;
 	}
 
-	public void setPatientGW(PatientGateway patientGW) {
+	public void setPatientGW(UserGateway patientGW) {
 		this.patientGW = patientGW;
 	}
 
-	public void setPresenter(VerifyPatientAppointmentsPresenter presenter) {
+	public void setPresenter(VerifyAppointmentsPresenter presenter) {
 		this.presenter = presenter;
 	}
 
