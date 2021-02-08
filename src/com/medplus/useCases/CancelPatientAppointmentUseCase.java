@@ -24,7 +24,7 @@ public class CancelPatientAppointmentUseCase implements Cancelable {
 			presenter.fail();
 			return;
 		}
-		presenter.succeed(patient.getAppointments());
+		presenter.succeed(patient.getAppointments(), null);
 		cancelProviderAppointment(dateTime);
 	}
 
