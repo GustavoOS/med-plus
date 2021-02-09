@@ -7,7 +7,7 @@ import com.medplus.entities.User;
 
 public class CancelAppointmentUseCase implements Cancelable {
 	UserGateway rootGW, targetGW;
-	VerifyAppointmentsPresenter presenter;
+	CancelAppointmentPresenter presenter;
 	Canceler canceler;
 
 	User rootUser, targetUser;
@@ -15,14 +15,20 @@ public class CancelAppointmentUseCase implements Cancelable {
 	@Override
 	public void cancel(String id, LocalDateTime dateTime) {
 		rootUser = rootGW.getUser(id);
-		if(rootUser == null || dateTime == null || !canceler.cancel(
-				rootUser.getAppointments(), dateTime))
+		if(cantCancel(dateTime))
 		{
 			presenter.fail();
 			return;
 		}
-		presenter.succeed(rootUser.getAppointments(), null);
+		presenter.succeed(rootUser.getAppointments());
 		cancelTargetAppointment(dateTime);
+	}
+
+	private boolean cantCancel(LocalDateTime dateTime) {
+		return rootUser == null || dateTime == null || 
+				!canceler.cancel(
+						rootUser.getAppointments(),
+						dateTime);
 	}
 
 	private void cancelTargetAppointment(LocalDateTime dateTime) {
@@ -42,7 +48,7 @@ public class CancelAppointmentUseCase implements Cancelable {
 		this.targetGW = targetGW;
 	}
 
-	public void setPresenter(VerifyAppointmentsPresenter presenter) {
+	public void setPresenter(CancelAppointmentPresenter presenter) {
 		this.presenter = presenter;
 	}
 

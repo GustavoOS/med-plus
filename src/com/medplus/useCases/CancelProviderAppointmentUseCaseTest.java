@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.adapter.interfaces.VerifyAppointmentsPresenterImpl;
+import com.medplus.adapter.interfaces.CancelAppointmentPresenterImpl;
 import com.medplus.entities.Appointment;
 import com.medplus.entities.HealthProvider;
 import com.medplus.entities.Patient;
@@ -20,7 +20,7 @@ import com.medplus.gateways.ProviderGW;
 class CancelProviderAppointmentUseCaseTest {
 
 
-	VerifyAppointmentsPresenterImpl presenter;
+	CancelAppointmentPresenterImpl presenter;
 	LocalDateTime date;
 	String providerID;
 
@@ -31,7 +31,7 @@ class CancelProviderAppointmentUseCaseTest {
 		date = LocalDateTime.now().withHour(14).withMinute(0).withSecond(0).withNano(0);
 		injectGWs();
 
-		presenter = new VerifyAppointmentsPresenterImpl();
+		presenter = new CancelAppointmentPresenterImpl();
 		useCase.setCanceler(new ProviderAppointmentCanceler());
 		useCase.setPresenter(presenter);
 	}
@@ -97,7 +97,7 @@ class CancelProviderAppointmentUseCaseTest {
 	{
 		useCase.cancel(providerID, date);
 		assertEquals("success", presenter.getStatus());
-		ArrayList<Appointment> result = presenter.getResult();
+		ArrayList<Appointment> result = presenter.getList();
 		assertEquals(2, result.size());
 		assertEquals(providerID, result.get(0).getProviderID());
 		assertEquals(providerID, result.get(1).getProviderID());
