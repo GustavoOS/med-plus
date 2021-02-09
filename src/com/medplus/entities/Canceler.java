@@ -15,5 +15,5 @@ public abstract class Canceler {
 		return canceled != null;
 	}
 
-	public abstract String getCanceledAppointmentUnknownID();
+	public abstract String getCanceledAppointmentTargetUserID();
 }

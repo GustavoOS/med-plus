@@ -21,7 +21,7 @@ class CancelPatientAppointmentUseCaseTest {
 	LocalDateTime date;
 	String patientID;
 
-	public CancelPatientAppointmentUseCase useCase;
+	public CancelAppointmentUseCase useCase;
 	@BeforeEach
 	void setUp(){
 		PatientGW patientGW = new PatientGW();
@@ -30,11 +30,11 @@ class CancelPatientAppointmentUseCaseTest {
 		providerGW.setProviders(TestUtils.mountProviderList());
 
 		presenter = new VerifyAppointmentsPresenterImpl();
-		useCase = new CancelPatientAppointmentUseCase();
-		useCase.setCancel(new PatientAppointmentCanceler());
-		useCase.setPatientGW(patientGW);
+		useCase = new CancelAppointmentUseCase();
+		useCase.setCanceler(new PatientAppointmentCanceler());
+		useCase.setRootGW(patientGW);
 		useCase.setPresenter(presenter);
-		useCase.setProviderGW(providerGW);
+		useCase.setTargetGW(providerGW);
 
 		patientID = "4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1";
 		date = LocalDateTime.now().withHour(14).withMinute(0).withSecond(0).withNano(0);
