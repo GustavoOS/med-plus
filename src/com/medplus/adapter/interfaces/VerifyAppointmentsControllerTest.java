@@ -13,8 +13,8 @@ import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
 import com.medplus.useCases.Id2NameTranslater;
-import com.medplus.useCases.TranslateIDToName;
-import com.medplus.useCases.VerifyAppointmentsUseCase;
+import com.medplus.useCases.verifier.TranslateIDToName;
+import com.medplus.useCases.verifier.VerifyAppointmentsUseCase;
 
 class VerifyAppointmentsControllerTest {
 

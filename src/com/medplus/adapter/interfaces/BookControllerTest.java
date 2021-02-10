@@ -11,7 +11,7 @@ import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
-import com.medplus.useCases.BookAppointmentUseCase;
+import com.medplus.useCases.book.BookAppointmentUseCase;
 
 class BookControllerTest {
 

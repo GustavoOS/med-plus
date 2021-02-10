@@ -8,7 +8,7 @@ import com.medplus.entities.ProviderFilter;
 import com.medplus.factories.ProviderFilterFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
-import com.medplus.useCases.SearchUseCase;
+import com.medplus.useCases.search.SearchUseCase;
 
 class SearchControllerTest {
 	SearchPresenter receiver;

@@ -1,9 +1,12 @@
-package com.medplus.useCases;
+package com.medplus.useCases.cancelation;
 
 import java.time.LocalDateTime;
 
 import com.medplus.entities.Canceler;
 import com.medplus.entities.User;
+import com.medplus.useCases.CancelAppointmentPresenter;
+import com.medplus.useCases.Cancelable;
+import com.medplus.useCases.UserGateway;
 
 public class CancelAppointmentUseCase implements Cancelable {
 	UserGateway rootGW, targetGW;

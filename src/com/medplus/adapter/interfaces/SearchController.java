@@ -1,7 +1,7 @@
 package com.medplus.adapter.interfaces;
 import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.ProviderFilterParameter;
-import com.medplus.useCases.SearchUseCase;
+import com.medplus.useCases.search.SearchUseCase;
 
 public class SearchController {
 	private SearchUseCase useCase;

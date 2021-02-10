@@ -1,4 +1,4 @@
-package com.medplus.useCases;
+package com.medplus.useCases.cancelation;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,10 +1,14 @@
-package com.medplus.useCases;
+package com.medplus.useCases.verifier;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.User;
+import com.medplus.useCases.Id2NameTranslater;
+import com.medplus.useCases.UserGateway;
+import com.medplus.useCases.VerifiableBook;
+import com.medplus.useCases.VerifyAppointmentsPresenter;
 
 public class VerifyAppointmentsUseCase implements VerifiableBook {
 	private UserGateway gw;

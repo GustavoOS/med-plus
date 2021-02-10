@@ -1,4 +1,4 @@
-package com.medplus.useCases;
+package com.medplus.useCases.search;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +11,7 @@ import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.factories.ProviderFilterFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
+import com.medplus.useCases.ProviderGateway;
 
 class SearchUseCaseTest {
 	ProviderFilter filter;

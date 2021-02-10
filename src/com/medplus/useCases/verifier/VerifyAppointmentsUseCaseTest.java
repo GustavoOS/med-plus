@@ -1,4 +1,4 @@
-package com.medplus.useCases;
+package com.medplus.useCases.verifier;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,6 +9,7 @@ import com.medplus.adapter.interfaces.VerifyAppointmentsPresenterImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
+import com.medplus.useCases.Id2NameTranslater;
 
 class VerifyAppointmentsUseCaseTest {
 
@@ -16,6 +17,7 @@ class VerifyAppointmentsUseCaseTest {
 	PatientGW patientGW;
 	ProviderGW providerGW;
 	VerifyAppointmentsPresenterImpl presenter;
+	Id2NameTranslater translater;
 	
 
 	@BeforeEach
@@ -26,7 +28,7 @@ class VerifyAppointmentsUseCaseTest {
 		providerGW = new ProviderGW();
 		providerGW.setProviders(TestUtils.mountProviderList());
 		presenter = new VerifyAppointmentsPresenterImpl();
-		Id2NameTranslater translater = new TranslateIDToName();
+		translater = new TranslateIDToName();
 		translater.setPatientGW(patientGW);
 		translater.setProviderGW(providerGW);
 		
