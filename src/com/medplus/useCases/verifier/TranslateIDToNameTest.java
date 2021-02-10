@@ -1,4 +1,4 @@
-package com.medplus.useCases;
+package com.medplus.useCases.verifier;
 
 import static org.junit.jupiter.api.Assertions.*;
 

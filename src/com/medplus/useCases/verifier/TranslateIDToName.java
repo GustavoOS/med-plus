@@ -1,6 +1,8 @@
-package com.medplus.useCases;
+package com.medplus.useCases.verifier;
 
 import com.medplus.entities.User;
+import com.medplus.useCases.Id2NameTranslater;
+import com.medplus.useCases.UserGateway;
 
 public class TranslateIDToName implements Id2NameTranslater {
 	private UserGateway providerGW;

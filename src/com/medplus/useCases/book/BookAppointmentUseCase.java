@@ -1,8 +1,12 @@
-package com.medplus.useCases;
+package com.medplus.useCases.book;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.DayScheduler;
 import com.medplus.entities.User;
+import com.medplus.useCases.Bookable;
+import com.medplus.useCases.ProviderGateway;
+import com.medplus.useCases.SchedulePresenter;
+import com.medplus.useCases.UserGateway;
 
 public class BookAppointmentUseCase implements Bookable {
 	private UserGateway patientGW;

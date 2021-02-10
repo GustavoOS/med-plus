@@ -1,7 +1,10 @@
-package com.medplus.useCases;
+package com.medplus.useCases.search;
 
 import com.medplus.entities.ProviderFilter;
 import com.medplus.entities.ProviderFilterParameter;
+import com.medplus.useCases.ProviderGateway;
+import com.medplus.useCases.SearchReceiver;
+import com.medplus.useCases.Searchable;
 
 public class SearchUseCase implements Searchable {
 	private ProviderGateway gw;

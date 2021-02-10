@@ -16,7 +16,7 @@ import com.medplus.entities.ProviderAppointmentCanceler;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
-import com.medplus.useCases.CancelAppointmentUseCase;
+import com.medplus.useCases.cancelation.CancelAppointmentUseCase;
 
 class CancelAppointmentControllerTest {
 
