@@ -18,10 +18,10 @@ public class AttendanceUseCase implements Attendable {
 
 	@Override
 	public void attend(String providerID, LocalDateTime dateTime) {
-		provider = providerGateway.getUser(providerID);
-		appointment = Utils.findFirstAppointmentWithDateTime(provider.getAppointments(), dateTime);
-		patient = patientGateway.getUser(appointment.getPatientID());
-		presenter.succeed(PatientExtractor.extract(patient));
+		if(attendanceIsInvalid(providerID, dateTime))
+			presenter.fail();
+		else
+			presenter.succeed(PatientExtractor.extract(patient));
 	}
 
 	public void setProviderGateway(UserGateway userGateway) {
@@ -37,5 +37,22 @@ public class AttendanceUseCase implements Attendable {
 		this.presenter = presenter;
 	}
 
-	
+	private boolean attendanceIsInvalid(String providerID, LocalDateTime dateTime) {
+		return providerIsNull(providerID) || appointmentIsNull(dateTime) || patientIsNull();
+	}
+
+	private Boolean providerIsNull(String providerID) {
+		provider = providerGateway.getUser(providerID);
+		return provider == null;
+	}
+
+	private Boolean appointmentIsNull(LocalDateTime dateTime) {
+		appointment = Utils.findFirstAppointmentWithDateTime(provider.getAppointments(), dateTime);
+		return appointment == null;
+	}
+
+	private Boolean patientIsNull() {
+		patient = patientGateway.getUser(appointment.getPatientID());
+		return patient == null;
+	}
 }

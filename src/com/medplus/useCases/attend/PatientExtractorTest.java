@@ -48,6 +48,6 @@ class PatientExtractorTest {
 	@Test
 	void testStatic()
 	{
-		assert(new PatientExtractor() instanceof PatientExtractor);
+		assertNotNull(new PatientExtractor());
 	}
 }
