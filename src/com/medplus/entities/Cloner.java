@@ -41,6 +41,27 @@ public class Cloner {
 		return list;
 	}
 
+	public static Exam cloneExam(Exam original)
+	{
+		if(original == null)
+			return null;
+
+		return (new ExamImpl())
+				.withId(original.getId())
+				.withInsertionDateTime(original.getInsertionDateTime())
+				.withTitle(original.getTitle());
+	}
+
+	public static ArrayList<Exam> cloneExamList(ArrayList<Exam> original)
+	{
+		if(original == null)
+			return null;
+		ArrayList<Exam> copy = new ArrayList<Exam>();
+		for (Exam exam : original)
+			copy.add(cloneExam(exam));
+		return copy;
+	}
+
 	public static ArrayList<HealthProvider> cloneProviderList(ArrayList<HealthProvider> original)
 	{
 		if(original == null)
@@ -61,6 +82,7 @@ public class Cloner {
 		p.setId(original.getId());
 		p.setIsFemale(original.getIsFemale());
 		p.setName(original.getName());
+		p.setExams(cloneExamList(original.getExams()));
 		return p;
 	}
 }

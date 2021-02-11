@@ -86,12 +86,14 @@ class ClonerTest {
 		p.setId("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
 		p.setIsFemale(true);
 		p.setName("Maria");
+		p.setExams(TestUtils.mountExamList());
 		Patient copy = Cloner.clonePatient(p);
 		assertEquals(p.getBirth(), copy.getBirth());
 		assertEquals("Maria", copy.getName());
 		assertTrue(p.getIsFemale());
 		assertEquals(p.getId(), copy.getId());
 		assertNotSame(p, copy);
+		assertEquals(3, copy.getExams().size());
 	}
 
 
@@ -99,5 +101,66 @@ class ClonerTest {
 		assertNotNull(appointment);
 		assertEquals(rawAppointmentList.get(index).getDateTime(), appointment.getDateTime());
 		assertNotSame(rawAppointmentList.get(index), appointment);
+	}
+
+	@Test
+	void cloneExam()
+	{
+		LocalDateTime dateTime = LocalDateTime.now();
+		Exam exam = (new ExamImpl())
+						.withId("0ef0c14e-5745-4402-8629-7b4f45c433fb")
+						.withInsertionDateTime(dateTime)
+						.withTitle("electrocardiogram");
+		Exam copy = Cloner.cloneExam(exam);
+		assertNotNull(copy);
+		assertNotSame(exam, copy);
+		assertExamClone(
+				"electrocardiogram",
+				"0ef0c14e-5745-4402-8629-7b4f45c433fb",
+				dateTime, copy);
+	}
+
+	@Test
+	void cloneNullExamShallReturnNull()
+	{
+		assertNull(Cloner.cloneExam(null));
+	}
+
+	@Test
+	void cloneExamList()
+	{
+		ArrayList<Exam> exams = TestUtils.mountExamList();
+		LocalDateTime dateTime = exams.get(0).getInsertionDateTime();
+		ArrayList<Exam> copy = Cloner.cloneExamList(exams);
+		assertNotNull(copy);
+		assertNotSame(copy, exams);
+		assertEquals(3, copy.size());
+		assertNotSame(copy.get(0), exams.get(0));
+		assertNotSame(copy.get(1), exams.get(1));
+		assertNotSame(copy.get(2), exams.get(2));
+		assertExamClone(
+				"electrocardiogram",
+				"0ef0c14e-5745-4402-8629-7b4f45c433fb",
+				dateTime, copy.get(0));
+		assertExamClone(
+				"urine test",
+				"5367dea0-416a-44bf-a71a-df0cf72902c2",
+				dateTime.plusDays(1), copy.get(1));
+		assertExamClone(
+				"echocardiogram",
+				"67e9e81e-c631-479f-aa14-60792d6a1bcf",
+				dateTime.plusDays(3), copy.get(2));
+	}
+
+	@Test
+	void cloneNullExamList()
+	{
+		assertNull(Cloner.cloneExamList(null));
+	}
+
+	private void assertExamClone(String title, String id, LocalDateTime dateTime, Exam copy) {
+		assertEquals(title, copy.getTitle());
+		assertEquals(id, copy.getId());
+		assertEquals(dateTime, copy.getInsertionDateTime());
 	}
 }

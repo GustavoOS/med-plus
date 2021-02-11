@@ -11,6 +11,7 @@ public class PatientImpl implements Patient{
 	private Boolean isFemale;
 
 	private ArrayList<Appointment> appointments;
+	private ArrayList<Exam> exams;
 
 	public LocalDate getBirth() {
 		return birth;
@@ -42,4 +43,11 @@ public class PatientImpl implements Patient{
 	public void setAppointments(ArrayList<Appointment> appointments) {
 		this.appointments = appointments;
 	}
+	public ArrayList<Exam> getExams() {
+		return exams;
+	}
+	public void setExams(ArrayList<Exam> exams) {
+		this.exams = exams;
+	}
+
 }
