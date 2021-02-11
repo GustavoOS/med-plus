@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.CoordinateDS;
+import com.medplus.entities.Exam;
+import com.medplus.entities.ExamImpl;
 import com.medplus.entities.HealthProvider;
 import com.medplus.entities.Patient;
 import com.medplus.entities.ProviderPicker;
@@ -93,5 +95,26 @@ public class TestUtils {
 		appointment.setPatientID(patientId);
 		appointment.setDateTime(dateTime);
 		raw.add(appointment);
+	}
+
+	public static ArrayList<Exam> mountExamList()
+	{
+		LocalDateTime dateTime = LocalDateTime.now();
+		ArrayList<Exam> exams = new ArrayList<Exam>();
+		exams.add((new ExamImpl())
+						.withId("0ef0c14e-5745-4402-8629-7b4f45c433fb")
+						.withInsertionDateTime(dateTime)
+						.withTitle("electrocardiogram"));
+
+		exams.add((new ExamImpl())
+						.withId("5367dea0-416a-44bf-a71a-df0cf72902c2")
+						.withInsertionDateTime(dateTime.plusDays(1))
+						.withTitle("urine test"));
+
+		exams.add((new ExamImpl())
+						.withId("67e9e81e-c631-479f-aa14-60792d6a1bcf")
+						.withInsertionDateTime(dateTime.plusDays(3))
+						.withTitle("echocardiogram"));
+		return exams;
 	}
 }
