@@ -28,11 +28,13 @@ class PatientExtractorTest {
 		patient.setId("pac");
 		patient.setIsFemale(true);
 		patient.setName("mary");
+		patient.setExams(TestUtils.mountExamList());
 	
 		extracted = PatientExtractor.extract(patient);
 		assertEquals(20, extracted.getAge());
 		assertEquals("mary", extracted.getName());
 		assertTrue(extracted.getIsFemale());
+		assertEquals("echocardiogram", extracted.getExams().get(2).getTitle());
 	}
 
 	@Test

@@ -12,6 +12,7 @@ public class PatientExtractor {
 		return (new PatientAvailableDataDS())
 				.withAge(Utils.calculateAge(patient.getBirth()))
 				.withName(patient.getName())
-				.withIsFemale(patient.getIsFemale());
+				.withIsFemale(patient.getIsFemale())
+				.withExams(patient.getExams());
 	}
 }
