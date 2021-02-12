@@ -1,4 +1,4 @@
-package com.medplus.useCases.attend;
+package com.medplus.useCases;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import com.medplus.entities.Patient;
 import com.medplus.entities.PatientImpl;
 import com.medplus.factories.TestUtils;
-import com.medplus.useCases.PatientAvailableDataDS;
 
 class PatientExtractorTest {
 

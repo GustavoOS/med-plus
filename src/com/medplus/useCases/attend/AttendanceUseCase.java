@@ -7,30 +7,27 @@ import com.medplus.entities.User;
 import com.medplus.entities.Utils;
 import com.medplus.useCases.Attendable;
 import com.medplus.useCases.AttendancePresenter;
+import com.medplus.useCases.CheckableAvailablePatientData;
 import com.medplus.useCases.UserGateway;
 
 public class AttendanceUseCase implements Attendable {
 
-	private UserGateway providerGateway, patientGateway;
-	private User provider, patient;
+	private UserGateway providerGateway;
+	private User provider;
 	private Appointment appointment;
 	private AttendancePresenter presenter;
+	private CheckableAvailablePatientData checker;
 
 	@Override
 	public void attend(String providerID, LocalDateTime dateTime) {
 		if(attendanceIsInvalid(providerID, dateTime))
 			presenter.fail();
 		else
-			presenter.succeed(PatientExtractor.extract(patient));
+			checker.check(appointment.getPatientID());
 	}
 
 	public void setProviderGateway(UserGateway userGateway) {
 		this.providerGateway = userGateway;
-	}
-
-	@Override
-	public void setPatientGateway(UserGateway gw) {
-		this.patientGateway = gw;
 	}
 
 	public void setPresenter(AttendancePresenter presenter) {
@@ -38,7 +35,7 @@ public class AttendanceUseCase implements Attendable {
 	}
 
 	private boolean attendanceIsInvalid(String providerID, LocalDateTime dateTime) {
-		return providerIsNull(providerID) || appointmentIsNull(dateTime) || patientIsNull();
+		return providerIsNull(providerID) || appointmentIsNull(dateTime);
 	}
 
 	private Boolean providerIsNull(String providerID) {
@@ -51,8 +48,12 @@ public class AttendanceUseCase implements Attendable {
 		return appointment == null;
 	}
 
-	private Boolean patientIsNull() {
-		patient = patientGateway.getUser(appointment.getPatientID());
-		return patient == null;
+	public void setChecker(CheckableAvailablePatientData checker) {
+		this.checker = checker;
+		this.checker.setPresenter(presenter);
 	}
+
+
+	
+	
 }

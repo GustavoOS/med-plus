@@ -14,10 +14,12 @@ import com.medplus.entities.Patient;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
+import com.medplus.useCases.CheckAvailablePatientDataUseCase;
 
 class AttendanceUseCaseTest {
 
 	AttendanceUseCase useCase;
+	CheckAvailablePatientDataUseCase checker;
 	ProviderGW providerGW;
 	PatientGW patientGW;
 	AttendancePresenterImpl presenter;
@@ -28,6 +30,7 @@ class AttendanceUseCaseTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		useCase = new AttendanceUseCase();
+		checker = new CheckAvailablePatientDataUseCase();
 		provider = "da2ed3e9-566b-4521-8002-6e15f6f9958d";
 		baseTime = LocalDateTime.now()
 				.withHour(14)
@@ -35,10 +38,9 @@ class AttendanceUseCaseTest {
 				.withSecond(0)
 				.withNano(0);
 
-		setGateways();
 		presenter = new AttendancePresenterImpl();
 		useCase.setPresenter(presenter);
-		
+		setGateways();
 	}
 
 	private void setGateways() {
@@ -48,7 +50,8 @@ class AttendanceUseCaseTest {
 		providerGW.setProviders(providers);
 		patientGW = new PatientGW();
 		patientGW.setPatients(mountPatientList());
-		useCase.setPatientGateway(patientGW);
+		checker.setPatientGateway(patientGW);
+		useCase.setChecker(checker);
 		useCase.setProviderGateway(providerGW);
 	}
 

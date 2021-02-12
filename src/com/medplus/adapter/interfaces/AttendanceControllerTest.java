@@ -12,6 +12,7 @@ import com.medplus.entities.HealthProvider;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
+import com.medplus.useCases.CheckAvailablePatientDataUseCase;
 import com.medplus.useCases.attend.AttendanceUseCase;
 
 class AttendanceControllerTest {
@@ -34,9 +35,12 @@ class AttendanceControllerTest {
 				.withSecond(0)
 				.withNano(0);
 
-		setGateways();
+
 		presenter = new AttendancePresenterImpl();
 		useCase.setPresenter(presenter);
+		
+		setGateways();
+		
 		controller = new AttendanceController();
 		controller.setUseCase(useCase);
 		
@@ -47,10 +51,17 @@ class AttendanceControllerTest {
 		providers = TestUtils.mountProviderList();
 		setDoctorAppointments("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
 		providerGW.setProviders(providers);
+		setPatientGW();
+		useCase.setProviderGateway(providerGW);
+	}
+
+	private void setPatientGW() {
 		patientGW = new PatientGW();
 		patientGW.setPatients(TestUtils.mountPatientList());
-		useCase.setPatientGateway(patientGW);
-		useCase.setProviderGateway(providerGW);
+		CheckAvailablePatientDataUseCase checker = 
+				new CheckAvailablePatientDataUseCase();
+		checker.setPatientGateway(patientGW);
+		useCase.setChecker(checker);
 	}
 
 	private void setDoctorAppointments(String patient) {
