@@ -1,9 +1,14 @@
 package com.medplus.useCases;
 
+import java.util.ArrayList;
+
+import com.medplus.entities.Exam;
+
 public class PatientAvailableDataDS {
 	private String name;
 	private int age;
 	private Boolean isFemale;
+	private ArrayList<Exam> exams;
 
 	//Getters
 	public String getName() {
@@ -17,6 +22,11 @@ public class PatientAvailableDataDS {
 	public Boolean getIsFemale() {
 		return isFemale;
 	}
+
+	public ArrayList<Exam> getExams() {
+		return exams;
+	}
+
 
 	//Withs
 	 public PatientAvailableDataDS withName(String name) {
@@ -33,4 +43,10 @@ public class PatientAvailableDataDS {
 		this.isFemale = isFemale;
 		return this;
 	}
+
+	public PatientAvailableDataDS withExams(ArrayList<Exam> exams) {
+		this.exams = exams;
+		return this;
+	}
+	
 }

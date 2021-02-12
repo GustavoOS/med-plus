@@ -10,13 +10,16 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.AttendancePresenterImpl;
 import com.medplus.entities.HealthProvider;
+import com.medplus.entities.Patient;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
+import com.medplus.useCases.CheckAvailablePatientDataUseCase;
 
 class AttendanceUseCaseTest {
 
 	AttendanceUseCase useCase;
+	CheckAvailablePatientDataUseCase checker;
 	ProviderGW providerGW;
 	PatientGW patientGW;
 	AttendancePresenterImpl presenter;
@@ -27,6 +30,7 @@ class AttendanceUseCaseTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		useCase = new AttendanceUseCase();
+		checker = new CheckAvailablePatientDataUseCase();
 		provider = "da2ed3e9-566b-4521-8002-6e15f6f9958d";
 		baseTime = LocalDateTime.now()
 				.withHour(14)
@@ -34,10 +38,9 @@ class AttendanceUseCaseTest {
 				.withSecond(0)
 				.withNano(0);
 
-		setGateways();
 		presenter = new AttendancePresenterImpl();
 		useCase.setPresenter(presenter);
-		
+		setGateways();
 	}
 
 	private void setGateways() {
@@ -46,9 +49,16 @@ class AttendanceUseCaseTest {
 		setDoctorAppointments("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
 		providerGW.setProviders(providers);
 		patientGW = new PatientGW();
-		patientGW.setPatients(TestUtils.mountPatientList());
-		useCase.setPatientGateway(patientGW);
+		patientGW.setPatients(mountPatientList());
+		checker.setPatientGateway(patientGW);
+		useCase.setChecker(checker);
 		useCase.setProviderGateway(providerGW);
+	}
+
+	private ArrayList<Patient> mountPatientList() {
+		ArrayList<Patient> patients = TestUtils.mountPatientList();
+		patients.get(0).setExams(TestUtils.mountExamList());
+		return patients;
 	}
 
 	private void setDoctorAppointments(String patient) {
@@ -67,6 +77,8 @@ class AttendanceUseCaseTest {
 		assertEquals("Maria", presenter.getData().getName());
 		assertTrue(presenter.getData().getIsFemale());
 		assertEquals(20, presenter.getData().getAge());
+		assertEquals("echocardiogram",
+				presenter.getData().getExams().get(2).getTitle());
 	}
 
 	@Test
