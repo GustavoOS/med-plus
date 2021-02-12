@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import com.medplus.entities.Exam;
 import com.medplus.factories.TestUtils;
 
-class AddExamPresenterImplTest {
-	AddExamPresenterImpl presenter;
+class ManageExamPresenterImplTest {
+	ManageExamPresenterImpl presenter;
 	Exam exam;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		exam = TestUtils.mountExamList().get(0);
-		presenter = new AddExamPresenterImpl();
+		presenter = new ManageExamPresenterImpl();
 	}
 
 	@Test

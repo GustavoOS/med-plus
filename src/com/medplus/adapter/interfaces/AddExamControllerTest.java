@@ -10,13 +10,13 @@ import com.medplus.entities.ExamAdderImpl;
 import com.medplus.factories.ExamFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
-import com.medplus.useCases.AddExamPresenter;
+import com.medplus.useCases.ManageExamPresenter;
 import com.medplus.useCases.AddExamUseCase;
 
 class AddExamControllerTest {
 
 	AddExamController controller;
-	AddExamPresenter presenter;
+	ManageExamPresenter presenter;
 	AddExamUseCase useCase;
 	PatientGW gw;
 	ExamAdder adder;
@@ -26,7 +26,7 @@ class AddExamControllerTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		useCase = new AddExamUseCase();
-		presenter = new AddExamPresenterImpl();
+		presenter = new ManageExamPresenterImpl();
 		adder = new ExamAdderImpl();
 		adder.setExamFactory(new ExamFactoryImpl());
 		useCase.setExamAdder(adder);

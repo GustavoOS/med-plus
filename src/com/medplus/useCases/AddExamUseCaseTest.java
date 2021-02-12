@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.adapter.interfaces.AddExamPresenterImpl;
+import com.medplus.adapter.interfaces.ManageExamPresenterImpl;
 import com.medplus.entities.Exam;
 import com.medplus.entities.ExamAdder;
 import com.medplus.entities.ExamAdderImpl;
@@ -19,7 +19,7 @@ class AddExamUseCaseTest {
 	PatientGW gw;
 	Patient patient;
 	String patientID, fileID;
-	AddExamPresenter presenter;
+	ManageExamPresenter presenter;
 
 	Exam exam;
 
@@ -32,7 +32,7 @@ class AddExamUseCaseTest {
 		gw = new PatientGW();
 		gw.setPatients(TestUtils.mountPatientList());
 		useCase.setGateway(gw);
-		presenter = new AddExamPresenterImpl();
+		presenter = new ManageExamPresenterImpl();
 		useCase.setPresenter(presenter);
 		patientID = "4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1";
 		fileID = "1cbc4c03-4ec6-4946-b5c2-195bf4fad481";
