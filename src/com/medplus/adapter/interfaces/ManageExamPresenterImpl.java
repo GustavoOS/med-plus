@@ -1,9 +1,9 @@
 package com.medplus.adapter.interfaces;
 
 import com.medplus.entities.Exam;
-import com.medplus.useCases.AddExamPresenter;
+import com.medplus.useCases.ManageExamPresenter;
 
-public class AddExamPresenterImpl implements AddExamPresenter {
+public class ManageExamPresenterImpl implements ManageExamPresenter {
 
 	private String status;
 	private Exam result;

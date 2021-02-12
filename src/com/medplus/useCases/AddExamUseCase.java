@@ -5,7 +5,7 @@ import com.medplus.entities.Patient;
 
 public class AddExamUseCase {
 	private UserGateway gateway;
-	private AddExamPresenter presenter;
+	private ManageExamPresenter presenter;
 	private ExamAdder examAdder;
 	
 	public void add(String patientID, String title, String fileID)
@@ -26,7 +26,7 @@ public class AddExamUseCase {
 		this.gateway = gateway;
 	}
 
-	public void setPresenter(AddExamPresenter presenter)
+	public void setPresenter(ManageExamPresenter presenter)
 	{
 		this.presenter = presenter;
 	}
