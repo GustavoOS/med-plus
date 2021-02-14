@@ -1,7 +1,14 @@
-package com.medplus.entities;
+package com.medplus.gateways;
 
 import java.util.ArrayList;
 
+import com.medplus.entities.Appointment;
+import com.medplus.entities.Exam;
+import com.medplus.entities.HealthProvider;
+import com.medplus.entities.Patient;
+import com.medplus.entities.Provider;
+import com.medplus.entities.exam.impl.ExamImpl;
+import com.medplus.entities.patient.PatientImpl;
 import com.medplus.factories.AppointmentFactoryImpl;
 
 public class Cloner {

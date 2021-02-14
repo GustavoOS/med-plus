@@ -1,7 +1,6 @@
 package com.medplus.gateways;
 import java.util.ArrayList;
 
-import com.medplus.entities.Cloner;
 import com.medplus.entities.HealthProvider;
 import com.medplus.entities.User;
 import com.medplus.useCases.ProviderGateway;

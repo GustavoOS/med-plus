@@ -1,10 +1,13 @@
-package com.medplus.entities;
+package com.medplus.entities.exam.adder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.medplus.entities.Exam;
+import com.medplus.entities.Patient;
+import com.medplus.entities.patient.PatientImpl;
 import com.medplus.factories.ExamFactoryImpl;
 
 class ExamAdderImplTest {

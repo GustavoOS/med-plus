@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.CancelAppointmentPresenterImpl;
 import com.medplus.entities.Appointment;
-import com.medplus.entities.PatientAppointmentCanceler;
+import com.medplus.entities.appointment.canceler.PatientAppointmentCanceler;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;

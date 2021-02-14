@@ -12,7 +12,7 @@ import com.medplus.adapter.interfaces.CancelAppointmentPresenterImpl;
 import com.medplus.entities.Appointment;
 import com.medplus.entities.HealthProvider;
 import com.medplus.entities.Patient;
-import com.medplus.entities.ProviderAppointmentCanceler;
+import com.medplus.entities.appointment.canceler.ProviderAppointmentCanceler;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;

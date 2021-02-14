@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.patient;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.medplus.entities.Appointment;
+import com.medplus.entities.Patient;
 import com.medplus.factories.PatientFactoryImpl;
 
 class PatientTest {

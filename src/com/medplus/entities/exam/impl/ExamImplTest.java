@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.exam.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import com.medplus.entities.Exam;
 
 class ExamImplTest {
 

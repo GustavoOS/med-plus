@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.medplus.entities.Exam;
 import com.medplus.entities.ExamFactory;
-import com.medplus.entities.ExamImpl;
+import com.medplus.entities.exam.impl.ExamImpl;
 
 public class ExamFactoryImpl implements ExamFactory {
 

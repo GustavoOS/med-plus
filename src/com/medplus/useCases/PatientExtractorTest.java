@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.Patient;
-import com.medplus.entities.PatientImpl;
+import com.medplus.entities.patient.PatientImpl;
 import com.medplus.factories.TestUtils;
 
 class PatientExtractorTest {

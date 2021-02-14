@@ -1,7 +1,11 @@
-package com.medplus.entities;
+package com.medplus.entities.patient;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+
+import com.medplus.entities.Appointment;
+import com.medplus.entities.Exam;
+import com.medplus.entities.Patient;
 
 public class PatientImpl implements Patient{
 	private String name;

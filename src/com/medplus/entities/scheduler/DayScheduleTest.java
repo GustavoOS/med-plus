@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.scheduler;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.medplus.entities.Appointment;
+import com.medplus.entities.DayScheduler;
 import com.medplus.factories.AppointmentFactoryImpl;
 import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;

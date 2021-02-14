@@ -1,6 +1,10 @@
-package com.medplus.entities;
+package com.medplus.entities.scheduler;
 
 import java.util.ArrayList;
+
+import com.medplus.entities.Appointment;
+import com.medplus.entities.DayScheduler;
+import com.medplus.entities.Utils;
 
 public class DaySchedulerImpl implements DayScheduler {
 

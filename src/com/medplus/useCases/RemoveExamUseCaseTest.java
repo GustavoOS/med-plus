@@ -8,8 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.ManageExamPresenterImpl;
-import com.medplus.entities.ExamRemoverImpl;
 import com.medplus.entities.Patient;
+import com.medplus.entities.exam.remover.ExamRemoverImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 

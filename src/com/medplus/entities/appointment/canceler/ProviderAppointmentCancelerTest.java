@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.appointment.canceler;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,22 +8,26 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.medplus.entities.Appointment;
 import com.medplus.factories.TestUtils;
 
-class PatientAppointmentCancelerTest {
+class ProviderAppointmentCancelerTest {
 	ArrayList<Appointment> appointments;
-	PatientAppointmentCanceler canceler;
+	ProviderAppointmentCanceler canceler;
 	LocalDateTime baseDate;
 	
+	String provider, patient;
 	@BeforeEach
 	void setUp() throws Exception {
+		provider = "b9d4ec7e-7cda-4d52-a986-e9dd2ea4343d";
+		patient = "0d8306b3-20a9-47c0-95f4-8a764699ba16";
 		baseDate = LocalDateTime.now().withHour(10).withMinute(0).withSecond(0).withNano(0);
 		appointments = TestUtils.
 				mountAppointmentList(
-						"b9d4ec7e-7cda-4d52-a986-e9dd2ea4343d",
-						"0d8306b3-20a9-47c0-95f4-8a764699ba16",
+						provider,
+						patient,
 						baseDate);
-		canceler = new PatientAppointmentCanceler();
+		canceler = new ProviderAppointmentCanceler();
 	}
 
 	@Test
@@ -31,7 +35,7 @@ class PatientAppointmentCancelerTest {
 		assertEquals(3, appointments.size());
 		canceler.cancel(appointments, baseDate);
 		assertEquals(2, appointments.size());
-		assertEquals("b9d4ec7e-7cda-4d52-a986-e9dd2ea4343d",
+		assertEquals(patient,
 				canceler.getCanceledAppointmentTargetUserID());
 		assertNotEquals(
 				appointments.get(0).getDateTime()
@@ -63,4 +67,5 @@ class PatientAppointmentCancelerTest {
 	private void assertCancelFailure() {
 		assertNull(canceler.getCanceledAppointmentTargetUserID());
 	}
+
 }
