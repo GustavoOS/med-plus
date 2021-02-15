@@ -64,7 +64,6 @@ class AttendanceUseCaseTest {
 	private void setDoctorAppointments(String patient) {
 		providers.get(0).setAppointments(
 				TestUtils.mountAppointmentList(
-						provider,
 						patient,
 						baseTime));
 	}

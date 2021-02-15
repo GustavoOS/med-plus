@@ -32,8 +32,7 @@ public class Cloner {
 			return null;
 		Appointment a = (new AppointmentFactoryImpl()).make();
 		a.setDateTime(original.getDateTime());
-		a.setPatientID(original.getPatientID());
-		a.setProviderID(original.getProviderID());
+		a.setPeerID(original.getPeerID());
 		return a;
 	}
 

@@ -20,7 +20,6 @@ class CancelAppointmentPresenterImplTest {
 	void setUp() throws Exception {
 		presenter = new CancelAppointmentPresenterImpl();
 		appointments = TestUtils.mountAppointmentList(
-				"973ee2f7-ec81-4855-975e-7b05b5970f6f",
 				"e8c6b544-0339-4c6f-a024-1a721de23fba",
 				LocalDateTime.of(2021, 2, 8, 22, 34));
 	}

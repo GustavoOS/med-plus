@@ -12,7 +12,6 @@ import com.medplus.adapter.interfaces.CancelAppointmentPresenterImpl;
 import com.medplus.entities.Appointment;
 import com.medplus.entities.HealthProvider;
 import com.medplus.entities.Patient;
-import com.medplus.entities.appointment.canceler.ProviderAppointmentCanceler;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
@@ -30,38 +29,22 @@ class CancelProviderAppointmentUseCaseTest {
 		useCase = new CancelAppointmentUseCase();
 		date = LocalDateTime.now().withHour(14).withMinute(0).withSecond(0).withNano(0);
 		injectGWs();
+		providerID = "da2ed3e9-566b-4521-8002-6e15f6f9958d";
 
 		presenter = new CancelAppointmentPresenterImpl();
-		useCase.setCanceler(new ProviderAppointmentCanceler());
 		useCase.setPresenter(presenter);
 	}
 
 	private void injectGWs() {
-		ArrayList<Patient> patients = TestUtils.mountPatientList();
-		ArrayList<HealthProvider> providers = TestUtils.mountProviderList();
-		providerID = providers.get(0).getId();
-		setAppointments(patients, providers);
-
-		populateGWsAndInjectToUseCase(patients, providers);
-	}
-
-	private void populateGWsAndInjectToUseCase(ArrayList<Patient> patients, ArrayList<HealthProvider> providers) {
-		PatientGW patientGW = new PatientGW();
+		LocalDateTime now = LocalDateTime.now();
+		ArrayList<Patient> patients = TestUtils.mountPatientList(now);
+		ArrayList<HealthProvider> providers = TestUtils.mountProviderList(now);
 		ProviderGW providerGW = new ProviderGW();
-		patientGW.setPatients(patients);
 		providerGW.setProviders(providers);
-
-		useCase.setTargetGW(patientGW);
-		useCase.setRootGW(providerGW);
-	}
-
-	private void setAppointments(ArrayList<Patient> patients, ArrayList<HealthProvider> providers) {
-		ArrayList<Appointment> appointments = 
-				TestUtils.mountAppointmentList(
-						providerID,
-						patients.get(0).getId(), date);
-		patients.get(0).setAppointments(appointments);
-		providers.get(0).setAppointments(appointments);
+		PatientGW patientGW = new PatientGW();
+		patientGW.setPatients(patients);
+		useCase.setUserGW(providerGW);
+		useCase.setPeerGW(patientGW);
 	}
 
 	@Test
@@ -95,12 +78,18 @@ class CancelProviderAppointmentUseCaseTest {
 	@Test
 	void cancelProperWay()
 	{
+		String maria, john;
+		maria = "4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1";
+		john = "0c9dbc30-2874-4983-a0b7-6885c409ddbc";
 		useCase.cancel(providerID, date);
 		assertEquals("success", presenter.getStatus());
 		ArrayList<Appointment> result = presenter.getList();
-		assertEquals(2, result.size());
-		assertEquals(providerID, result.get(0).getProviderID());
-		assertEquals(providerID, result.get(1).getProviderID());
+		assertEquals(5, result.size());
+		assertEquals(maria, result.get(0).getPeerID());
+		assertEquals(maria, result.get(1).getPeerID());
+		assertEquals(john, result.get(2).getPeerID());
+		assertEquals(john, result.get(3).getPeerID());
+		assertEquals(john, result.get(4).getPeerID());
 		
 	}
 	private void assertFailure()

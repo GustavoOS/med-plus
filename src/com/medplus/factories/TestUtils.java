@@ -13,7 +13,7 @@ import com.medplus.entities.PickerChain;
 import com.medplus.entities.Provider;
 
 public class TestUtils {
-	public static ArrayList<HealthProvider> mountProviderList(){
+	public static ArrayList<HealthProvider> mountProviderList(LocalDateTime appointmentDateTime){
 		ArrayList<HealthProvider> providers = new ArrayList<HealthProvider>();
 		providers.add(new Provider("Joe", "blabla.com", "surgeon", new CoordinateDS(-23.2191582,-45.8843743)));
 		providers.add(new Provider("Silva", "silva.com", "surgeon", new CoordinateDS(-23.2173173,-45.8918382)));
@@ -23,11 +23,18 @@ public class TestUtils {
 		providers.get(1).setId("c43a58c6-de7b-4a95-8b41-b1b29e786422");
 		providers.get(2).setId("7b11fdbb-0894-4e4b-afaf-880738c84f4c");
 		providers.get(3).setId("81a5cb24-d4ba-4789-b5da-3e76ae7ca551");
-		providers.get(0).setAppointments(new ArrayList<Appointment>());
+		ArrayList<Appointment> appointments = mountAppointmentList("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1", appointmentDateTime.withHour(14));
+		appointments.addAll(mountAppointmentList("0c9dbc30-2874-4983-a0b7-6885c409ddbc", appointmentDateTime.withHour(10).plusDays(1)));
+		providers.get(0).setAppointments(appointments);
 		providers.get(1).setAppointments(new ArrayList<Appointment>());
 		providers.get(2).setAppointments(new ArrayList<Appointment>());
 		providers.get(3).setAppointments(new ArrayList<Appointment>());
 		return providers;
+	}
+
+	public static ArrayList<HealthProvider> mountProviderList()
+	{
+		return mountProviderList(LocalDateTime.now());
 	}
 
 	public static ProviderPicker mountPickerChain()
@@ -48,51 +55,70 @@ public class TestUtils {
 		return picker;
 	}
 
-	public static ArrayList<Appointment> mountAppointmentList(String provider, String patient, LocalDateTime baseDate)
+	public static ArrayList<Appointment> mountAppointmentList(String peer, LocalDateTime baseDate)
 	{
 		ArrayList<Appointment> list = new ArrayList<Appointment>();
 
-		addAppointmentToRaw(list, provider, patient, baseDate);
-		addAppointmentToRaw(list, provider, patient, baseDate.plusHours(1));
-		addAppointmentToRaw(list, provider, patient, baseDate.plusDays(1));
+		addAppointmentToRaw(list, peer, baseDate);
+		addAppointmentToRaw(list, peer, baseDate.plusHours(1));
+		addAppointmentToRaw(list, peer, baseDate.plusDays(1));
 
 		return list;
 	}
 
 	public static ArrayList<Patient> mountPatientList()
 	{
+		return mountPatientList(LocalDateTime.now());
+	}
+
+	public static ArrayList<Patient> mountPatientList(LocalDateTime baseDate)
+	{
 		ArrayList<Patient> patients = new ArrayList<Patient>();
-		Patient p = (new PatientFactoryImpl()).make();
-		p.setAppointments(mountAppointmentList(
-				"da2ed3e9-566b-4521-8002-6e15f6f9958d",
+		baseDate = baseDate.withMinute(0).withSecond(0).withNano(0);
+		Patient p;
+		p = createPatient(
 				"4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1",
-				LocalDateTime.now().withHour(14)));
-		p.setBirth(LocalDateTime.now().minusYears(20).toLocalDate());
-		p.setId("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
-		p.setIsFemale(true);
-		p.setName("Maria");
-		patients.add(p);
-		p = (new PatientFactoryImpl()).make();
-		p.setAppointments(mountAppointmentList(
 				"da2ed3e9-566b-4521-8002-6e15f6f9958d",
+				"Maria",
+				true,
+				20,
+				baseDate.withHour(14));
+		patients.add(p);
+		p = createPatient(
 				"0c9dbc30-2874-4983-a0b7-6885c409ddbc",
-				LocalDateTime.now().withHour(10).plusDays(1)));
-		p.setBirth(LocalDateTime.now().minusYears(25).toLocalDate());
-		p.setId("0c9dbc30-2874-4983-a0b7-6885c409ddbc");
-		p.setIsFemale(false);
-		p.setName("John");
+				"da2ed3e9-566b-4521-8002-6e15f6f9958d",
+				"John",
+				false,
+				25,
+				baseDate.withHour(10).plusDays(1));
 		patients.add(p);
 		return patients;
 	}
 
-	private static void addAppointmentToRaw(ArrayList<Appointment> raw, 
+	private static Patient createPatient(
+			String patientID,
 			String providerId,
-			String patientId,
+			String name,
+			Boolean isFemale,
+			int age,
+			LocalDateTime dateTime) {
+		Patient p = (new PatientFactoryImpl()).make();
+		p.setAppointments(mountAppointmentList(
+				providerId,
+				dateTime));
+		p.setBirth(dateTime.minusYears(age).toLocalDate());
+		p.setId(patientID);
+		p.setIsFemale(isFemale);
+		p.setName(name);
+		return p;
+	}
+
+	private static void addAppointmentToRaw(ArrayList<Appointment> raw, 
+			String peerID,
 			LocalDateTime dateTime)
 	{
 		Appointment appointment = (new AppointmentFactoryImpl()).make();
-		appointment.setProviderID(providerId);
-		appointment.setPatientID(patientId);
+		appointment.setPeerID(peerID);
 		appointment.setDateTime(dateTime);
 		raw.add(appointment);
 	}

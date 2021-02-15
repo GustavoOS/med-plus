@@ -23,7 +23,7 @@ public class AttendanceUseCase implements Attendable {
 		if(attendanceIsInvalid(providerID, dateTime))
 			presenter.fail();
 		else
-			checker.check(appointment.getPatientID());
+			checker.check(appointment.getPeerID());
 	}
 
 	public void setProviderGateway(UserGateway userGateway) {

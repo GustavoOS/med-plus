@@ -2,6 +2,8 @@ package com.medplus.useCases;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +32,7 @@ class AddExamUseCaseTest {
 		adder.setExamFactory(new ExamFactoryImpl());
 		useCase.setExamAdder(adder);
 		gw = new PatientGW();
-		gw.setPatients(TestUtils.mountPatientList());
+		gw.setPatients(TestUtils.mountPatientList(LocalDateTime.now()));
 		useCase.setGateway(gw);
 		presenter = new ManageExamPresenterImpl();
 		useCase.setPresenter(presenter);

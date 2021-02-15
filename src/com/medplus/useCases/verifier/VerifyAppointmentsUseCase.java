@@ -5,44 +5,41 @@ import java.util.HashMap;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.User;
-import com.medplus.useCases.Id2NameTranslater;
 import com.medplus.useCases.UserGateway;
 import com.medplus.useCases.VerifiableBook;
 import com.medplus.useCases.VerifyAppointmentsPresenter;
 
 public class VerifyAppointmentsUseCase implements VerifiableBook {
-	private UserGateway gw;
+	private UserGateway userGw;
+	private UserGateway peerGW;
 	private VerifyAppointmentsPresenter presenter;
-	private Id2NameTranslater translater;
 
 	@Override
 	public void verify(String id) {
-		User user = gw.getUser(id);
+		User user = userGw.getUser(id);
 		if(user == null)
 		{
 			presenter.fail();
 			return;
 		}
-		presenter.succeed(user.getAppointments(), buildNameList(user));		
+		presenter.succeed(user.getAppointments(), buildNameList(user));
 	}
 
 	private HashMap<String, String> buildNameList(User user) {
 		ArrayList<Appointment> list = user.getAppointments();
 		HashMap<String, String> names = new HashMap<String, String>();
-		for (Appointment appointment : list) {
-			addNameToNameList(names, appointment.getPatientID());
-			addNameToNameList(names, appointment.getProviderID());
-		}
+		for (Appointment appointment : list)
+			addNameToNameList(names, appointment.getPeerID());
 		return names;
 	}
 
 	private void addNameToNameList(HashMap<String, String> names, String id) {
-		names.put(id, translater.translate(id));
+		names.put(id, peerGW.getUser(id).getName());
 	}
 
 	public void setGw(UserGateway gw)
 	{
-		this.gw = gw;
+		this.userGw = gw;
 	}
 
 	public void setPresenter(VerifyAppointmentsPresenter presenter)
@@ -50,7 +47,8 @@ public class VerifyAppointmentsUseCase implements VerifiableBook {
 		this.presenter = presenter;
 	}
 
-	public void setTranslater(Id2NameTranslater translater) {
-		this.translater = translater;
+	public void setPeerGW(UserGateway peerGW) {
+		this.peerGW = peerGW;
 	}
+
 }

@@ -9,27 +9,22 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.Appointment;
 import com.medplus.entities.DayScheduler;
-import com.medplus.factories.AppointmentFactoryImpl;
 import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
 
 class DayScheduleTest {
 
 	DayScheduler bd;
-	Appointment appointment;
 	ArrayList<Appointment> list;
+	LocalDateTime dateTime;
 
 	@BeforeEach
 	void setUp(){
 		bd = DayScheduleFactory.make();
-		appointment = (new AppointmentFactoryImpl()).make();
-		appointment.setProviderID("da2ed3e9-566b-4521-8002-6e15f6f9958d");
-		appointment.setPatientID("cb0e17f2-a988-43af-9ef0-63e6b9fc41f5");
-		appointment.setDateTime(LocalDateTime.of(2021, 01, 28, 10, 0));
-		list = TestUtils.mountAppointmentList(
-				"da2ed3e9-566b-4521-8002-6e15f6f9958d",
-				"f7369fbc-691d-4df8-b55f-2da43be30cc7",
-				LocalDateTime.of(2021, 01, 28, 14, 0));
+		dateTime = LocalDateTime.now().withHour(14);
+		list = TestUtils.mountProviderList(dateTime)
+				.get(0)
+				.getAppointments();
 	}
 
 	@Test
@@ -61,9 +56,7 @@ class DayScheduleTest {
 	void testNullArguments()
 	{
 		assertFalse(bd.isAvailable(null, list));
-		assertFalse(bd.isAvailable(appointment, null));
-		appointment.setDateTime(null);
-		assertFalse(bd.isAvailable(appointment, list));
+		assertFalse(bd.isAvailable(dateTime, null));
 	}
 
 	@Test
@@ -71,35 +64,32 @@ class DayScheduleTest {
 	{
 		list = TestUtils.mountProviderList().get(0).getAppointments();
 		assertNotNull(list);
-		appointment.setProviderID("da2ed3e9-566b-4521-8002-6e15f6f9958d");
-		assertTrue(bd.isAvailable(appointment, list));
+		assertTrue(bd.isAvailable(dateTime.withHour(9), list));
 	}
 
 	@Test
 	void testConflictingDoctorAppointment()
 	{
 		list = TestUtils.mountPatientList().get(0).getAppointments();
-		appointment.setDateTime(LocalDateTime.now().withHour(14).plusDays(1));
-		assertFalse(bd.isAvailable(appointment, list));
+		assertFalse(bd.isAvailable(dateTime.withHour(14).plusDays(1), list));
 	}
 
 	private void changeAppointmentDateTimeHour(int hour) {
-		appointment.setDateTime(appointment.getDateTime().withHour(hour));
+		dateTime = dateTime.withHour(hour);
 	}
-
 
 	private void assertUnavailableHour(int hour) {
 		changeAppointmentDateTimeHour(hour);
-		assertFalse(bd.isAvailable(appointment, list));
+		assertFalse(bd.isAvailable(dateTime, list));
 	}
 
 	private void assertAvailableHour(int hour)
 	{
 		changeAppointmentDateTimeHour(hour);
-		assertTrue(bd.isAvailable(appointment, list));
+		assertTrue(bd.isAvailable(dateTime, list));
 	}
 
-	private void changeAppointmentDay(int day) {
-		appointment.setDateTime(appointment.getDateTime().withDayOfMonth(day));
+	private void changeAppointmentDay(int days) {
+		dateTime = dateTime.plusDays(days);
 	}
 }

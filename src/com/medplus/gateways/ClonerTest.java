@@ -27,7 +27,6 @@ class ClonerTest {
 	{
 		rawAppointmentList =
 				TestUtils.mountAppointmentList(
-						"062227ac-50fe-4967-9fb1-13d8968d7ab0",
 						"f60579ed-6de3-49ee-9229-0bb027d5b74b",
 						LocalDateTime.of(LocalDate.now(), LocalTime.of(14, 0)));
 	}

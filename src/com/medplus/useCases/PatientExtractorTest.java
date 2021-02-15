@@ -22,7 +22,7 @@ class PatientExtractorTest {
 
 	@Test
 	void testFullPatient() {
-		patient.setAppointments(TestUtils.mountAppointmentList("doc", "pac", LocalDateTime.now()));
+		patient.setAppointments(TestUtils.mountAppointmentList("doc", LocalDateTime.now()));
 		patient.setBirth(LocalDateTime.now().minusYears(20).toLocalDate());
 		patient.setId("pac");
 		patient.setIsFemale(true);

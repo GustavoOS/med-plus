@@ -2,6 +2,7 @@ package com.medplus.useCases;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +33,7 @@ class RemoveExamUseCaseTest {
 
 	private void setGateway() {
 		PatientGW gw = new PatientGW();
-		patients = TestUtils.mountPatientList();
+		patients = TestUtils.mountPatientList(LocalDateTime.now());
 		patients.get(0).setExams(TestUtils.mountExamList());
 		gw.setPatients(patients);
 		useCase.setPatientGateway(gw);

@@ -1,4 +1,4 @@
-package com.medplus.factories;
+package com.medplus.useCases;
 
 import com.medplus.entities.Appointment;
 

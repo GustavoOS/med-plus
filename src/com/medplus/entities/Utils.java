@@ -36,10 +36,14 @@ public class Utils {
 
 	public static Appointment findFirstAppointmentWithDateTime(ArrayList<Appointment> appointments, LocalDateTime dateTime)
 	{
-		return (appointments == null || dateTime == null)? null : appointments.stream()
-				  .filter(ap -> getComparableDateTime(ap.getDateTime()).equals(getComparableDateTime(dateTime)))
-				  .findAny()
-				  .orElse(null);
+		if(appointments == null || dateTime == null)
+			return null;
+		for (Appointment ap : appointments) {
+			if(getComparableDateTime(ap.getDateTime())
+					.equals(getComparableDateTime(dateTime)))
+				return ap;
+		}
+		return null;
 	}
 
 	private static LocalDateTime getComparableDateTime(LocalDateTime a)

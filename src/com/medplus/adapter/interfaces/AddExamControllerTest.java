@@ -2,6 +2,8 @@ package com.medplus.adapter.interfaces;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +34,7 @@ class AddExamControllerTest {
 		useCase.setExamAdder(adder);
 		useCase.setPresenter(presenter);
 		gw = new PatientGW();
-		gw.setPatients(TestUtils.mountPatientList());
+		gw.setPatients(TestUtils.mountPatientList(LocalDateTime.now()));
 		useCase.setGateway(gw);
 		controller = new AddExamController();
 		controller.setUseCase(useCase);

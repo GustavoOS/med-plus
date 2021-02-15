@@ -1,5 +1,6 @@
 package com.medplus.entities.scheduler;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
@@ -9,16 +10,15 @@ import com.medplus.entities.Utils;
 public class DaySchedulerImpl implements DayScheduler {
 
 	@Override
-	public Boolean isAvailable(Appointment appointment, ArrayList<Appointment> appointments) {
-		return !isInvalid(appointment, appointments);
+	public Boolean isAvailable(LocalDateTime dateTime, ArrayList<Appointment> appointments) {
+		return !isInvalid(dateTime, appointments);
 	}
 
-	private boolean isInvalid(Appointment appointment, ArrayList<Appointment> appointments) {
+	private boolean isInvalid(LocalDateTime dateTime, ArrayList<Appointment> appointments) {
 		return  appointments == null ||
-				appointment == null ||
-				appointment.getDateTime() == null ||
-				hasConflictingAppointment(appointment, appointments) ||
-				hourIsOutOfBusinessTime(appointment.getDateTime().getHour())
+				dateTime == null ||
+				hasConflictingAppointment(dateTime, appointments) ||
+				hourIsOutOfBusinessTime(dateTime.getHour())
 				;
 	}
 
@@ -26,9 +26,9 @@ public class DaySchedulerImpl implements DayScheduler {
 		return hour > 17 || hour < 9 || hour == 12;
 	}
 
-	private Boolean hasConflictingAppointment(Appointment appointment, ArrayList<Appointment> appointments)
+	private Boolean hasConflictingAppointment(LocalDateTime dateTime, ArrayList<Appointment> appointments)
 	{
-		Appointment conflict = Utils.findFirstAppointmentWithDateTime(appointments, appointment.getDateTime());
+		Appointment conflict = Utils.findFirstAppointmentWithDateTime(appointments, dateTime);
 		return conflict != null;
 	}
 

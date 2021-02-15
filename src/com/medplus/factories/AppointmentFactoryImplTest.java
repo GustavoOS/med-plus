@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.Appointment;
+import com.medplus.useCases.AppointmentFactory;
 
 class AppointmentFactoryImplTest {
 

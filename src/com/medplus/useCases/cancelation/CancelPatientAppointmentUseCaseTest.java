@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.CancelAppointmentPresenterImpl;
 import com.medplus.entities.Appointment;
-import com.medplus.entities.appointment.canceler.PatientAppointmentCanceler;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
@@ -26,18 +25,18 @@ class CancelPatientAppointmentUseCaseTest {
 	void setUp(){
 		PatientGW patientGW = new PatientGW();
 		ProviderGW providerGW = new ProviderGW();
-		patientGW.setPatients(TestUtils.mountPatientList());
-		providerGW.setProviders(TestUtils.mountProviderList());
+		LocalDateTime now = LocalDateTime.now();
+		patientGW.setPatients(TestUtils.mountPatientList(now));
+		providerGW.setProviders(TestUtils.mountProviderList(now));
 
 		presenter = new CancelAppointmentPresenterImpl();
 		useCase = new CancelAppointmentUseCase();
-		useCase.setCanceler(new PatientAppointmentCanceler());
-		useCase.setRootGW(patientGW);
+		useCase.setUserGW(patientGW);
 		useCase.setPresenter(presenter);
-		useCase.setTargetGW(providerGW);
+		useCase.setPeerGW(providerGW);
 
 		patientID = "4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1";
-		date = LocalDateTime.now().withHour(14).withMinute(0).withSecond(0).withNano(0);
+		date = now.withHour(14).withMinute(0).withSecond(0).withNano(0);
 	}
 
 	@Test
@@ -75,7 +74,8 @@ class CancelPatientAppointmentUseCaseTest {
 		assertEquals("success", presenter.getStatus());
 		ArrayList<Appointment> result = presenter.getList();
 		assertEquals(2, result.size());
-		assertEquals(patientID, result.get(0).getPatientID());
+		assertNotEquals(date, result.get(0).getDateTime());
+		assertNotEquals(date, result.get(1).getDateTime());
 		
 	}
 	private void assertFailure()

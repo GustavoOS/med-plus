@@ -2,6 +2,7 @@ package com.medplus.useCases;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -57,7 +58,7 @@ class CheckAvailablePatientDataUseCaseTest {
 	}
 	private void setGateway() {
 		PatientGW gw = new PatientGW();
-		ArrayList<Patient> patients = TestUtils.mountPatientList();
+		ArrayList<Patient> patients = TestUtils.mountPatientList(LocalDateTime.now());
 		patients.get(0).setExams(TestUtils.mountExamList());
 		gw.setPatients(patients);
 		useCase.setPatientGateway(gw);
