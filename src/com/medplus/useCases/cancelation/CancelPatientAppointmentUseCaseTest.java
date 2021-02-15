@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.CancelAppointmentPresenterImpl;
 import com.medplus.entities.Appointment;
+import com.medplus.entities.AppointmentImpl;
+import com.medplus.entities.Patient;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
@@ -20,10 +22,12 @@ class CancelPatientAppointmentUseCaseTest {
 	LocalDateTime date;
 	String patientID;
 
+	PatientGW patientGW;
+
 	public CancelAppointmentUseCase useCase;
 	@BeforeEach
 	void setUp(){
-		PatientGW patientGW = new PatientGW();
+		patientGW = new PatientGW();
 		ProviderGW providerGW = new ProviderGW();
 		LocalDateTime now = LocalDateTime.now();
 		patientGW.setPatients(TestUtils.mountPatientList(now));
@@ -76,10 +80,37 @@ class CancelPatientAppointmentUseCaseTest {
 		assertEquals(2, result.size());
 		assertNotEquals(date, result.get(0).getDateTime());
 		assertNotEquals(date, result.get(1).getDateTime());
-		
 	}
+
+	@Test
+	void cantFindPeer()
+	{
+		addAppointmentToPatientAppointmentList("dfgyui");
+		useCase.cancel(patientID, date.plusDays(20));
+		assertEquals("fail", presenter.getStatus());
+	}
+
+	@Test
+	void peerHasNoAppointment()
+	{
+		addAppointmentToPatientAppointmentList("81a5cb24-d4ba-4789-b5da-3e76ae7ca551");
+		useCase.cancel(patientID, date.plusDays(20));
+		assertEquals("fail", presenter.getStatus());
+	}
+
 	private void assertFailure()
 	{
 		assertEquals("fail", presenter.getStatus());
+	}
+
+
+	private void addAppointmentToPatientAppointmentList(String provider) {
+		Appointment appointment =
+				(new AppointmentImpl())
+					.withDateTime(date.plusDays(20))
+					.withPeerID(provider);
+		Patient p = (Patient) patientGW.getUser(patientID);
+		p.getAppointments().add(appointment);
+		patientGW.put(p);
 	}
 }

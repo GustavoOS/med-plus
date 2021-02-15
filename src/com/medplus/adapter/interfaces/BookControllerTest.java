@@ -70,9 +70,7 @@ class BookControllerTest {
 
 	@Test
 	void testNullProvider() {
-		controller.setAppointment(  patientID,
-									null,
-									dateTime);
+		controller.setAppointment(patientID, null, dateTime);
 		assertEquals("fail", presenter.getStatus());
 		
 	}
@@ -80,17 +78,13 @@ class BookControllerTest {
 	@Test
 	void testUnknownProvider()
 	{
-		controller.setAppointment(  patientID,
-									"hello",
-									dateTime);
+		controller.setAppointment(patientID, "hello", dateTime);
 		assertEquals("fail", presenter.getStatus());
 	}
 
 	@Test
 	void testNullPatient() {
-		controller.setAppointment(  null,
-									providerID,
-									dateTime);
+		controller.setAppointment(null, providerID, dateTime);
 		assertEquals("fail", presenter.getStatus());
 		
 	}
@@ -98,9 +92,7 @@ class BookControllerTest {
 	@Test
 	void testUnknownPatient()
 	{
-		controller.setAppointment(  "hello",
-									patientID,
-									dateTime);
+		controller.setAppointment("hello", patientID, dateTime);
 		assertEquals("fail", presenter.getStatus());
 	}
 }
