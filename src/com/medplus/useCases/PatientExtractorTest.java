@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.Patient;
-import com.medplus.entities.PatientImpl;
+import com.medplus.entities.domain.Patient;
+import com.medplus.entities.patient.PatientImpl;
 import com.medplus.factories.TestUtils;
 
 class PatientExtractorTest {
@@ -22,7 +22,7 @@ class PatientExtractorTest {
 
 	@Test
 	void testFullPatient() {
-		patient.setAppointments(TestUtils.mountAppointmentList("doc", "pac", LocalDateTime.now()));
+		patient.setAppointments(TestUtils.mountAppointmentList("doc", LocalDateTime.now()));
 		patient.setBirth(LocalDateTime.now().minusYears(20).toLocalDate());
 		patient.setId("pac");
 		patient.setIsFemale(true);

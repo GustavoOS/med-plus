@@ -1,9 +1,8 @@
 package com.medplus.entities.provider.filters.pickers;
 
 import com.medplus.entities.ProviderFilterParameter;
-import com.medplus.entities.HealthProvider;
 import com.medplus.entities.ProviderPicker;
-import com.medplus.entities.PickerChain;
+import com.medplus.entities.domain.HealthProvider;
 
 public class SpecializationPicker implements ProviderPicker, PickerChain {
 	private ProviderPicker nextPicker;

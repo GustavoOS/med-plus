@@ -2,14 +2,16 @@ package com.medplus.useCases;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.ManageExamPresenterImpl;
-import com.medplus.entities.Exam;
 import com.medplus.entities.ExamAdder;
-import com.medplus.entities.ExamAdderImpl;
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.Exam;
+import com.medplus.entities.domain.Patient;
+import com.medplus.entities.exam.adder.ExamAdderImpl;
 import com.medplus.factories.ExamFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
@@ -30,7 +32,7 @@ class AddExamUseCaseTest {
 		adder.setExamFactory(new ExamFactoryImpl());
 		useCase.setExamAdder(adder);
 		gw = new PatientGW();
-		gw.setPatients(TestUtils.mountPatientList());
+		gw.setPatients(TestUtils.mountPatientList(LocalDateTime.now()));
 		useCase.setGateway(gw);
 		presenter = new ManageExamPresenterImpl();
 		useCase.setPresenter(presenter);

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.ProviderFilter;
+import com.medplus.factories.CoordinateFactoryImpl;
 import com.medplus.factories.ProviderFilterFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
@@ -22,7 +23,9 @@ class SearchControllerTest {
 		ProviderGW gw = new ProviderGW();
 		gw.setProviders(TestUtils.mountProviderList());
 		receiver = new SearchPresenter();
-		controller = new SearchController(new SearchUseCase(gw, filter, receiver));
+		controller = new SearchController();
+		controller.setUseCase(new SearchUseCase(gw, filter, receiver));
+		controller.setFactory(new CoordinateFactoryImpl());
 	}
 
 	@Test

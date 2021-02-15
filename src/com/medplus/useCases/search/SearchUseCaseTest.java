@@ -5,9 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.SearchPresenter;
-import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.ProviderFilter;
 import com.medplus.entities.ProviderFilterParameter;
+import com.medplus.entities.coordinate.CoordinateDS;
+import com.medplus.entities.domain.Coordinate;
 import com.medplus.factories.ProviderFilterFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;
@@ -20,7 +21,7 @@ class SearchUseCaseTest {
 	ProviderFilterParameter param;
 	SearchUseCase useCase;
 
-	CoordinateDS userLocation;
+	Coordinate userLocation;
 
 	@BeforeEach
 	void setUp(){
@@ -30,7 +31,7 @@ class SearchUseCaseTest {
 		((ProviderGW)gw).setProviders(TestUtils.mountProviderList());
 		receiver = new SearchPresenter();
 		useCase = new SearchUseCase(gw, filter, receiver);
-		userLocation = new CoordinateDS(-23.2198557,-45.8857719);
+		userLocation = (new CoordinateDS()).with(-23.2198557,-45.8857719);
 		param = new ProviderFilterParameter();
 	}
 

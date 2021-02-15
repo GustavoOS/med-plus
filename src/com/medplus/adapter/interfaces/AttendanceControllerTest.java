@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.HealthProvider;
+import com.medplus.entities.domain.HealthProvider;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
@@ -48,7 +48,7 @@ class AttendanceControllerTest {
 
 	private void setGateways() {
 		providerGW = new ProviderGW();
-		providers = TestUtils.mountProviderList();
+		providers = TestUtils.mountProviderList(LocalDateTime.now());
 		setDoctorAppointments("4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1");
 		providerGW.setProviders(providers);
 		setPatientGW();
@@ -57,7 +57,7 @@ class AttendanceControllerTest {
 
 	private void setPatientGW() {
 		patientGW = new PatientGW();
-		patientGW.setPatients(TestUtils.mountPatientList());
+		patientGW.setPatients(TestUtils.mountPatientList(LocalDateTime.now()));
 		CheckAvailablePatientDataUseCase checker = 
 				new CheckAvailablePatientDataUseCase();
 		checker.setPatientGateway(patientGW);
@@ -67,7 +67,6 @@ class AttendanceControllerTest {
 	private void setDoctorAppointments(String patient) {
 		providers.get(0).setAppointments(
 				TestUtils.mountAppointmentList(
-						provider,
 						patient,
 						baseTime));
 	}

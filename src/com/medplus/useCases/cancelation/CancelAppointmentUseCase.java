@@ -2,60 +2,85 @@ package com.medplus.useCases.cancelation;
 
 import java.time.LocalDateTime;
 
-import com.medplus.entities.Canceler;
-import com.medplus.entities.User;
+import com.medplus.entities.Utils;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.User;
 import com.medplus.useCases.CancelAppointmentPresenter;
 import com.medplus.useCases.Cancelable;
 import com.medplus.useCases.UserGateway;
 
 public class CancelAppointmentUseCase implements Cancelable {
-	UserGateway rootGW, targetGW;
+	UserGateway userGW, peerGW;
 	CancelAppointmentPresenter presenter;
-	Canceler canceler;
 
-	User rootUser, targetUser;
+	User user, peer;
+
+	Appointment userAppointment, peerAppointment;
 
 	@Override
 	public void cancel(String id, LocalDateTime dateTime) {
-		rootUser = rootGW.getUser(id);
+		user = userGW.getUser(id);
 		if(cantCancel(dateTime))
 		{
 			presenter.fail();
 			return;
 		}
-		presenter.succeed(rootUser.getAppointments());
-		cancelTargetAppointment(dateTime);
+
+		removeAppointments();
+		updateGWs();
+		presenter.succeed(userGW.getUser(id).getAppointments());
+	}
+
+	private void updateGWs() {
+		userGW.put(user);
+		peerGW.put(peer);
 	}
 
 	private boolean cantCancel(LocalDateTime dateTime) {
-		return rootUser == null || dateTime == null || 
-				!canceler.cancel(
-						rootUser.getAppointments(),
-						dateTime);
+		return  user == null ||
+				dateTime == null ||
+				userAppointmentDoesntExist(dateTime) ||
+				peerCantBeFound() ||
+				cantFindPeerAppointment(dateTime);
 	}
 
-	private void cancelTargetAppointment(LocalDateTime dateTime) {
-		rootGW.put(rootUser);
-		targetUser = targetGW.getUser(canceler.getCanceledAppointmentTargetUserID());
-		canceler.cancel(targetUser.getAppointments(), dateTime);
-		targetGW.put(targetUser);
+	private Boolean cantFindPeerAppointment(LocalDateTime dateTime) {
+		peerAppointment = Utils.findFirstAppointmentWithDateTime(peer.getAppointments(), dateTime);
+		return peerAppointment == null;
 	}
+
+	private Boolean peerCantBeFound() {
+		peer = peerGW.getUser(userAppointment.getPeerID());
+		return peer == null;
+	}
+
+	private Boolean userAppointmentDoesntExist(LocalDateTime dateTime) {
+		userAppointment = Utils.findFirstAppointmentWithDateTime(user.getAppointments(), dateTime);
+		return userAppointment == null;
+	}
+
+
+	private void removeAppointments() {
+		removeAppointment(userAppointment, user);
+		removeAppointment(peerAppointment, peer);
+	}
+
+	private void removeAppointment(Appointment appointment, User _user)
+	{
+		_user.getAppointments().remove(appointment);
+	}
+
 
 	// Auto generated Setters
-
-	public void setRootGW(UserGateway originGW) {
-		this.rootGW = originGW;
+	public void setUserGW(UserGateway userGW) {
+		this.userGW = userGW;
 	}
 
-	public void setTargetGW(UserGateway targetGW) {
-		this.targetGW = targetGW;
+	public void setPeerGW(UserGateway peerGW) {
+		this.peerGW = peerGW;
 	}
 
 	public void setPresenter(CancelAppointmentPresenter presenter) {
 		this.presenter = presenter;
-	}
-
-	public void setCanceler(Canceler canceler) {
-		this.canceler = canceler;
 	}
 }

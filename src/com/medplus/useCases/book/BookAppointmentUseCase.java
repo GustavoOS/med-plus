@@ -1,67 +1,77 @@
 package com.medplus.useCases.book;
 
-import com.medplus.entities.Appointment;
+import java.time.LocalDateTime;
+
 import com.medplus.entities.DayScheduler;
-import com.medplus.entities.User;
+import com.medplus.entities.domain.User;
+import com.medplus.useCases.AppointmentFactory;
 import com.medplus.useCases.Bookable;
-import com.medplus.useCases.ProviderGateway;
 import com.medplus.useCases.SchedulePresenter;
 import com.medplus.useCases.UserGateway;
 
 public class BookAppointmentUseCase implements Bookable {
-	private UserGateway patientGW;
-	private ProviderGateway providerGW;
+	private UserGateway patientGW, providerGW;
 	private SchedulePresenter presenter;
 	private DayScheduler dayScheduler;
 
 	private User provider;
 	private User patient;
-	private Appointment appointment;
+	private AppointmentFactory factory;
+
+	private LocalDateTime dateTime;
 
 	@Override
-	public void book(Appointment a) {
-		appointment = a;
-		if(appointmentIsInvalid() || !involvedPeopleAreNotBusy())
+	public void book(String providerID, String patientID, LocalDateTime dateTime) {
+		this.dateTime = dateTime;
+		if(appointmentIsInvalid(providerID, patientID) || !involvedPeopleAreNotBusy())
 		{
 			presenter.fail();
 			return;
 		}
-		provider.getAppointments().add(appointment);
-		patient.getAppointments().add(appointment);
+		provider.getAppointments().add(
+				factory.make()
+					.withDateTime(dateTime)
+					.withPeerID(patientID));
+
+		patient.getAppointments().add(
+				factory.make()
+					.withDateTime(dateTime)
+					.withPeerID(providerID));
+
 		providerGW.put(provider);
 		patientGW.put(patient);
 		presenter.succeed();
 	}
 
-	private Boolean appointmentIsInvalid()
+	private Boolean appointmentIsInvalid(String providerID, String patientID)
 	{		
-		return  appointment.getDateTime() == null ||
-				appointment.getPatientID() == null ||
-				appointment.getProviderID() == null ||
-				providerWasNotFound() ||
-				patientWasNotFound();
+		return  dateTime == null ||
+				providerID == null ||
+				patientID == null ||
+				providerWasNotFound(providerID) ||
+				patientWasNotFound(patientID);
 	}
 
-	private boolean patientWasNotFound() {
-		patient = patientGW.getUser(appointment.getPatientID());
+	private boolean patientWasNotFound(String patientID) {
+		patient = patientGW.getUser(patientID);
 		return patient == null;
 	}
 
 	private Boolean involvedPeopleAreNotBusy()
 	{
 		return
-			dayScheduler.isAvailable(appointment, provider.getAppointments()) &&
-			dayScheduler.isAvailable(appointment, patient.getAppointments());
+			dayScheduler.isAvailable(dateTime, provider.getAppointments()) &&
+			dayScheduler.isAvailable(dateTime, patient.getAppointments());
 	}
 
-	private Boolean providerWasNotFound()
+	private Boolean providerWasNotFound(String providerID)
 	{
-		provider = providerGW.getUser(appointment.getProviderID());
+		provider = providerGW.getUser(providerID);
 		return provider == null;
 	}
 	// Setters
 
-	public void setProviderGW(ProviderGateway providerGW) {
+	public void setProviderGW(UserGateway providerGW) {
 		this.providerGW = providerGW;
 	}
 
@@ -75,6 +85,10 @@ public class BookAppointmentUseCase implements Bookable {
 
 	public void setDaySchedule(DayScheduler dayScheduler) {
 		this.dayScheduler = dayScheduler;
+	}
+
+	public void setAppointmentFactory(AppointmentFactory factory) {
+		this.factory = factory;
 	}
 
 }

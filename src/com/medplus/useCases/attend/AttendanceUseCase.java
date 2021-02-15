@@ -2,9 +2,9 @@ package com.medplus.useCases.attend;
 
 import java.time.LocalDateTime;
 
-import com.medplus.entities.Appointment;
-import com.medplus.entities.User;
 import com.medplus.entities.Utils;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.User;
 import com.medplus.useCases.Attendable;
 import com.medplus.useCases.AttendancePresenter;
 import com.medplus.useCases.CheckableAvailablePatientData;
@@ -23,7 +23,7 @@ public class AttendanceUseCase implements Attendable {
 		if(attendanceIsInvalid(providerID, dateTime))
 			presenter.fail();
 		else
-			checker.check(appointment.getPatientID());
+			checker.check(appointment.getPeerID());
 	}
 
 	public void setProviderGateway(UserGateway userGateway) {

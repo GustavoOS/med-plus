@@ -3,7 +3,7 @@ package com.medplus.adapter.interfaces;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.medplus.entities.Appointment;
+import com.medplus.entities.domain.Appointment;
 import com.medplus.useCases.VerifyAppointmentsPresenter;
 
 public class VerifyAppointmentsPresenterImpl implements VerifyAppointmentsPresenter {

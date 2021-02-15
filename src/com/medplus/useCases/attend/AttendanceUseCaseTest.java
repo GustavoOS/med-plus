@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.AttendancePresenterImpl;
-import com.medplus.entities.HealthProvider;
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.HealthProvider;
+import com.medplus.entities.domain.Patient;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
@@ -64,7 +64,6 @@ class AttendanceUseCaseTest {
 	private void setDoctorAppointments(String patient) {
 		providers.get(0).setAppointments(
 				TestUtils.mountAppointmentList(
-						provider,
 						patient,
 						baseTime));
 	}

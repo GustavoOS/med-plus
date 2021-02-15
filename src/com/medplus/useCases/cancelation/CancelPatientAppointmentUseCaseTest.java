@@ -9,8 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.CancelAppointmentPresenterImpl;
-import com.medplus.entities.Appointment;
-import com.medplus.entities.PatientAppointmentCanceler;
+import com.medplus.entities.appointment.AppointmentImpl;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.Patient;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.gateways.ProviderGW;
@@ -21,23 +22,25 @@ class CancelPatientAppointmentUseCaseTest {
 	LocalDateTime date;
 	String patientID;
 
+	PatientGW patientGW;
+
 	public CancelAppointmentUseCase useCase;
 	@BeforeEach
 	void setUp(){
-		PatientGW patientGW = new PatientGW();
+		patientGW = new PatientGW();
 		ProviderGW providerGW = new ProviderGW();
-		patientGW.setPatients(TestUtils.mountPatientList());
-		providerGW.setProviders(TestUtils.mountProviderList());
+		LocalDateTime now = LocalDateTime.now();
+		patientGW.setPatients(TestUtils.mountPatientList(now));
+		providerGW.setProviders(TestUtils.mountProviderList(now));
 
 		presenter = new CancelAppointmentPresenterImpl();
 		useCase = new CancelAppointmentUseCase();
-		useCase.setCanceler(new PatientAppointmentCanceler());
-		useCase.setRootGW(patientGW);
+		useCase.setUserGW(patientGW);
 		useCase.setPresenter(presenter);
-		useCase.setTargetGW(providerGW);
+		useCase.setPeerGW(providerGW);
 
 		patientID = "4f24bdb4-4f0c-4d85-b8b4-44f757ba1bb1";
-		date = LocalDateTime.now().withHour(14).withMinute(0).withSecond(0).withNano(0);
+		date = now.withHour(14).withMinute(0).withSecond(0).withNano(0);
 	}
 
 	@Test
@@ -75,11 +78,39 @@ class CancelPatientAppointmentUseCaseTest {
 		assertEquals("success", presenter.getStatus());
 		ArrayList<Appointment> result = presenter.getList();
 		assertEquals(2, result.size());
-		assertEquals(patientID, result.get(0).getPatientID());
-		
+		assertNotEquals(date, result.get(0).getDateTime());
+		assertNotEquals(date, result.get(1).getDateTime());
 	}
+
+	@Test
+	void cantFindPeer()
+	{
+		addAppointmentToPatientAppointmentList("dfgyui");
+		useCase.cancel(patientID, date.plusDays(20));
+		assertEquals("fail", presenter.getStatus());
+	}
+
+	@Test
+	void peerHasNoAppointment()
+	{
+		addAppointmentToPatientAppointmentList("81a5cb24-d4ba-4789-b5da-3e76ae7ca551");
+		useCase.cancel(patientID, date.plusDays(20));
+		assertEquals("fail", presenter.getStatus());
+	}
+
 	private void assertFailure()
 	{
 		assertEquals("fail", presenter.getStatus());
+	}
+
+
+	private void addAppointmentToPatientAppointmentList(String provider) {
+		Appointment appointment =
+				(new AppointmentImpl())
+					.withDateTime(date.plusDays(20))
+					.withPeerID(provider);
+		Patient p = (Patient) patientGW.getUser(patientID);
+		p.getAppointments().add(appointment);
+		patientGW.put(p);
 	}
 }

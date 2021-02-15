@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.Cloner;
-import com.medplus.entities.HealthProvider;
-import com.medplus.entities.Provider;
+import com.medplus.entities.domain.HealthProvider;
+import com.medplus.entities.provider.impl.Provider;
 import com.medplus.factories.TestUtils;
 
 class ProviderGWTest {
@@ -68,7 +67,6 @@ class ProviderGWTest {
 		p.setSocialMediaURL("medplus.com");
 		p.setAppointments(
 				TestUtils.mountAppointmentList(
-						"da2ed3e9-566b-4521-8002-6e15f6f9958d",
 						"566fce65-7170-4bc3-bde5-09f807df6798",
 						LocalDateTime.now().withHour(14)));
 

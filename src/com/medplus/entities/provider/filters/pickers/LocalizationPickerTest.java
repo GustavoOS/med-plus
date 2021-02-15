@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.ProviderFilterParameter;
-import com.medplus.entities.HealthProvider;
+import com.medplus.entities.coordinate.CoordinateDS;
+import com.medplus.entities.domain.Coordinate;
+import com.medplus.entities.domain.HealthProvider;
 import com.medplus.factories.TestUtils;
 
 class LocalizationPickerTest {
@@ -17,7 +18,7 @@ class LocalizationPickerTest {
 	ProviderFilterParameter param;
 	ArrayList<HealthProvider>providers;
 	RefuserPicker refuser = new RefuserPicker();
-	CoordinateDS user;
+	Coordinate user;
 
 
 	@BeforeEach
@@ -26,7 +27,7 @@ class LocalizationPickerTest {
 		picker.setNextPicker(new NullPicker());
 		param = new ProviderFilterParameter();
 		providers = TestUtils.mountProviderList();
-		user = new CoordinateDS(-23.1649181,-45.7951985);
+		user = (new CoordinateDS()).with(-23.1649181,-45.7951985);
 	}
 
 	@Test

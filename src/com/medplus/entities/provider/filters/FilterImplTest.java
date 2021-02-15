@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.ProviderFilterParameter;
-import com.medplus.entities.HealthProvider;
+import com.medplus.entities.coordinate.CoordinateDS;
+import com.medplus.entities.domain.Coordinate;
+import com.medplus.entities.domain.HealthProvider;
 import com.medplus.factories.TestUtils;
 
 class FilterImplTest {
 
-	CoordinateDS user;
+	Coordinate user;
 	FilterImpl filter;
 	ProviderFilterParameter param;
 
@@ -21,7 +22,7 @@ class FilterImplTest {
 
 	@BeforeEach
 	void setUp(){
-		user = new CoordinateDS(-23.2198557,-45.8857719);
+		user = (new CoordinateDS()).with(-23.2198557,-45.8857719);
 		filter = new FilterImpl();
 		filter.setPicker(TestUtils.mountPickerChain());
 

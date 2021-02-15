@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.Exam;
+import com.medplus.entities.domain.Exam;
 import com.medplus.factories.TestUtils;
 
 class ManageExamPresenterImplTest {
