@@ -27,10 +27,10 @@ class UtilsTest {
 
 	@Test
 	void testDistanceCalculation() {
-		CoordinateDS a = new CoordinateDS(53.32055555555556, -1.7297222222222221);
-		CoordinateDS b = new CoordinateDS();
-		b.latitude = 53.31861111111111;
-		b.longitude = -1.6997222222222223;
+		Coordinate a = (new CoordinateDS()).with(
+				53.32055555555556, -1.7297222222222221);
+		Coordinate b = (new CoordinateDS()).with(
+				53.31861111111111, -1.6997222222222223);
 		
 		assertEquals(2.0043, Utils.calculateDistance(a, b), 0.001);
 	}

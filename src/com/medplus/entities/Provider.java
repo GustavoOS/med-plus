@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Provider implements HealthProvider {
 	private String socialMediaUrl, name, specialization, id;
-	private CoordinateDS local;
+	private Coordinate local;
 	private ArrayList<Appointment> appointments;
 
 	public Provider(){}
 	
-	public Provider(String name, String url, String specialization, CoordinateDS local)
+	public Provider(String name, String url, String specialization, Coordinate local)
 	{
 		this.name = name;
 		this.socialMediaUrl = url;
@@ -34,12 +34,12 @@ public class Provider implements HealthProvider {
 	}
 
 	@Override
-	public CoordinateDS getLocal() {
+	public Coordinate getLocal() {
 		return this.local;
 	}
 
 	@Override
-	public void setLocal(CoordinateDS local) {
+	public void setLocal(Coordinate local) {
 		this.local = local;
 	}
 

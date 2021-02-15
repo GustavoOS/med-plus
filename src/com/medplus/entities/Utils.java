@@ -5,17 +5,17 @@ import java.time.Period;
 import java.util.ArrayList;
 
 public class Utils {
-	public static double calculateDistance(CoordinateDS pointA, CoordinateDS pointB) {
-		CoordinateDS aRad, bRad, delta;
-		aRad = new CoordinateDS(Math.toRadians(pointA.latitude), Math.toRadians(pointA.longitude));
-		bRad = new CoordinateDS(Math.toRadians(pointB.latitude), Math.toRadians(pointB.longitude));
+	public static double calculateDistance(Coordinate pointA, Coordinate pointB) {
+		Coordinate aRad, bRad, delta;
+		aRad = (new CoordinateDS()).with(Math.toRadians(pointA.lat()), Math.toRadians(pointA.lon()));
+		bRad = (new CoordinateDS()).with(Math.toRadians(pointB.lat()), Math.toRadians(pointB.lon()));
 
 		// Haversine formula  
-		delta = new CoordinateDS(bRad.latitude - aRad.latitude, bRad.longitude - aRad.longitude);
-		double a = Math.pow(Math.sin(delta.latitude / 2), 2)
-				+ Math.cos(aRad.latitude)
-				* Math.cos(bRad.latitude)
-				* Math.pow(Math.sin(delta.longitude / 2), 2);
+		delta = (new CoordinateDS()).with(bRad.lat() - aRad.lat(), bRad.lon() - aRad.lon());
+		double a = Math.pow(Math.sin(delta.lat() / 2), 2)
+				+ Math.cos(aRad.lat())
+				* Math.cos(bRad.lat())
+				* Math.pow(Math.sin(delta.lon() / 2), 2);
 
 		double c = 2 * Math.asin(Math.sqrt(a));
 

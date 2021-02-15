@@ -14,7 +14,7 @@ public class SearchController {
 
 	public void setLocation(double latitude, double longitude)
 	{
-		this.param.reference = new CoordinateDS(latitude, longitude);
+		this.param.reference = (new CoordinateDS()).with(latitude, longitude);
 	}
 
 	public void setDistance(double distance) {

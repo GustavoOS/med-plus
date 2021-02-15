@@ -1,16 +1,28 @@
 package com.medplus.entities;
 
-public class CoordinateDS {
-	public CoordinateDS()
-	{
-		latitude = 0;
-		longitude = 0;
-	}
-	public CoordinateDS(double lat, double lon)
+public class CoordinateDS implements Coordinate {
+	private double latitude = 0;
+	private double longitude = 0;
+
+	public void set(double lat, double lon)
 	{
 		latitude = lat;
 		longitude = lon;
 	}
-	public double latitude = 0;
-	public double longitude = 0;
+
+	public double lat() {
+		return latitude;
+	}
+
+	public double lon() {
+		return longitude;
+	}
+
+	@Override
+	public Coordinate with(double latitude, double longitude) {
+		set(latitude, longitude);
+		return this;
+	}
+
+	
 }

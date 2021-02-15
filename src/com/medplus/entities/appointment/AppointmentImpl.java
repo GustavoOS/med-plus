@@ -1,6 +1,8 @@
-package com.medplus.entities;
+package com.medplus.entities.appointment;
 
 import java.time.LocalDateTime;
+
+import com.medplus.entities.Appointment;
 
 public class AppointmentImpl implements Appointment {
 	private String peerID;
