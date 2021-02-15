@@ -2,7 +2,7 @@ package com.medplus.adapter.interfaces;
 
 import java.util.ArrayList;
 
-import com.medplus.entities.Appointment;
+import com.medplus.entities.domain.Appointment;
 import com.medplus.useCases.CancelAppointmentPresenter;
 
 public class CancelAppointmentPresenterImpl implements CancelAppointmentPresenter {

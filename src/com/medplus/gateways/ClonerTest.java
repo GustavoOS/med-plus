@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.Appointment;
-import com.medplus.entities.Exam;
-import com.medplus.entities.HealthProvider;
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.Exam;
+import com.medplus.entities.domain.HealthProvider;
+import com.medplus.entities.domain.Patient;
 import com.medplus.entities.exam.impl.ExamImpl;
 import com.medplus.factories.PatientFactoryImpl;
 import com.medplus.factories.TestUtils;

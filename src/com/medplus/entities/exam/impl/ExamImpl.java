@@ -2,7 +2,7 @@ package com.medplus.entities.exam.impl;
 
 import java.time.LocalDateTime;
 
-import com.medplus.entities.Exam;
+import com.medplus.entities.domain.Exam;
 
 public class ExamImpl implements Exam {
 	private String id, title;

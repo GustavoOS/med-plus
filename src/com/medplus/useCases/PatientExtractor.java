@@ -1,8 +1,8 @@
 package com.medplus.useCases;
 
-import com.medplus.entities.Patient;
-import com.medplus.entities.User;
 import com.medplus.entities.Utils;
+import com.medplus.entities.domain.Patient;
+import com.medplus.entities.domain.User;
 
 public class PatientExtractor {
 	public static PatientAvailableDataDS extract(User _patient)

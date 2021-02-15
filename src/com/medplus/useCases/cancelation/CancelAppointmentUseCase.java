@@ -2,9 +2,9 @@ package com.medplus.useCases.cancelation;
 
 import java.time.LocalDateTime;
 
-import com.medplus.entities.Appointment;
-import com.medplus.entities.User;
 import com.medplus.entities.Utils;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.User;
 import com.medplus.useCases.CancelAppointmentPresenter;
 import com.medplus.useCases.Cancelable;
 import com.medplus.useCases.UserGateway;

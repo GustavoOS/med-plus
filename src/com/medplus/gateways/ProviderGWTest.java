@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.HealthProvider;
-import com.medplus.entities.Provider;
+import com.medplus.entities.domain.HealthProvider;
+import com.medplus.entities.provider.impl.Provider;
 import com.medplus.factories.TestUtils;
 
 class ProviderGWTest {

@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.domain;
 
 public interface Coordinate {
 	public void set(double lat, double lon);

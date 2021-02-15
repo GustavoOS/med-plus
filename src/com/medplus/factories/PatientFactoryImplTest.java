@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.Patient;
 
 
 class PatientFactoryImplTest {

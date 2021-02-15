@@ -1,8 +1,8 @@
 package com.medplus.gateways;
 import java.util.ArrayList;
 
-import com.medplus.entities.HealthProvider;
-import com.medplus.entities.User;
+import com.medplus.entities.domain.HealthProvider;
+import com.medplus.entities.domain.User;
 import com.medplus.useCases.ProviderGateway;
 
 public class ProviderGW implements ProviderGateway {

@@ -5,6 +5,8 @@ import java.time.Period;
 import java.util.ArrayList;
 
 import com.medplus.entities.coordinate.CoordinateDS;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.Coordinate;
 
 public class Utils {
 	public static double calculateDistance(Coordinate pointA, Coordinate pointB) {

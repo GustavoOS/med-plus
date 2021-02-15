@@ -8,9 +8,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.ManageExamPresenterImpl;
-import com.medplus.entities.Exam;
 import com.medplus.entities.ExamAdder;
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.Exam;
+import com.medplus.entities.domain.Patient;
 import com.medplus.entities.exam.adder.ExamAdderImpl;
 import com.medplus.factories.ExamFactoryImpl;
 import com.medplus.factories.TestUtils;

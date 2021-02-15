@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.coordinate.CoordinateDS;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.Coordinate;
 import com.medplus.factories.TestUtils;
 
 

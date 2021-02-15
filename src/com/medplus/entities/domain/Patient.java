@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.domain;
 import java.time.LocalDate;
 import java.util.ArrayList;
 

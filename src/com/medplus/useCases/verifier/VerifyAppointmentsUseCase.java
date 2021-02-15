@@ -3,8 +3,8 @@ package com.medplus.useCases.verifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.medplus.entities.Appointment;
-import com.medplus.entities.User;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.User;
 import com.medplus.useCases.UserGateway;
 import com.medplus.useCases.VerifiableBook;
 import com.medplus.useCases.VerifyAppointmentsPresenter;

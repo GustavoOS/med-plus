@@ -2,9 +2,9 @@ package com.medplus.entities.exam.remover;
 
 import java.util.ArrayList;
 
-import com.medplus.entities.Exam;
 import com.medplus.entities.ExamRemover;
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.Exam;
+import com.medplus.entities.domain.Patient;
 
 public class ExamRemoverImpl implements ExamRemover {
 	private ArrayList<Exam> exams;

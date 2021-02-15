@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.medplus.entities.ExamAdder;
 import com.medplus.entities.ExamFactory;
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.Patient;
 
 public class ExamAdderImpl implements ExamAdder {
 	private ExamFactory factory;

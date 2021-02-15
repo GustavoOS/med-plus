@@ -1,6 +1,6 @@
 package com.medplus.useCases;
 
-import com.medplus.entities.Appointment;
+import com.medplus.entities.domain.Appointment;
 
 public interface AppointmentFactory {
 	public Appointment make();

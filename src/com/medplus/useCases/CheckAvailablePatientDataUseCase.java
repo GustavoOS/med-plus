@@ -1,6 +1,6 @@
 package com.medplus.useCases;
 
-import com.medplus.entities.User;
+import com.medplus.entities.domain.User;
 
 public class CheckAvailablePatientDataUseCase implements CheckableAvailablePatientData {
 	private UserGateway patientGateway;

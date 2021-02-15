@@ -1,7 +1,7 @@
 package com.medplus.adapter.interfaces;
 import java.util.ArrayList;
 
-import com.medplus.entities.HealthProvider;
+import com.medplus.entities.domain.HealthProvider;
 import com.medplus.useCases.SearchReceiver;
 
 public class SearchPresenter implements SearchReceiver {

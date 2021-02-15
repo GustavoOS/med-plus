@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.Appointment;
 import com.medplus.entities.DayScheduler;
+import com.medplus.entities.domain.Appointment;
 import com.medplus.factories.DayScheduleFactory;
 import com.medplus.factories.TestUtils;
 

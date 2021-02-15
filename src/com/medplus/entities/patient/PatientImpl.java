@@ -3,9 +3,9 @@ package com.medplus.entities.patient;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import com.medplus.entities.Appointment;
-import com.medplus.entities.Exam;
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.Exam;
+import com.medplus.entities.domain.Patient;
 
 public class PatientImpl implements Patient{
 	private String name;

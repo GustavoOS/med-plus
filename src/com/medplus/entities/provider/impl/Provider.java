@@ -1,6 +1,10 @@
-package com.medplus.entities;
+package com.medplus.entities.provider.impl;
 
 import java.util.ArrayList;
+
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.Coordinate;
+import com.medplus.entities.domain.HealthProvider;
 
 public class Provider implements HealthProvider {
 	private String socialMediaUrl, name, specialization, id;

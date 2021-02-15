@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.AttendancePresenterImpl;
-import com.medplus.entities.Patient;
+import com.medplus.entities.domain.Patient;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 

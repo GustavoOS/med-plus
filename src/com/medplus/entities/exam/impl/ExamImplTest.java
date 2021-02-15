@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.Exam;
+import com.medplus.entities.domain.Exam;
 
 class ExamImplTest {
 

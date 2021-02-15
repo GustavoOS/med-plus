@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 import com.medplus.entities.ProviderFilter;
 import com.medplus.entities.ProviderFilterParameter;
-import com.medplus.entities.HealthProvider;
 import com.medplus.entities.ProviderPicker;
+import com.medplus.entities.domain.HealthProvider;
 
 public class FilterImpl implements ProviderFilter{
 	protected ProviderPicker picker;

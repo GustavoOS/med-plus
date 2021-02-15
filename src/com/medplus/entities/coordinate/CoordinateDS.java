@@ -1,6 +1,6 @@
 package com.medplus.entities.coordinate;
 
-import com.medplus.entities.Coordinate;
+import com.medplus.entities.domain.Coordinate;
 
 public class CoordinateDS implements Coordinate {
 	private double latitude = 0;

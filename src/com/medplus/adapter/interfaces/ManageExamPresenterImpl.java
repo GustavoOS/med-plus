@@ -1,6 +1,6 @@
 package com.medplus.adapter.interfaces;
 
-import com.medplus.entities.Exam;
+import com.medplus.entities.domain.Exam;
 import com.medplus.useCases.ManageExamPresenter;
 
 public class ManageExamPresenterImpl implements ManageExamPresenter {

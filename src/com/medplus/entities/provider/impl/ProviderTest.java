@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.provider.impl;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.coordinate.CoordinateDS;
+import com.medplus.entities.domain.Appointment;
+import com.medplus.entities.domain.HealthProvider;
 import com.medplus.factories.TestUtils;
 
 class ProviderTest {

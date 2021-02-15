@@ -2,7 +2,7 @@ package com.medplus.entities.appointment;
 
 import java.time.LocalDateTime;
 
-import com.medplus.entities.Appointment;
+import com.medplus.entities.domain.Appointment;
 
 public class AppointmentImpl implements Appointment {
 	private String peerID;
