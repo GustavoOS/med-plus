@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.Coordinate;
-import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.ProviderFilterParameter;
+import com.medplus.entities.coordinate.CoordinateDS;
 import com.medplus.entities.HealthProvider;
 import com.medplus.factories.TestUtils;
 

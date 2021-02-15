@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.SearchPresenter;
 import com.medplus.entities.Coordinate;
-import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.ProviderFilter;
 import com.medplus.entities.ProviderFilterParameter;
+import com.medplus.entities.coordinate.CoordinateDS;
 import com.medplus.factories.ProviderFilterFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;

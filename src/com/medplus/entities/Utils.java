@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 
+import com.medplus.entities.coordinate.CoordinateDS;
+
 public class Utils {
 	public static double calculateDistance(Coordinate pointA, Coordinate pointB) {
 		Coordinate aRad, bRad, delta;

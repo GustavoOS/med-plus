@@ -3,11 +3,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.medplus.entities.Appointment;
-import com.medplus.entities.CoordinateDS;
 import com.medplus.entities.Exam;
 import com.medplus.entities.HealthProvider;
 import com.medplus.entities.Patient;
 import com.medplus.entities.ProviderPicker;
+import com.medplus.entities.coordinate.CoordinateDS;
 import com.medplus.entities.exam.impl.ExamImpl;
 import com.medplus.entities.PickerChain;
 import com.medplus.entities.Provider;
