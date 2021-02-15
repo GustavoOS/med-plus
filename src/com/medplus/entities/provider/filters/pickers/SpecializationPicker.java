@@ -19,9 +19,9 @@ public class SpecializationPicker implements ProviderPicker, PickerChain {
 
 	@Override
 	public Boolean shouldSelect(HealthProvider provider, ProviderFilterParameter param) {
-		if(param == null || param.specialization == null)
+		if(param == null || param.getSpecialization() == null)
 			return next(provider, param);
-		return (param.specialization.equals(provider.getSpecialization())) 
+		return (param.getSpecialization().equals(provider.getSpecialization())) 
 				&& next(provider, param);
 	}
 

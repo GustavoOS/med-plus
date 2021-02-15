@@ -11,6 +11,7 @@ import com.medplus.entities.coordinate.CoordinateDS;
 import com.medplus.entities.domain.Coordinate;
 import com.medplus.entities.domain.HealthProvider;
 import com.medplus.factories.TestUtils;
+import com.medplus.useCases.search.ProviderFilterParameterImpl;
 
 class LocalizationPickerTest {
 
@@ -25,45 +26,49 @@ class LocalizationPickerTest {
 	void setUp(){
 		picker = new LocalizationPicker();
 		picker.setNextPicker(new NullPicker());
-		param = new ProviderFilterParameter();
+		param = new ProviderFilterParameterImpl();
 		providers = TestUtils.mountProviderList();
 		user = (new CoordinateDS()).with(-23.1649181,-45.7951985);
 	}
 
 	@Test
 	void successfullFilter() {
-		param.distance = 20;
-		param.reference = user;
+		param
+			.withDistance(20)
+			.withReference(user);
 		assertTrue(picker.shouldSelect(providers.get(0), param));
 	}
 
 	@Test
 	void failDistance()
 	{
-		param.distance = 2;
-		param.reference = user;
+		param
+			.withDistance(2)
+			.withReference(user);
 		assertFalse(picker.shouldSelect(providers.get(0), param));
 	}
 
 	@Test
 	void failNextShoudFail()
 	{
-		param.distance = 20;
-		param.reference = user;
+		param
+			.withDistance(20)
+			.withReference(user);
 		picker.setNextPicker(refuser);
 		assertFalse(picker.shouldSelect(providers.get(0), param));
 	}
 
 	@Test
 	void missingReferenceShouldNotApplyFilter() {
-		param.distance = 20;
+		param
+		.withDistance(20);
 		assertTrue(picker.shouldSelect(providers.get(0), param));
 	}
 
 	@Test
 	void missingDistanceShouldNotApplyFilter()
 	{
-		param.reference = user;
+		param.withReference(user);
 		assertTrue(picker.shouldSelect(providers.get(0), param));
 	}
 

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.domain.HealthProvider;
 import com.medplus.factories.TestUtils;
+import com.medplus.useCases.search.ProviderFilterParameterImpl;
 
 class IDPickerTest {
 
@@ -16,26 +17,27 @@ class IDPickerTest {
 	ProviderFilterParameter param;
 	ArrayList<HealthProvider>providers;
 	RefuserPicker refuser = new RefuserPicker();
-
+	String id;
 
 	@BeforeEach
 	void setUp(){
 		idP = new IDPicker();
 		idP.setNextPicker(new NullPicker());
-		param = new ProviderFilterParameter();
+		param = new ProviderFilterParameterImpl();
 		providers = TestUtils.mountProviderList();
+		id = "7b11fdbb-0894-4e4b-afaf-880738c84f4c";
 	}
 
 	@Test
 	void testSuccessPicker() {
-		param.id = "7b11fdbb-0894-4e4b-afaf-880738c84f4c";
+		param.withId(id);
 		assertTrue(idP.shouldSelect(providers.get(2), param));
 	}
 
 	@Test
 	void testFailPicker()
 	{
-		param.id = "7b11fdbb-0894-4e4b-afaf-880738c84f4c";
+		param.withId(id);
 		assertFalse(idP.shouldSelect(providers.get(0), param));
 	}
 
@@ -51,7 +53,7 @@ class IDPickerTest {
 	void testCorrectPickButFailingNextShouldFail()
 	{
 		idP.setNextPicker(refuser);
-		param.id = "7b11fdbb-0894-4e4b-afaf-880738c84f4c";
+		param.withId(id);
 		assertFalse(idP.shouldSelect(providers.get(2), param));
 	}
 

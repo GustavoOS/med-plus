@@ -11,6 +11,7 @@ import com.medplus.entities.coordinate.CoordinateDS;
 import com.medplus.entities.domain.Coordinate;
 import com.medplus.entities.domain.HealthProvider;
 import com.medplus.factories.TestUtils;
+import com.medplus.useCases.search.ProviderFilterParameterImpl;
 
 class FilterImplTest {
 
@@ -27,14 +28,15 @@ class FilterImplTest {
 		filter.setPicker(TestUtils.mountPickerChain());
 
 		raw = TestUtils.mountProviderList();
-		param = new ProviderFilterParameter();
+		param = new ProviderFilterParameterImpl();
 	}
 
 	@Test
 	void filterNearSurgeons() {
-		param.distance = 10;
-		param.reference = user;
-		param.specialization = "surgeon";
+		param
+				.withDistance(10)
+				.withReference(user)
+				.withSpecialization("surgeon");
 		result = filter.filter(raw, param);
 
 		assertEquals(2, result.size());
@@ -45,7 +47,7 @@ class FilterImplTest {
 	@Test
 	void filterGynecologyst()
 	{
-		param.specialization = "gynecologyst";
+		param.withSpecialization("gynecologyst");
 		result = filter.filter(raw, param);
 		assertEquals(1, result.size());
 		assertEquals("Benedito", result.get(0).getName());
@@ -54,8 +56,9 @@ class FilterImplTest {
 	@Test
 	void filterNear()
 	{
-		param.distance = 10;
-		param.reference = user;
+		param
+			.withDistance(10)
+			.withReference(user);
 
 		result = filter.filter(raw, param);
 		assertEquals(3, result.size());

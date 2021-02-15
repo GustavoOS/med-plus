@@ -1,11 +1,12 @@
 package com.medplus.adapter.interfaces;
 import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.useCases.CoordinateFactory;
+import com.medplus.useCases.search.ProviderFilterParameterImpl;
 import com.medplus.useCases.search.SearchUseCase;
 
 public class SearchController {
 	private SearchUseCase useCase;
-	private ProviderFilterParameter param = new ProviderFilterParameter();
+	private ProviderFilterParameter param = new ProviderFilterParameterImpl();
 	private CoordinateFactory factory;
 
 
@@ -16,16 +17,17 @@ public class SearchController {
 
 	public void setLocation(double latitude, double longitude)
 	{
-		this.param.reference = factory.make().with(latitude, longitude);
+		this.param.withReference(
+				factory.make().with(latitude, longitude));
 	}
 
 	public void setDistance(double distance) {
-		this.param.distance = distance;
+		this.param.withDistance(distance);
 	}
 
 	public void setSpecialization(String specialization)
 	{
-		this.param.specialization = specialization;
+		this.param.withSpecialization(specialization);
 	}
 
 

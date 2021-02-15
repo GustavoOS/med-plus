@@ -19,9 +19,9 @@ public class IDPicker implements ProviderPicker, PickerChain {
 
 	@Override
 	public Boolean shouldSelect(HealthProvider provider, ProviderFilterParameter param) {
-		if(param == null || param.id == null)
+		if(param == null || param.getId() == null)
 			return this.next(provider, param);
-		return param.id.equals(provider.getId()) && this.next(provider, param);
+		return param.getId().equals(provider.getId()) && this.next(provider, param);
 	}
 
 }

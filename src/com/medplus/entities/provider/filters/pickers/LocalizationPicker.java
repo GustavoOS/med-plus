@@ -21,10 +21,10 @@ public class LocalizationPicker implements ProviderPicker, PickerChain {
 
 	@Override
 	public Boolean shouldSelect(HealthProvider provider, ProviderFilterParameter param) {
-		if (param == null || param.reference == null || param.distance < 0)
+		if (param == null || param.getReference() == null || param.getDistance() < 0)
 			return next(provider, param);
-		return (Utils.calculateDistance(param.reference, provider.getLocal()) < param.distance)
-				&& next(provider, param);
+		double distance = Utils.calculateDistance(param.getReference(), provider.getLocal());
+		return (distance < param.getDistance()) && next(provider, param);
 	}
 
 }

@@ -2,9 +2,15 @@ package com.medplus.entities;
 
 import com.medplus.entities.domain.Coordinate;
 
-public class ProviderFilterParameter {
-	public String specialization = null;
-	public double distance = -1;
-	public Coordinate reference = null;
-	public String id = null;
+public interface ProviderFilterParameter {
+
+	public String getSpecialization();
+	public ProviderFilterParameter withSpecialization(String specialization);
+	public double getDistance();
+	public ProviderFilterParameter withDistance(double distance);
+	public Coordinate getReference();
+	public ProviderFilterParameter withReference(Coordinate reference);
+	public String getId();
+	public ProviderFilterParameter withId(String id);
+	
 }

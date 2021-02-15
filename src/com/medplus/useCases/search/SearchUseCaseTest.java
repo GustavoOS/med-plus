@@ -32,7 +32,7 @@ class SearchUseCaseTest {
 		receiver = new SearchPresenter();
 		useCase = new SearchUseCase(gw, filter, receiver);
 		userLocation = (new CoordinateDS()).with(-23.2198557,-45.8857719);
-		param = new ProviderFilterParameter();
+		param = new ProviderFilterParameterImpl();
 	}
 
 	@Test
@@ -49,7 +49,7 @@ class SearchUseCaseTest {
 	@Test
 	void filterBySpecialization()
 	{
-		param.specialization = "gynecologyst";
+		param.withSpecialization("gynecologyst");
 		useCase.search(param);
 		assertEquals(1, receiver.getProviders().size());
 		assertEquals("gynecologyst", receiver.getProviders().get(0).getSpecialization());
@@ -59,8 +59,9 @@ class SearchUseCaseTest {
 	@Test
 	void filterByDistance()
 	{
-		param.reference = userLocation;
-		param.distance = 5;
+		param
+			.withReference(userLocation)
+			.withDistance(5);
 
 		useCase.search(param);
 		assertEquals(3, receiver.getProviders().size());
@@ -72,9 +73,10 @@ class SearchUseCaseTest {
 	@Test
 	void filterByDistanceAndSpecialization()
 	{
-		param.reference = userLocation;
-		param.distance = 5;
-		param.specialization = "surgeon";
+		param
+			.withReference(userLocation)
+			.withDistance(5)
+			.withSpecialization("surgeon");
 
 		useCase.search(param);
 		assertEquals(2, receiver.getProviders().size());

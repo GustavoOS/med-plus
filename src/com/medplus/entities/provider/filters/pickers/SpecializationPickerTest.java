@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.domain.HealthProvider;
 import com.medplus.factories.TestUtils;
+import com.medplus.useCases.search.ProviderFilterParameterImpl;
 
 class SpecializationPickerTest {
 
@@ -22,20 +23,20 @@ class SpecializationPickerTest {
 	void setUp(){
 		sp = new SpecializationPicker();
 		sp.setNextPicker(new NullPicker());
-		param = new ProviderFilterParameter();
+		param = new ProviderFilterParameterImpl();
 		providers = TestUtils.mountProviderList();
 	}
 
 	@Test
 	void testSuccessPicker() {
-		param.specialization = "surgeon";
+		param.withSpecialization("surgeon");
 		assertTrue(sp.shouldSelect(providers.get(0), param));
 	}
 
 	@Test
 	void testFailPicker()
 	{
-		param.specialization = "gynecologyst";
+		param.withSpecialization("gynecologyst");
 		assertFalse(sp.shouldSelect(providers.get(0), param));
 	}
 
@@ -53,7 +54,7 @@ class SpecializationPickerTest {
 	void testCorrectPickButFailingNextShouldFail()
 	{
 		sp.setNextPicker(refuser);
-		param.specialization = "surgeon";
+		param.withSpecialization("surgeon");
 		assertFalse(sp.shouldSelect(providers.get(0), param));
 	}
 
