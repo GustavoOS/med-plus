@@ -1,4 +1,4 @@
-package com.medplus.factories;
+package com.medplus.entities.exam.impl;
 
 import static org.junit.jupiter.api.Assertions.*;
 

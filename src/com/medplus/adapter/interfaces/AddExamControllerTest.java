@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.ExamAdder;
 import com.medplus.entities.exam.adder.ExamAdderImpl;
-import com.medplus.factories.ExamFactoryImpl;
+import com.medplus.entities.exam.impl.ExamFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
 import com.medplus.useCases.ManageExamPresenter;
