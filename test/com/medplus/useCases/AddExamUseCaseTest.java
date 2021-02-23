@@ -11,7 +11,7 @@ import com.medplus.adapter.interfaces.ManageExamPresenterImpl;
 import com.medplus.entities.domain.Exam;
 import com.medplus.entities.domain.Patient;
 import com.medplus.entities.exam.changer.ExamAdder;
-import com.medplus.entities.exam.changer.impl.ExamAdderImpl;
+import com.medplus.entities.exam.changer.ExamAdderImpl;
 import com.medplus.entities.exam.changer.impl.ExamFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;

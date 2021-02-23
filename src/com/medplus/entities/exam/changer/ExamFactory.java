@@ -1,4 +1,4 @@
-package com.medplus.entities.exam.impl;
+package com.medplus.entities.exam.changer;
 
 import java.util.ArrayList;
 

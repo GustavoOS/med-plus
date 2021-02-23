@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.exam.changer.ExamAdder;
-import com.medplus.entities.exam.changer.impl.ExamAdderImpl;
+import com.medplus.entities.exam.changer.ExamAdderImpl;
 import com.medplus.entities.exam.changer.impl.ExamFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
