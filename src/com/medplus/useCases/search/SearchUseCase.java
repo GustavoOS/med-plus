@@ -1,7 +1,7 @@
 package com.medplus.useCases.search;
 
-import com.medplus.entities.ProviderFilter;
-import com.medplus.entities.ProviderFilterParameter;
+import com.medplus.entities.provider.filter.ProviderFilter;
+import com.medplus.entities.provider.filter.ProviderFilterParameter;
 import com.medplus.useCases.ProviderGateway;
 import com.medplus.useCases.SearchReceiver;
 import com.medplus.useCases.Searchable;

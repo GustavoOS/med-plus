@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.scheduler;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

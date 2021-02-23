@@ -1,6 +1,6 @@
 package com.medplus.factories;
 
-import com.medplus.entities.ProviderPicker;
+import com.medplus.entities.provider.filter.ProviderPicker;
 import com.medplus.entities.provider.filters.pickers.IDPicker;
 import com.medplus.entities.provider.filters.pickers.LocalizationPicker;
 import com.medplus.entities.provider.filters.pickers.NullPicker;

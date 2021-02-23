@@ -1,10 +1,10 @@
-package com.medplus.entities.provider.filters;
+package com.medplus.entities.provider.filter.impl;
 import java.util.ArrayList;
 
-import com.medplus.entities.ProviderFilter;
-import com.medplus.entities.ProviderFilterParameter;
-import com.medplus.entities.ProviderPicker;
 import com.medplus.entities.domain.HealthProvider;
+import com.medplus.entities.provider.filter.ProviderFilter;
+import com.medplus.entities.provider.filter.ProviderFilterParameter;
+import com.medplus.entities.provider.filter.ProviderPicker;
 
 public class FilterImpl implements ProviderFilter{
 	protected ProviderPicker picker;

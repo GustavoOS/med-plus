@@ -1,7 +1,8 @@
-package com.medplus.useCases;
+package com.medplus.useCases.exam;
 
-import com.medplus.entities.ExamRemover;
 import com.medplus.entities.domain.Patient;
+import com.medplus.entities.exam.changer.ExamRemover;
+import com.medplus.useCases.UserGateway;
 
 public class RemoveExamUseCase {
 	private UserGateway patientGateway;

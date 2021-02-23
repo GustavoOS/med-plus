@@ -8,13 +8,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.ManageExamPresenterImpl;
-import com.medplus.entities.ExamAdder;
 import com.medplus.entities.domain.Exam;
 import com.medplus.entities.domain.Patient;
-import com.medplus.entities.exam.adder.ExamAdderImpl;
-import com.medplus.entities.exam.impl.ExamFactoryImpl;
+import com.medplus.entities.exam.changer.ExamAdder;
+import com.medplus.entities.exam.changer.impl.ExamAdderImpl;
+import com.medplus.entities.exam.changer.impl.ExamFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
+import com.medplus.useCases.exam.AddExamUseCase;
+import com.medplus.useCases.exam.ManageExamPresenter;
 
 class AddExamUseCaseTest {
 	AddExamUseCase useCase;

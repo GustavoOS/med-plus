@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.ExamFactory;
 import com.medplus.entities.domain.Exam;
+import com.medplus.entities.exam.changer.impl.ExamFactoryImpl;
 
 class ExamFactoryImplTest {
 

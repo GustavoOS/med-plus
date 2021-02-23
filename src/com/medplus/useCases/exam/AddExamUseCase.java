@@ -1,7 +1,8 @@
-package com.medplus.useCases;
+package com.medplus.useCases.exam;
 
-import com.medplus.entities.ExamAdder;
 import com.medplus.entities.domain.Patient;
+import com.medplus.entities.exam.changer.ExamAdder;
+import com.medplus.useCases.UserGateway;
 
 public class AddExamUseCase {
 	private UserGateway gateway;

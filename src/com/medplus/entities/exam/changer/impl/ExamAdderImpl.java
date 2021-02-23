@@ -1,10 +1,10 @@
-package com.medplus.entities.exam.adder;
+package com.medplus.entities.exam.changer.impl;
 
 import java.time.LocalDateTime;
 
-import com.medplus.entities.ExamAdder;
-import com.medplus.entities.ExamFactory;
 import com.medplus.entities.domain.Patient;
+import com.medplus.entities.exam.changer.ExamAdder;
+import com.medplus.entities.exam.impl.ExamFactory;
 
 public class ExamAdderImpl implements ExamAdder {
 	private ExamFactory factory;

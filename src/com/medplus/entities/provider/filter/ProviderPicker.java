@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.provider.filter;
 
 import com.medplus.entities.domain.HealthProvider;
 

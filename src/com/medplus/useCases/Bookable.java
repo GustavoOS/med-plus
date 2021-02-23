@@ -2,7 +2,7 @@ package com.medplus.useCases;
 
 import java.time.LocalDateTime;
 
-import com.medplus.entities.DayScheduler;
+import com.medplus.entities.scheduler.DayScheduler;
 
 public interface Bookable {
 	void book(String providerID, String patientID, LocalDateTime dateTime);

@@ -1,6 +1,6 @@
 package com.medplus.adapter.interfaces;
 
-import com.medplus.useCases.AddExamUseCase;
+import com.medplus.useCases.exam.AddExamUseCase;
 
 public class AddExamController {
 	AddExamUseCase useCase;

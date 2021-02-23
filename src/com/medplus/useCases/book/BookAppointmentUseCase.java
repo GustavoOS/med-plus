@@ -2,8 +2,8 @@ package com.medplus.useCases.book;
 
 import java.time.LocalDateTime;
 
-import com.medplus.entities.DayScheduler;
 import com.medplus.entities.domain.User;
+import com.medplus.entities.scheduler.DayScheduler;
 import com.medplus.useCases.AppointmentFactory;
 import com.medplus.useCases.Bookable;
 import com.medplus.useCases.SchedulePresenter;

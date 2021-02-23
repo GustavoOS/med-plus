@@ -2,13 +2,13 @@ package com.medplus.factories;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.medplus.entities.ProviderPicker;
 import com.medplus.entities.coordinate.CoordinateDS;
 import com.medplus.entities.domain.Appointment;
 import com.medplus.entities.domain.Exam;
 import com.medplus.entities.domain.HealthProvider;
 import com.medplus.entities.domain.Patient;
 import com.medplus.entities.exam.impl.ExamImpl;
+import com.medplus.entities.provider.filter.ProviderPicker;
 import com.medplus.entities.provider.filters.pickers.PickerChain;
 import com.medplus.entities.provider.impl.Provider;
 

@@ -1,9 +1,9 @@
 package com.medplus.entities.provider.filters.pickers;
 
-import com.medplus.entities.ProviderFilterParameter;
-import com.medplus.entities.ProviderPicker;
 import com.medplus.entities.Utils;
 import com.medplus.entities.domain.HealthProvider;
+import com.medplus.entities.provider.filter.ProviderFilterParameter;
+import com.medplus.entities.provider.filter.ProviderPicker;
 
 public class LocalizationPicker implements ProviderPicker, PickerChain {
 

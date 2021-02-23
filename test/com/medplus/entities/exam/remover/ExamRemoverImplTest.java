@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.domain.Patient;
+import com.medplus.entities.exam.changer.impl.ExamRemoverImpl;
 import com.medplus.factories.TestUtils;
 
 class ExamRemoverImplTest {

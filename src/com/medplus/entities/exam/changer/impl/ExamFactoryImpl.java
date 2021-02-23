@@ -1,9 +1,10 @@
-package com.medplus.entities.exam.impl;
+package com.medplus.entities.exam.changer.impl;
 
 import java.util.ArrayList;
 
-import com.medplus.entities.ExamFactory;
 import com.medplus.entities.domain.Exam;
+import com.medplus.entities.exam.impl.ExamFactory;
+import com.medplus.entities.exam.impl.ExamImpl;
 
 public class ExamFactoryImpl implements ExamFactory {
 

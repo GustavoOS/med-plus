@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.coordinate.CoordinateDS;
 import com.medplus.entities.domain.Coordinate;
 import com.medplus.entities.domain.HealthProvider;
+import com.medplus.entities.provider.filter.ProviderFilterParameter;
+import com.medplus.entities.provider.filter.impl.FilterImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.useCases.search.ProviderFilterParameterImpl;
 

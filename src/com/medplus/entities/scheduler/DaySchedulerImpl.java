@@ -3,7 +3,6 @@ package com.medplus.entities.scheduler;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import com.medplus.entities.DayScheduler;
 import com.medplus.entities.Utils;
 import com.medplus.entities.domain.Appointment;
 

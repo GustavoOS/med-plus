@@ -1,4 +1,4 @@
-package com.medplus.entities;
+package com.medplus.entities.exam.changer;
 
 import com.medplus.entities.domain.Exam;
 import com.medplus.entities.domain.Patient;

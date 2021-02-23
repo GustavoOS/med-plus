@@ -8,10 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.domain.Patient;
-import com.medplus.entities.exam.remover.ExamRemoverImpl;
+import com.medplus.entities.exam.changer.impl.ExamRemoverImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.PatientGW;
-import com.medplus.useCases.RemoveExamUseCase;
+import com.medplus.useCases.exam.RemoveExamUseCase;
 
 class RemoveExamControllerTest {
 	RemoveExamController controller;

@@ -1,6 +1,6 @@
 package com.medplus.adapter.interfaces;
 
-import com.medplus.useCases.RemoveExamUseCase;
+import com.medplus.useCases.exam.RemoveExamUseCase;
 
 public class RemoveExamController {
 	private RemoveExamUseCase useCase;

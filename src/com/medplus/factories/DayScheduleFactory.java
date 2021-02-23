@@ -1,6 +1,6 @@
 package com.medplus.factories;
 
-import com.medplus.entities.DayScheduler;
+import com.medplus.entities.scheduler.DayScheduler;
 import com.medplus.entities.scheduler.DaySchedulerImpl;
 
 public class DayScheduleFactory {

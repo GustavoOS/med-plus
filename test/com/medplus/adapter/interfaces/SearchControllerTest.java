@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.medplus.entities.ProviderFilter;
+import com.medplus.entities.provider.filter.ProviderFilter;
 import com.medplus.factories.CoordinateFactoryImpl;
 import com.medplus.factories.ProviderFilterFactoryImpl;
 import com.medplus.factories.TestUtils;

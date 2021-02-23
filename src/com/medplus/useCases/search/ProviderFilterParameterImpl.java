@@ -1,7 +1,7 @@
 package com.medplus.useCases.search;
 
-import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.domain.Coordinate;
+import com.medplus.entities.provider.filter.ProviderFilterParameter;
 
 public class ProviderFilterParameterImpl implements ProviderFilterParameter {
 

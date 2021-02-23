@@ -5,10 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.medplus.adapter.interfaces.SearchPresenter;
-import com.medplus.entities.ProviderFilter;
-import com.medplus.entities.ProviderFilterParameter;
 import com.medplus.entities.coordinate.CoordinateDS;
 import com.medplus.entities.domain.Coordinate;
+import com.medplus.entities.provider.filter.ProviderFilter;
+import com.medplus.entities.provider.filter.ProviderFilterParameter;
 import com.medplus.factories.ProviderFilterFactoryImpl;
 import com.medplus.factories.TestUtils;
 import com.medplus.gateways.ProviderGW;

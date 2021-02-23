@@ -1,7 +1,7 @@
 package com.medplus.factories;
 
-import com.medplus.entities.ProviderFilter;
-import com.medplus.entities.provider.filters.FilterImpl;
+import com.medplus.entities.provider.filter.ProviderFilter;
+import com.medplus.entities.provider.filter.impl.FilterImpl;
 
 public class ProviderFilterFactoryImpl implements ProviderFilterFactory {
 

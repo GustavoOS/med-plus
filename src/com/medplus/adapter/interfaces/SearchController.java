@@ -1,5 +1,5 @@
 package com.medplus.adapter.interfaces;
-import com.medplus.entities.ProviderFilterParameter;
+import com.medplus.entities.provider.filter.ProviderFilterParameter;
 import com.medplus.useCases.CoordinateFactory;
 import com.medplus.useCases.search.ProviderFilterParameterImpl;
 import com.medplus.useCases.search.SearchUseCase;

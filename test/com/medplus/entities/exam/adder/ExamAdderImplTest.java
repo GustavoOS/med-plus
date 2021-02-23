@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import com.medplus.entities.domain.Exam;
 import com.medplus.entities.domain.Patient;
-import com.medplus.entities.exam.impl.ExamFactoryImpl;
+import com.medplus.entities.exam.changer.impl.ExamAdderImpl;
+import com.medplus.entities.exam.changer.impl.ExamFactoryImpl;
 import com.medplus.entities.patient.PatientImpl;
 
 class ExamAdderImplTest {
